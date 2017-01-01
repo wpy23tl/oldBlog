@@ -12,7 +12,7 @@ import com.wpy.blog.service.BlogService;
 
 
 @Service("blogService")
-public class BlogServiceImpl  {
+public class BlogServiceImpl implements BlogService {
 	@Resource
 	private BlogDao blogDao;
 	
