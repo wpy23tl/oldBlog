@@ -1,6 +1,7 @@
 package com.wpy.blog.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +12,7 @@ import com.wpy.blog.service.BlogService;
 
 public class BlogServiceImplTest {
 
-	@Test
+	/*@Test
 	public void testAddBlog() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		BlogService blogService = (BlogService)ac.getBean("blogService");
@@ -24,13 +25,22 @@ public class BlogServiceImplTest {
 		blog.setBlogTypeId(Integer.valueOf(23));
 		blogService.addBlog(blog);
 		System.out.println("------------");
-	}
+	}*/
 
 //	@Test
 //	public void testUpdateBlog() {
-//		fail("Not yet implemented");
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		BlogService blogService = (BlogService)ac.getBean("blogService");
+//		Blog blog =blogService.getBlogById(Integer.valueOf(1));
+//		blog.setBlogTitle("修改");
+//		blog.setUpdateTime(new Date());
+//		blog.setUpdateTime(new Date());
+//		blog.setBlogContent("修改内容");
+//		blog.setBlogTypeId(Integer.valueOf(85));
+//		blogService.updateBlog(blog);
+//		System.out.println("------------");
 //	}
-//
+
 //	@Test
 //	public void testDeleteBlog() {
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -48,9 +58,12 @@ public class BlogServiceImplTest {
 //		System.out.println(blog.toString());
 //	}
 
-//	@Test
-//	public void testGetAllBlog() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	public void testGetAllBlog() {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		BlogService blogService = (BlogService)ac.getBean("blogService");
+		List<Blog> blogs = blogService.getAllBlog();
+		System.out.println(blogs.toString());
+	}
 
 }

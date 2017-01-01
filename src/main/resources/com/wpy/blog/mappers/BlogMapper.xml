@@ -27,4 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
 		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId})
 	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="Blog" >
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId}  where id=#{id}
+	</update>
+	
+	
 </mapper>
