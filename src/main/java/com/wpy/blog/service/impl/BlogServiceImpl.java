@@ -42,4 +42,8 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.selectAll();
 	}
 
+	public Integer getTotalCount() {
+		return blogDao.getTotalCount();
+	}
+
 }

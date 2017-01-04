@@ -42,5 +42,10 @@ public interface BlogDao  {
 	 * @return
 	 */
 	List<Blog> selectAll();
+	/**
+	 * 查询总记录数
+	 * @return
+	 */
+	Integer getTotalCount();
 	
 }

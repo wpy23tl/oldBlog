@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from tb_blog 
 	</select>
 	
+	<select id="getTotalCount"  resultType="Integer">
+		select count(id) from tb_blog 
+	</select>
+	
 	<delete id="deleteByPrimarKey" parameterType="Integer">
 		delete from tb_blog where id=#{id}
 	</delete>

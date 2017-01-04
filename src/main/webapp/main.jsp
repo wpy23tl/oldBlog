@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	function openTab(title,url,iconCls){
-		if($('#tabs').tabs('exist',title))
+		if($('#tabs').tabs('exists',title))
 			$('#tabs').tabs('select',title);
 		else{
 			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='${pageContext.request.contextPath}/admin/"+url+"'></iframe>"
@@ -56,7 +56,7 @@
 		<div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
 			<a href="javascript:openTab('写博客','writeBlog.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
 			<!-- <a href="javascript:openTab('博客信息管理','blogManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a> -->
-			<a href="javascript:void(0)"  onclick="openTab()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
+			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','blogManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
 		</div>
 		<div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
 			<a href="javascript:openTab('博客类别信息管理','blogTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
