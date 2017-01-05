@@ -34,7 +34,14 @@ public class BlogAdminController {
 
 	@Resource
 	private BlogService blogService;
- 	
+ 	/**
+ 	 * 查询所有博客
+ 	 * @param request
+ 	 * @param response
+ 	 * @param model
+ 	 * @return
+ 	 * @throws Exception
+ 	 */
 	@RequestMapping("/blogManage")
 	public  String blogManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		
@@ -56,6 +63,21 @@ public class BlogAdminController {
 		String json = JSON.toJSONString(result);
 		ResponseUtil.write(response, json);
 	return null;
+	}
+	/**
+	 * 删除博客
+	 * @param request
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("/deleteBlog")
+	public void deleteBlog(HttpServletRequest request,HttpServletResponse response,String ids){
+		String[] idsArray = ids.split(",");
+		for(int i=0;i<idsArray.length;i++){
+			blogService.deleteBlog(Integer.valueOf(idsArray[i]));
+		}
+		
+		
 	}
 	
 }
