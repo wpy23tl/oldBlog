@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.wpy.blog.entity.BlogType;
@@ -49,9 +50,18 @@ public class BlogTypeAdminController {
 	}
 	
 	@RequestMapping("/addBlogType")
-	public void addBlogType(HttpServletRequest request,HttpServletResponse response,BlogType blogType){
-		blogTypeService.addBlogType(blogType);
+	public void addBlogType(HttpServletRequest request,HttpServletResponse response,BlogType blogType) throws Exception{
 		
+		Map<String, Object> map= new HashMap<>();
+		try {
+			blogTypeService.addBlogType(blogType);
+			map.put("success", true);
+		} catch (Exception e) {
+			map.put("success", false);
+			e.printStackTrace();
+		}
+		String result = JSON.toJSONString(map);
+		ResponseUtil.write(response,result);
 	}
 	
 }

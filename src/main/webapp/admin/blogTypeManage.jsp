@@ -63,22 +63,38 @@
 	}
 	
 	function saveBlogType(){
-		$.messager.confirm("系统提示","您确定要添加这条类别信息吗？",
-				function(r){
-				$.ajax({
-					type:"POST",
-					url:"${pageContext.request.contextPath}/admin/blogType/addBlogType.do",
-					data:{},
-					success:function(){
-						$.messager.alert("系统提示","数据已成功保存！");
-						$("#dg").datagrid("reload");
-					},
-					error:function(){
-					    $.messager.alert("系统提示","数据保存失败！");
-					}
-				});
+		$("#fm").form("submit",{
+			url:"${pageContext.request.contextPath}/admin/blogType/addBlogType.do",
+			onSubmit:function(){
+				return $(this).form("validate");
+			},
+			success:function(data){
+				var data=eval('('+data+')');
+				if(data.success){
+					$.messager.alert("系统提示","保存成功！");
+					resetValue();
+					$("#dlg").dialog("close");
+					$("#dg").datagrid("reload");
+				}else{
+					$.messager.alert("系统提示","保存失败！");
+					resetValue();
+					$("#dlg").dialog("close");
+					return;
+				}
+				
+			},
+			error:function(){
+				$.messager.alert("系统提示","操作失败！");
+				resetValue();
+				$("#dlg").dialog("close");
+				return;
+			}
 		});
 	}
+	
+	function resetValue(){
+		 $("#blogTypeName").val("");
+	 }
 	
 	function closeBlogTypeDialog(){
 		$("#dlg").dialog("close");
@@ -117,7 +133,7 @@
    	<table cellspacing="8px">
    		<tr>
    			<td>博客类别名称：</td>
-   			<td><input type="text" id="typeName" name="typeName" class="easyui-validatebox" required="true"/></td>
+   			<td><input type="text" id="blogTypeName" name="blogTypeName" class="easyui-validatebox" required="true"/></td>
    		</tr>
    	</table>
    </form>
