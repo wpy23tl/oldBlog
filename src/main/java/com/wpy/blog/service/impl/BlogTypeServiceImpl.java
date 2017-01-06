@@ -19,7 +19,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	@Override
 	public void addBlogType(BlogType blog) {
 		
-		
+		blogTypeDao.insert(blog);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	@Override
 	public void deleteBlogType(Integer id) {
 		
-		
+		 blogTypeDao.deleteByPrimarKey(id);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	@Override
 	public Integer getTotalCount() {
 		
-		return null;
+		return blogTypeDao.getTotalCount();
 	}
 	
 	

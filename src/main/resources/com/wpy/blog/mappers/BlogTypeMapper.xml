@@ -11,8 +11,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAll"  resultMap="BlogTypeResult">
 		select * from tb_blogtype 
 	</select>
+	<select id="getTotalCount"  resultType="Integer">
+		select count(id) from tb_blogtype
+	</select>
+	<delete id="deleteByPrimarKey" parameterType="Integer">
+		delete from tb_blogtype where id=#{id}
+	</delete>
 	
-	
-	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="BlogType">
+		insert into tb_blogtype values(null,#{blogTypeName})
+	</insert>
 	
 </mapper>
