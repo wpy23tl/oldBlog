@@ -1,4 +1,8 @@
-/target
-/.settings
-/.classpath
-/.project
+# ignore Maven generated target folders
+target
+ 
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
