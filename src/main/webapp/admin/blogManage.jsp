@@ -20,6 +20,26 @@
 		return "<a target='_blank' href='${pageContext.request.contextPath}/blog/articles/"+row.id+".html'>"+val+"</a>"
 	}
 	
+	function openTab(title,url,iconCls){
+		if($('#tabs').tabs('exists',title))
+			$('#tabs').tabs('select',title);
+		else{
+			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='${pageContext.request.contextPath}"+url+"'></iframe>"
+			$('#tabs').tabs('add',{    
+			    title:title,    
+			    content:content,    
+			    closable:true,    
+			    iconCls:iconCls
+			});  
+		}
+	
+	}
+	function openBlogModifyTab(){
+		$("#dg").datagrid({
+			url:'${pageContext.request.contextPath}/admin/blog/addBlog.do'
+		});
+	}
+	
 	function deleteBlog(){
 		var selectedRows = $("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
@@ -71,7 +91,6 @@
  <div id="tb">
  	<div>
  		<a href="javascript:openBlogModifyTab()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
- 		<!-- <a href="javascript:deleteBlog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a> -->
  		<a href="javascript:void(0)" onclick="deleteBlog()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  	<div>

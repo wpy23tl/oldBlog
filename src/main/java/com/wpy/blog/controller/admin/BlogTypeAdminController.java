@@ -30,9 +30,15 @@ public class BlogTypeAdminController {
 	private BlogTypeService blogTypeService;
 	
 	
+	@RequestMapping("/blogTypeManage")
+	public  String blogTypeManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		
+		
+	    return "admin/blogTypeManage";
+	}
 	
 	@RequestMapping("/list")
-	public  String blogTypeManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+	public  String list(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		
 		List<BlogType> blogTypeList=blogTypeService.getAllBlogType();
 		Integer total=blogTypeService.getTotalCount();
