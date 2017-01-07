@@ -57,7 +57,7 @@
 <body style="margin: 1px">
 <table id="dg" title="博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/blogManage.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/admin/blog/list.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>

@@ -24,7 +24,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 
 	@Override
 	public void updateBlogType(BlogType blog) {
-		
+		blogTypeDao.updateByPrimaryKey(blog);
 		
 	}
 

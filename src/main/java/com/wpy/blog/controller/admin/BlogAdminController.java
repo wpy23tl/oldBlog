@@ -18,14 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.wpy.blog.entity.Blog;
+import com.wpy.blog.entity.BlogType;
 import com.wpy.blog.service.BlogService;
+import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
 import com.wpy.blog.util.ResponseUtil;
 import com.wpy.blog.vo.BlogVo;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 
 @Controller
@@ -34,6 +32,8 @@ public class BlogAdminController {
 
 	@Resource
 	private BlogService blogService;
+	@Resource
+	private BlogTypeService blogTypeService;
  	/**
  	 * 查询所有博客
  	 * @param request
@@ -44,6 +44,11 @@ public class BlogAdminController {
  	 */
 	@RequestMapping("/blogManage")
 	public  String blogManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+	return "admin/blogManage";
+	}
+	
+	@RequestMapping("/list")
+	public  String list(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		
 		List<Blog> blogList=blogService.getAllBlog();
 		Integer total=blogService.getTotalCount();
@@ -78,6 +83,28 @@ public class BlogAdminController {
 		}
 		
 		
+	}
+	
+	@RequestMapping("/addBlog")
+	public String writeBlog(HttpServletRequest request,HttpServletResponse response,Model model){
+		List<BlogType> blogTypeList = blogTypeService.getAllBlogType();
+		model.addAttribute("blogTypeList",blogTypeList);
+		return "admin/blogAdd";
+	}
+	
+	@RequestMapping("/saveBlog")
+	public String saveBlog(HttpServletRequest request,HttpServletResponse response,Model model,Blog blog) throws Exception{
+		Map<String,Object>  map = new HashMap<>();
+		 try {
+			blogService.addBlog(blog);
+			map.put("success",true);
+		} catch (Exception e) {
+			map.put("success",false);
+			e.printStackTrace();
+		}
+		 String result =JSON.toJSONString(map);
+		 ResponseUtil.write(response, result);
+		return null;
 	}
 	
 }

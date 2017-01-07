@@ -1,5 +1,6 @@
 package com.wpy.blog.controller.admin;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,8 +29,10 @@ public class BlogTypeAdminController {
 	@Resource
 	private BlogTypeService blogTypeService;
 	
+	
+	
 	@RequestMapping("/list")
-	public  String blogManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+	public  String blogTypeManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		
 		List<BlogType> blogTypeList=blogTypeService.getAllBlogType();
 		Integer total=blogTypeService.getTotalCount();
@@ -54,8 +58,14 @@ public class BlogTypeAdminController {
 		
 		Map<String, Object> map= new HashMap<>();
 		try {
-			blogTypeService.addBlogType(blogType);
-			map.put("success", true);
+			if("".equals(blogType.getId()) ||blogType.getId()== null){
+				blogTypeService.addBlogType(blogType);
+				map.put("success", true);
+			}
+			else{
+				blogTypeService.updateBlogType(blogType);
+				map.put("success", true);
+			}
 		} catch (Exception e) {
 			map.put("success", false);
 			e.printStackTrace();

@@ -24,21 +24,53 @@
             width:100%;
         }
     </style>
+<script type="text/javascript">
+	function submitData(){
+		var title= $("#blogTitle").val();
+		var blogTypeId=$("#blogTypeId").combobox("getValue");
+		var content=UE.getEditor('editor').getContent();
+		if(title==null || title==''){
+			alert("请输入标题！");
+		}else if(blogTypeId==null || blogTypeId==''){
+			alert("请选择博客类别！");
+		}else if(content==null || content==''){
+			alert("请输入内容！");
+		}else{
+			$.ajax({
+				type:"POST",
+				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content},
+				url:"${pageContext.request.contextPath}/admin/blog/saveBlog.do",
+				dataType:"JSON",
+				success:function(data){
+					if(data.success){
+						$.messager.alert("系统提示","发布成功！");
+					}else{
+						$.messager.alert("系统提示","发布失败！");
+					}
+				},
+				error:function(){
+					$.messager.alert("系统提示","操作失败！");
+				}
+			});
+		}
+	}
+
+</script>
 </head>
 <body style="margin: 10px">
 <div id="p" class="easyui-panel" title="编写博客" style="padding: 10px">
-<form action="">
+<form id="fm" >
 <table cellspacing="20px">
    		<tr>
    			<td width="80px">博客标题：</td>
-   			<td><input type="text" id="title" name="title" style="width: 400px;"/></td>
+   			<td><input type="text" id="blogTitle" name="blogTitle" style="width: 400px;"/></td>
    		</tr>
    		<tr>
    			<td>所属类别：</td>
    			<td>
-   				<select class="easyui-combobox" style="width: 154px" id="blogTypeId" name="blogTypeid" editable="false" panelHeight="auto" >
+   				<select class="easyui-combobox" style="width: 154px" id="blogTypeId" name="blogTypeId" editable="false" panelHeight="auto" >
 					<option value="">请选择博客类别...</option>	
-					<c:forEach var="blogType" items="${blogTypeList }" >
+					<c:forEach var="blogType" items="${blogTypeList}" >
 				   		<option value="${blogType.id }">${blogType.blogTypeName }</option>	
 				   </c:forEach>
                 </select>

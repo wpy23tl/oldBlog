@@ -22,4 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into tb_blogtype values(null,#{blogTypeName})
 	</insert>
 	
+	<update id="updateByPrimaryKey" parameterType="BlogType" >
+		update tb_blogtype set blogTypeName=#{blogTypeName}  where id=#{id}
+	</update>
 </mapper>

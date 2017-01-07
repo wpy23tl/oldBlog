@@ -55,6 +55,8 @@
 			return;
 		}else{
 			$("#dlg").dialog("open").dialog("setTitle","编辑博客类别信息");
+			 var row=selectedRows[0];
+			 $("#fm").form("load",row);
 		}
 	}
 	
@@ -94,6 +96,7 @@
 	
 	function resetValue(){
 		 $("#blogTypeName").val("");
+		 $("#id").val("");
 	 }
 	
 	function closeBlogTypeDialog(){
@@ -136,6 +139,7 @@
    			<td><input type="text" id="blogTypeName" name="blogTypeName" class="easyui-validatebox" required="true"/></td>
    		</tr>
    	</table>
+   	<input type="hidden" id="id" name="id" >
    </form>
  </div>
  
