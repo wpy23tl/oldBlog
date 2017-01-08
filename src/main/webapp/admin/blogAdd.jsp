@@ -29,6 +29,7 @@
 		var title= $("#blogTitle").val();
 		var blogTypeId=$("#blogTypeId").combobox("getValue");
 		var content=UE.getEditor('editor').getContent();
+		var id="${id}";
 		if(title==null || title==''){
 			alert("请输入标题！");
 		}else if(blogTypeId==null || blogTypeId==''){
@@ -37,8 +38,9 @@
 			alert("请输入内容！");
 		}else{
 			$.ajax({
+				
 				type:"POST",
-				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content},
+				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content,"id":id},
 				url:"${pageContext.request.contextPath}/admin/blog/saveBlog.do",
 				dataType:"JSON",
 				success:function(data){
@@ -63,7 +65,7 @@
 <table cellspacing="20px">
    		<tr>
    			<td width="80px">博客标题：</td>
-   			<td><input type="text" id="blogTitle" name="blogTitle" style="width: 400px;"/></td>
+   			<td><input type="text" id="blogTitle" name="blogTitle" style="width: 400px;" value="${blogTitle}"/></td>
    		</tr>
    		<tr>
    			<td>所属类别：</td>
@@ -97,7 +99,11 @@
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
-
+    //向编辑器设置内容
+    ue.ready(function() {
+        ue.setContent("${blogContent}");
+    });
+    
 </script>
 </body>
 </html>

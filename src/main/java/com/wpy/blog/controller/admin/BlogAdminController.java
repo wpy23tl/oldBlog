@@ -96,8 +96,17 @@ public class BlogAdminController {
 	public String saveBlog(HttpServletRequest request,HttpServletResponse response,Model model,Blog blog) throws Exception{
 		Map<String,Object>  map = new HashMap<>();
 		 try {
-			blogService.addBlog(blog);
-			map.put("success",true);
+			 if("".equals(blog.getId()) || null == blog.getId()){
+				 blogService.addBlog(blog);
+			 }else{
+				 Blog blog1 = blogService.getBlogById(blog.getId());
+				 blog1.setBlogContent(blog.getBlogContent());
+				 blog1.setBlogTitle(blog.getBlogTitle());
+				 blog1.setBlogTypeId(blog.getBlogTypeId());
+				 blog1.setUpdateTime(new Date());
+				 blogService.updateBlog(blog1);
+			 }
+			 map.put("success",true);
 		} catch (Exception e) {
 			map.put("success",false);
 			e.printStackTrace();
@@ -105,6 +114,17 @@ public class BlogAdminController {
 		 String result =JSON.toJSONString(map);
 		 ResponseUtil.write(response, result);
 		return null;
+	}
+	
+	@RequestMapping("/updateBlog")
+	public String updateBlog(HttpServletRequest request,HttpServletResponse response,Model model,Integer id) throws Exception{
+		Blog blog = blogService.getBlogById(id);
+		List<BlogType> blogTypeList=blogTypeService.getAllBlogType();
+		model.addAttribute("blogTitle",blog.getBlogTitle());
+		model.addAttribute("blogContent",blog.getBlogContent());
+		model.addAttribute("blogTypeList",blogTypeList);
+		model.addAttribute("id",id);
+		return "admin/blogAdd";
 	}
 	
 }

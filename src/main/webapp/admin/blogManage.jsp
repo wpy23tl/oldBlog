@@ -28,7 +28,7 @@
 			 return;
 		 }
 		 var row=selectedRows[0];
-		 window.parent.openTab('修改博客','/admin/blog/addBlog.do','icon-writeblog');	
+		 window.parent.openTab('修改博客','/admin/blog/updateBlog.do?id='+row.id,'icon-writeblog');	
 		
 	
 	}
