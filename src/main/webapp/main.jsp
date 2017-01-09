@@ -12,16 +12,23 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	function openTab(title,url,iconCls){
-		urls="${pageContext.request.contextPath}"+url;
+		var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='${pageContext.request.contextPath}"+url+"'></iframe>"
 		if($('#tabs').tabs('exists',title)){
 			$('#tabs').tabs('select',title);
 			var tab = $('#tabs').tabs('getSelected');  
 			// 获取选择的面板
-			tab.panel('refresh',urls );
+			$('#tabs').tabs('update', {
+				tab: tab,
+				options: {
+					title:title,
+					content:content
+				}
+			});
+
 
 		}
 		else{
-			var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='${pageContext.request.contextPath}"+url+"'></iframe>"
+			
 			$('#tabs').tabs('add',{    
 			    title:title,    
 			    content:content,    

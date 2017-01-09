@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAll"  resultMap="BlogResult">
-		select * from tb_blog 
+		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id
 	</select>
 	
 	<select id="getTotalCount"  resultType="Integer">
