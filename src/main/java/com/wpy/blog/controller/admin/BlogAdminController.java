@@ -124,6 +124,7 @@ public class BlogAdminController {
 		model.addAttribute("blogContent",blog.getBlogContent());
 		model.addAttribute("blogTypeList",blogTypeList);
 		model.addAttribute("id",id);
+		model.addAttribute("blogTypeId",blog.getBlogTypeId());
 		return "admin/blogAdd";
 	}
 	

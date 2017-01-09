@@ -10,7 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime" column="create_time"/>
 		<result property="updateTime" column="update_time"/>
 		<result property="blogTypeId" column="blogtype_id"/>
+		<result property="blogTypeName" column="blogTypeName"/>
 	</resultMap>
+	
+	
 	
 	<select id="selectByPrimaryKey" parameterType="Integer" resultMap="BlogResult">
 		select * from tb_blog where id=#{id}

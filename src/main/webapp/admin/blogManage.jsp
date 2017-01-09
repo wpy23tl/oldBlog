@@ -78,7 +78,7 @@
    		<th field="id" width="20" align="center">编号</th>
    		<th field="blogTitle" width="200" align="center" >标题</th>
    		<th field="createTime" width="50" align="center">发布日期</th>
-   		<th field="blogType" width="50" align="center" >博客类别</th>
+   		<th field="blogTypeName" width="50" align="center" >博客类别</th>
    	</tr>
    </thead>
  </table>

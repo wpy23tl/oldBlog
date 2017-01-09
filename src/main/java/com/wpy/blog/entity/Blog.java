@@ -4,12 +4,13 @@ import java.util.Date;
 
 public class Blog {
 
-	private Integer id;//Ö÷¼üid
-	private String blogTitle;//²©¿Í±êÌâ
-	private String blogContent;//²©¿ÍÄÚÈÝ
-	private Date createTime;//´´½¨Ê±¼ä
-	private Date updateTime;//ÐÞ¸ÄÊ±¼ä
-	private Integer blogTypeId;//²©¿ÍÀàÐÍid
+	private Integer id;//ï¿½ï¿½ï¿½ï¿½id
+	private String blogTitle;//ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½
+	private String blogContent;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Date createTime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private Date updateTime;//ï¿½Þ¸ï¿½Ê±ï¿½ï¿½
+	private Integer blogTypeId;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+	private String blogTypeName;    
 	public Integer getId() {
 		return id;
 	}
@@ -46,5 +47,11 @@ public class Blog {
 	public void setBlogTypeId(Integer blogTypeId) {
 		this.blogTypeId = blogTypeId;
 	}
-	
+	public String getBlogTypeName() {
+		return blogTypeName;
+	}
+	public void setBlogTypeName(String blogTypeName) {
+		this.blogTypeName = blogTypeName;
+	}
+	  
 }
