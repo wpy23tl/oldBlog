@@ -1,6 +1,7 @@
 package com.wpy.blog.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -37,13 +38,15 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.selectByPrimaryKey(id);
 	}
 
-	public List<Blog> getAllBlog() {
-		
-		return blogDao.selectAll();
-	}
+	
 
 	public Integer getTotalCount() {
 		return blogDao.getTotalCount();
+	}
+
+	@Override
+	public List<Blog> getAllBlog(Map<String, Object> map) {
+		return blogDao.selectAll(map);
 	}
 
 }

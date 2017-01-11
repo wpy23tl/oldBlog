@@ -2,6 +2,7 @@ package com.wpy.blog.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.wpy.blog.entity.Blog;
 
@@ -12,6 +13,7 @@ public interface BlogService {
 	public void updateBlog(Blog blog);
 	public void deleteBlog(Integer id);
 	public Blog getBlogById(Integer id);
-	public List<Blog> getAllBlog();
+	
+	public List<Blog> getAllBlog(Map<String,Object> map);
 	public Integer getTotalCount();
 }

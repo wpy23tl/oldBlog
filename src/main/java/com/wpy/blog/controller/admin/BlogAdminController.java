@@ -14,11 +14,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.BlogType;
+import com.wpy.blog.entity.PageBean;
 import com.wpy.blog.service.BlogService;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
@@ -48,9 +50,12 @@ public class BlogAdminController {
 	}
 	
 	@RequestMapping("/list")
-	public  String list(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
-		
-		List<Blog> blogList=blogService.getAllBlog();
+	public  String list(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String pageSize) throws Exception{
+		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("start", pageBean.getStart());
+		map.put("size", pageBean.getPageSize());
+		List<Blog> blogList=blogService.getAllBlog(map);
 		Integer total=blogService.getTotalCount();
 		
 		List<BlogVo> newBlogList = new ArrayList<>();
@@ -87,7 +92,8 @@ public class BlogAdminController {
 	
 	@RequestMapping("/addBlog")
 	public String writeBlog(HttpServletRequest request,HttpServletResponse response,Model model){
-		List<BlogType> blogTypeList = blogTypeService.getAllBlogType();
+		Map<String,Object> map=new HashMap<String,Object>();
+		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
 		model.addAttribute("blogTypeList",blogTypeList);
 		return "admin/blogAdd";
 	}
@@ -119,7 +125,8 @@ public class BlogAdminController {
 	@RequestMapping("/updateBlog")
 	public String updateBlog(HttpServletRequest request,HttpServletResponse response,Model model,Integer id) throws Exception{
 		Blog blog = blogService.getBlogById(id);
-		List<BlogType> blogTypeList=blogTypeService.getAllBlogType();
+		Map<String,Object> map=new HashMap<String,Object>();
+		List<BlogType> blogTypeList=blogTypeService.getAllBlogType(map);
 		model.addAttribute("blogTitle",blog.getBlogTitle());
 		model.addAttribute("blogContent",blog.getBlogContent());
 		model.addAttribute("blogTypeList",blogTypeList);

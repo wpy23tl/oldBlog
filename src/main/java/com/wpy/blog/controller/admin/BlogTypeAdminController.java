@@ -14,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.wpy.blog.entity.BlogType;
+import com.wpy.blog.entity.PageBean;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.ResponseUtil;
 
@@ -38,9 +40,12 @@ public class BlogTypeAdminController {
 	}
 	
 	@RequestMapping("/list")
-	public  String list(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
-		
-		List<BlogType> blogTypeList=blogTypeService.getAllBlogType();
+	public  String list(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String pageSize) throws Exception{
+		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("start", pageBean.getStart());
+		map.put("size", pageBean.getPageSize());
+		List<BlogType> blogTypeList=blogTypeService.getAllBlogType(map);
 		Integer total=blogTypeService.getTotalCount();
 		Map<String,Object> result = new HashMap<>();
 		result.put("rows",blogTypeList);

@@ -2,6 +2,7 @@ package com.wpy.blog.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.wpy.blog.entity.BlogType;
 
@@ -43,7 +44,7 @@ public interface BlogTypeDao  {
 	 * @param id
 	 * @return
 	 */
-	List<BlogType> selectAll();
+	List<BlogType> selectAll(Map<String,Object> map);
 	/**
 	 * 查询总记录数
 	 * @return
