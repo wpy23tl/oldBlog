@@ -10,7 +10,8 @@ public class Blog {
 	private Date createTime;//����ʱ��
 	private Date updateTime;//�޸�ʱ��
 	private Integer blogTypeId;//��������id
-	private String blogTypeName;    
+	private String blogTypeName;  
+	private String summary;
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +54,12 @@ public class Blog {
 	public void setBlogTypeName(String blogTypeName) {
 		this.blogTypeName = blogTypeName;
 	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	
 	  
 }

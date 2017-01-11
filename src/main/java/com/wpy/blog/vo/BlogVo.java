@@ -11,6 +11,7 @@ public class BlogVo {
 	private String updateTime;//�޸�ʱ��
 	private Integer blogTypeId;//��������id
 	private String blogTypeName;
+	private String summary;
 	public Integer getId() {
 		return id;
 	}
@@ -52,6 +53,12 @@ public class BlogVo {
 	}
 	public void setBlogTypeName(String blogTypeName) {
 		this.blogTypeName = blogTypeName;
+	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 	
 	

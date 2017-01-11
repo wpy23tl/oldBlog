@@ -22,6 +22,7 @@
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/ueditor/**" location="/ueditor/"/>
 	<mvc:resources mapping="/jquery-easyui-1.3.3/**" location="/jquery-easyui-1.3.3/"/>
+	<mvc:resources mapping="/blogResources/**" location="/blogResources/"/>
 
 	<!-- 视图解析器 -->
 	<bean id="viewResolver"

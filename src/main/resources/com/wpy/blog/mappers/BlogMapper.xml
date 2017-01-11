@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateTime" column="update_time"/>
 		<result property="blogTypeId" column="blogtype_id"/>
 		<result property="blogTypeName" column="blogTypeName"/>
+		<result property="summary" column="summary"/>
 	</resultMap>
 	
 	
@@ -35,11 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId})
+		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary})
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId}  where id=#{id}
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary}  where id=#{id}
 	</update>
 	
 	

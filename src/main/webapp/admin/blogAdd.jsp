@@ -41,7 +41,7 @@
 			$.ajax({
 				
 				type:"POST",
-				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content,"id":id},
+				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content,"id":id,"summary":UE.getEditor('editor').getContentTxt().substr(0,155)},
 				url:"${pageContext.request.contextPath}/admin/blog/saveBlog.do",
 				dataType:"JSON",
 				success:function(data){

@@ -1,6 +1,8 @@
 package com.wpy.blog.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +17,8 @@ public class BlogTypeServiceImplTest {
 	public void testGetAllBlogType() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		BlogTypeService blogTypeService = (BlogTypeService)ac.getBean("blogTypeService");
-		 blogTypeService.getAllBlogType();
+		Map<String,Object> map=new HashMap<String,Object>();
+		blogTypeService.getAllBlogType(map);
 		System.out.println("-----------");
 	}
 
