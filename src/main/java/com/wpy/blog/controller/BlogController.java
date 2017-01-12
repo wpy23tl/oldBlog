@@ -60,4 +60,28 @@ public class BlogController {
 		model.addAttribute("blogList",newBlogList);
 		return "portal/index";
 	}
+	
+	@RequestMapping("/article")
+	public String article(HttpServletRequest request,HttpServletResponse response,Model model,String id){
+		Map<String,Object> map = new HashMap<>();
+		//获取所有博客类型
+		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
+		model.addAttribute("blogTypeList",blogTypeList);
+		//获取所有博客
+		List<Blog> blogList =  blogService.getAllBlog(map);
+		List<BlogVo> newBlogList = new ArrayList<>();
+		for(Blog blog:blogList){
+			Date createTime = blog.getCreateTime();
+			String createTimeString = DateTimeUtil.DateToString(createTime, "yyyy-MM-dd HH:mm:ss");
+			BlogVo blogVo = new BlogVo();
+			BeanUtils.copyProperties(blog, blogVo);
+			blogVo.setCreateTime(createTimeString);
+			newBlogList.add(blogVo);
+		}
+		model.addAttribute("blogList",newBlogList);
+		
+		Blog blog =blogService.getBlogById(Integer.valueOf(id));
+		model.addAttribute("blog",blog);
+		return "portal/article";
+	}
 }
