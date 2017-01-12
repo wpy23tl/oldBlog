@@ -60,7 +60,16 @@ public class BlogController {
 		model.addAttribute("blogList",newBlogList);
 		return "portal/index";
 	}
-	
+	/**
+	 * @author wpy
+	 * @description 进入文章
+	 * @date 2017年1月12日
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/article")
 	public String article(HttpServletRequest request,HttpServletResponse response,Model model,String id){
 		Map<String,Object> map = new HashMap<>();
@@ -79,9 +88,21 @@ public class BlogController {
 			newBlogList.add(blogVo);
 		}
 		model.addAttribute("blogList",newBlogList);
-		
+		//根据id获取博客
 		Blog blog =blogService.getBlogById(Integer.valueOf(id));
-		model.addAttribute("blog",blog);
+		Date createTime = blog.getCreateTime();
+		BlogVo blogVo = new BlogVo();
+		BeanUtils.copyProperties(blog, blogVo);
+		String createTimeString = DateTimeUtil.DateToString(createTime, "yyyy-MM-dd HH:mm:ss");
+		blogVo.setCreateTime(createTimeString);
+		model.addAttribute("blog",blogVo);
+		
+		//获取上一篇博客
+	    Blog lastBlog =	blogService.getLastBlog(Integer.valueOf(id));
+		//获取下一篇博客
+		Blog nextBlog = blogService.getNextBlog(Integer.valueOf(id));
+		model.addAttribute("lastBlog",lastBlog);
+		model.addAttribute("nextBlog",nextBlog);
 		return "portal/article";
 	}
 }

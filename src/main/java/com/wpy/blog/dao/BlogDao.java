@@ -48,5 +48,19 @@ public interface BlogDao  {
 	 * @return
 	 */
 	Integer getTotalCount();
+	/**
+	 * @author wpy
+	 * @description  获取上一篇博客信息
+	 * @date 2017年1月12日
+	 * @return
+	 */
+	Blog getLastBlog(Integer id);
+	/**
+	 * @author wpy
+	 * @description 获取下一篇博客信息 
+	 * @date 2017年1月12日
+	 * @return
+	 */
+	Blog getNextBlog(Integer id);
 	
 }

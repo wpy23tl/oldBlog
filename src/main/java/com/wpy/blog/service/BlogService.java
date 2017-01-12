@@ -16,4 +16,20 @@ public interface BlogService {
 	
 	public List<Blog> getAllBlog(Map<String,Object> map);
 	public Integer getTotalCount();
+	/**
+	 * @author wpy
+	 * @desc 获取上一个博客信息
+	 * @date 2017年1月12日
+	 * @param id
+	 * @return
+	 */
+	public Blog getLastBlog(Integer id);
+	/**
+	 * @author wpy
+	 * @desc 获取下一个博客新
+	 * @date 2017年1月12日
+	 * @param id
+	 * @return
+	 */
+	public Blog getNextBlog(Integer id);
 }

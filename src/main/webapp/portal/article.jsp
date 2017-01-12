@@ -41,11 +41,7 @@
     <h2 class="c_titile">${blog.blogTitle}</h2>
     <p class="box_c"><span class="d_time">发布时间：${blog.createTime}</span><span>编辑：<a href="mailto:dancesmiling@qq.com">杨青</a></span><span>阅读（<script src="/e/public/ViewClick/?classid=8&amp;id=530&amp;addclick=1"></script>90800）</span></p>
     <ul class="infos">
-      <p>遇到很多新手，都会问，如果要学习web前端开发，需要学习什么？难不难？多久能入门？怎么能快速建一个网站？工资能拿到多少？还有些让我推荐一些培训机构什么的要去学习。我建议是自学，实在是觉得自己没有这个能力，确实是需要一个老师的话，那你还是自己做主找个老师吧！为什么要自学呢，现在的老师水平都可以说是参差不平，运气好，你遇到个好老师，把毕生的经验和技巧都教给了你，运气不好，遇到个照本宣科的老师，那你的知识也会仅仅局限于教材！也许还有更糟糕的是，学到的书本知识两年前就已经开始有了大的变化，你并不知道关于更多的web设计这方面的知识。如果在这样的情况下，都还不如那些闭关自学的学生。</p>
-<p>学习最好的老师就是兴趣，没有兴趣而言，这条路我相信你是走不长远的，除非你有其他比如说生活压力，工作压力等让你不得不这样坚持下去。我刚开始接触web网页设计的时候，教材都是以table来布局的，看到插入table生成了很多标签代码后，tr里面一个个td，理不清楚这个里面怎么回事。敷衍的学习了一个学期。还是没学到什么。真正学到的还是停留在怎么新建，怎么保存。</p>
-<p>如果你还是在校学生，那你得好好上课，大学的教材普遍来讲都是知识面浅的。虽然很多知识看起来用处不大，学起来也很枯燥，让你觉得浪费时间。但这些书本上最基础的知识你都不能掌握，那你以后怎么追求更精湛的技术呢。所以不要逃课，把基础知识掌握了，别小看这个基础知识，它非常重要，基础扎实是否也会决定你在一个职业能走多远。</p>
-<p>我是毕业了后从文员转到编辑再到技术员当然这期间工资就像是阶梯一样，虽然这差距也不是很大，都离不开那些曾经被我遗落角落的专业课本。生活上的压力迫使我这样做，我知道自己要什么，当一个文员没有追求，感觉过着30、40岁人的生活，接电话、发email、整理报表，每个月都有白领的工资...浪费的不仅仅是自己的青春，还有这大学几年昂贵的学费。后来就愈来愈想掌握一门技术，想去培训学校学习一段时间，但是现实是我没有钱，闭关一个星期，重拾课本，再看看那些讨厌的table，虽然out了，但是确实会发现很多基础再基础不过的东西，利用互联网，不明白的就百度，作为一个过来人，我觉得我自己走了不少弯路，所以，有必要提醒你们一下，一定要明确自己的目标，摆正自己的位置，最好掌握一门技术。</p>
-
+		${blog.blogContent}
     </ul>
     <div class="keybq">
     <p><span>关键字词</span>：学习,web,前端开发,web前端,学习web前端</p>    
@@ -58,8 +54,8 @@ var cpro_id = "u1335521";
 
 </div>
     <div class="nextinfo">
-<p>上一篇：<a href="/jstt/bj/2013-07-24/523.html">CSS简明教程（三）——css样式高级技巧</a></p>
-<p>下一篇：<a href="/jstt/bj/2013-07-31/532.html">Fieldset教你如何绘制带标题的表单框</a></p>
+<p>上一篇：<c:choose><c:when test="${not empty lastBlog.id}"><a href="${pageContext.request.contextPath}/blog/article.do?id=${lastBlog.id}">${lastBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
+<p>下一篇：<c:choose><c:when test="${not empty nextBlog.id}"><a href="${pageContext.request.contextPath}/blog/article.do?id=${nextBlog.id}">${nextBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
     </div>
     <div class="otherlink">
       <h2>相关文章</h2>

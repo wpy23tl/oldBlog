@@ -26,6 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			limit #{start},#{size}
 		</if>
 	</select>
+	<!-- 获取上一篇博客 -->
+	<select id="getLastBlog" parameterType="Integer" resultMap="BlogResult">
+		SELECT * FROM tb_blog WHERE id&gt;#{id} order by id ASC LIMIT 1
+	</select>
+	<!-- 获取下一篇博客 -->
+	<select id="getNextBlog" parameterType="Integer" resultMap="BlogResult">
+		SELECT * FROM tb_blog WHERE id&lt;#{id} order by id DESC LIMIT 1
+	</select>
 	
 	<select id="getTotalCount"  resultType="Integer">
 		select count(id) from tb_blog 

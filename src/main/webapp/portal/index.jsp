@@ -80,7 +80,7 @@
 	        <figure><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"></figure>
 	        <ul>
 	          <h3><a href="${pageContext.request.contextPath}/blog/article.do?id=${blog.id}">${blog.blogTitle}</a></h3>
-	          <p>${blog.summary }</p>
+	          <p>${blog.summary }......</p>
 	          <p class="autor"><span class="lm f_l"><a href="/">${blog.blogTypeName}</a></span><span class="dtime f_l">${blog.createTime}</span><span class="viewnum f_r">浏览（<a href="/">459</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
 	        </ul>
 	      </div>
