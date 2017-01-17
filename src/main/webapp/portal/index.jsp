@@ -10,6 +10,7 @@
 <meta name="description" content="" />
 <link href="${pageContext.request.contextPath}/blogResources/css/base.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/blogResources/css/index.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/blogResources/css/learn.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/blogResources/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/blogResources/js/sliders.js"></script>
 <!--[if lt IE 9]>
@@ -75,7 +76,7 @@
     <!-- banner代码 结束 -->
     <div class="topnews">
       <h2><span><a href="/" target="_blank">栏目标题</a><a href="/" target="_blank">栏目标题</a><a href="/" target="_blank">栏目标题</a></span><b>文章</b>推荐</h2>
-      <c:forEach var="blog" items="${blogList }">
+      <c:forEach var="blog" items="${blogList }" >
 	      <div class="blogs">
 	        <figure><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"></figure>
 	        <ul>
@@ -93,7 +94,10 @@
           <p class="autor"><span class="lm f_l"><a href="/">个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_r">浏览（<a href="/">459</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
         </ul>
       </div>
-      
+     <c:if test="">
+     	
+     </c:if>
+      <div class="page"><a title="Total record"><b>136</b> </a><a href="/jstt/index.html">&lt;&lt;</a><a href="/jstt/index_3.html">&lt;</a><a href="/jstt/index_2.html">2</a><a href="/jstt/index_3.html">3</a><b>4</b><a href="/jstt/index_5.html">5</a><a href="/jstt/index_6.html">6</a><a href="/jstt/index_5.html">&gt;</a><a href="/jstt/index_6.html">&gt;&gt;</a></div>  
     </div>
   </div>
   <div class="r_box f_r">
@@ -216,7 +220,9 @@ window.onload = function ()
     </div>
   </div>
   <!--r_box end --> 
+
 </article>
+
 <footer>
   <p class="ft-copyright">兔小白博客 Design by DanceSmile 蜀ICP备11002373号-1</p>
   <div id="tbox"> <a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a> </div>

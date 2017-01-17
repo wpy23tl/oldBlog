@@ -14,12 +14,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.BlogType;
+import com.wpy.blog.entity.PageBean;
 import com.wpy.blog.service.BlogService;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
+import com.wpy.blog.util.PageUtil;
 import com.wpy.blog.vo.BlogVo;
 
 @Controller
@@ -41,10 +44,19 @@ public class BlogController {
 	 * @return
 	 */
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request,HttpServletResponse response,Model model){
+	public String index(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String pageSize){
 		Map<String,Object> map = new HashMap<>();
 		//获取所有博客类型
 		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
+		if("".equals(page) || page==null){
+			page="1";
+		}
+		if("".equals(pageSize) || pageSize==null){
+			pageSize="10";
+		}
+		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
+		map.put("start", pageBean.getStart());
+		map.put("size", pageBean.getPageSize());
 		model.addAttribute("blogTypeList",blogTypeList);
 		//获取所有博客
 		List<Blog> blogList =  blogService.getAllBlog(map);
@@ -58,6 +70,12 @@ public class BlogController {
 			newBlogList.add(blogVo);
 		}
 		model.addAttribute("blogList",newBlogList);
+		
+		//获取博客总数
+		Integer totalCount = blogService.getTotalCount();
+		
+		Integer pageCount = PageUtil.getPageCount(totalCount, Integer.valueOf(pageSize));
+		model.addAttribute("pageCount",pageCount);
 		return "portal/index";
 	}
 	/**
