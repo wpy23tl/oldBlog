@@ -74,8 +74,8 @@ public class BlogController {
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
 		
-		Integer pageCount = PageUtil.getPageCount(totalCount, Integer.valueOf(pageSize));
-		model.addAttribute("pageCount",pageCount);
+		String pageCode = PageUtil.genPageCode(totalCount, Integer.valueOf(pageSize),Integer.valueOf(page), request);
+		model.addAttribute("pageCode",pageCode);
 		return "portal/index";
 	}
 	/**

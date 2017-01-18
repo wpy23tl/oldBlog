@@ -97,7 +97,9 @@
      <c:if test="">
      	
      </c:if>
-      <div class="page"><a title="Total record"><b>136</b> </a><a href="/jstt/index.html">&lt;&lt;</a><a href="/jstt/index_3.html">&lt;</a><a href="/jstt/index_2.html">2</a><a href="/jstt/index_3.html">3</a><b>4</b><a href="/jstt/index_5.html">5</a><a href="/jstt/index_6.html">6</a><a href="/jstt/index_5.html">&gt;</a><a href="/jstt/index_6.html">&gt;&gt;</a></div>  
+     
+     ${pageCode }
+    
     </div>
   </div>
   <div class="r_box f_r">
