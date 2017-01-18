@@ -18,6 +18,13 @@ public interface BlogService {
 	public Integer getTotalCount();
 	/**
 	 * @author wpy
+	 * @desc 根据点击数排行
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	public List<Blog> getRankByClickHit();
+	/**
+	 * @author wpy
 	 * @desc 获取上一个博客信息
 	 * @date 2017年1月12日
 	 * @param id
@@ -32,4 +39,11 @@ public interface BlogService {
 	 * @return
 	 */
 	public Blog getNextBlog(Integer id);
+	/**
+	 * @author wpy
+	 * @desc 根据创建时间排序
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	List<Blog> getRankByCreateTime();
 }

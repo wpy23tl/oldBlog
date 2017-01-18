@@ -71,6 +71,12 @@ public class BlogController {
 		}
 		model.addAttribute("blogList",newBlogList);
 		
+		//点击排行
+		List<Blog> clickHitRank = blogService.getRankByClickHit();
+		model.addAttribute("clickHitRank",clickHitRank);
+		//最新文章
+		List<Blog> createTimeRank = blogService.getRankByCreateTime();
+		model.addAttribute("createTimeRank",createTimeRank);
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
 		
@@ -108,13 +114,15 @@ public class BlogController {
 		model.addAttribute("blogList",newBlogList);
 		//根据id获取博客
 		Blog blog =blogService.getBlogById(Integer.valueOf(id));
+		//增加查看次数
+		blog.setClickHit(blog.getClickHit()+1);
+		blogService.updateBlog(blog);
 		Date createTime = blog.getCreateTime();
 		BlogVo blogVo = new BlogVo();
 		BeanUtils.copyProperties(blog, blogVo);
 		String createTimeString = DateTimeUtil.DateToString(createTime, "yyyy-MM-dd HH:mm:ss");
 		blogVo.setCreateTime(createTimeString);
 		model.addAttribute("blog",blogVo);
-		
 		//获取上一篇博客
 	    Blog lastBlog =	blogService.getLastBlog(Integer.valueOf(id));
 		//获取下一篇博客

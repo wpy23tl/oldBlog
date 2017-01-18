@@ -61,4 +61,14 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.getNextBlog(id);
 	}
 
+	@Override
+	public List<Blog> getRankByClickHit() {
+		return blogDao.getRankByClickHit();
+	}
+
+	@Override
+	public List<Blog> getRankByCreateTime() {
+		return blogDao.getRankByCreateTime();
+	}
+
 }

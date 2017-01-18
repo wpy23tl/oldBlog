@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="blogTypeId" column="blogtype_id"/>
 		<result property="blogTypeName" column="blogTypeName"/>
 		<result property="summary" column="summary"/>
+		<result property="clickHit" column="clickHit"/>
 	</resultMap>
 	
 	
@@ -44,12 +45,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary})
+		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0)
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary}  where id=#{id}
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit}  where id=#{id}
 	</update>
-	
-	
+	<select id="getRankByClickHit"  resultMap="BlogResult">
+		SELECT * FROM `tb_blog`  order by clickHit desc,id desc limit 6
+	</select>
+	<select id="getRankByCreateTime"  resultMap="BlogResult">
+		SELECT * FROM `tb_blog`  order by create_time desc,id desc limit 6
+	</select>
 </mapper>

@@ -35,7 +35,7 @@ Integer pageCount=null;
 		
 		String projectName =request.getContextPath();
 		if(totalCount>10){
-			sb.append("<div class='page'><a title='Total record'><b>136</b> </a>");
+			sb.append("<div class='page'><a title='Total record'><b>"+pageCount+"</b> </a>");
 			if(currentPage!=1){
 				sb.append("<a href='"+projectName+"/blog/index.do'>&lt;&lt;</a><a href='"+projectName+"/blog/index.do?page="+(currentPage-1)+"'>&lt;</a>");
 			}
@@ -44,7 +44,7 @@ Integer pageCount=null;
 					continue;
 				}
 				if(i==currentPage){
-					sb.append("<a href='"+projectName+"/blog/index.do?page="+i+"'>"+i+"</a>");	
+					sb.append("<b>"+currentPage+"</b>");	
 				}else{
 					sb.append("<a href='"+projectName+"/blog/index.do?page="+i+"'>"+i+"</a>");	
 				}

@@ -39,7 +39,7 @@
 <article>
   <div class="l_box f_l">
     <h2 class="c_titile">${blog.blogTitle}</h2>
-    <p class="box_c"><span class="d_time">发布时间：${blog.createTime}</span><span>编辑：<a href="mailto:dancesmiling@qq.com">杨青</a></span><span>阅读（<script src="/e/public/ViewClick/?classid=8&amp;id=530&amp;addclick=1"></script>90800）</span></p>
+    <p class="box_c"><span class="d_time">发布时间：${blog.createTime}</span><span>编辑：<a href="mailto:dancesmiling@qq.com">老王头</a></span><span>阅读（<script src="/e/public/ViewClick/?classid=8&amp;id=530&amp;addclick=1"></script>${blog.clickHit}）</span></p>
     <ul class="infos">
 		${blog.blogContent}
     </ul>

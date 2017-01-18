@@ -12,6 +12,7 @@ public class BlogVo {
 	private Integer blogTypeId;//��������id
 	private String blogTypeName;
 	private String summary;
+	private Integer clickHit;
 	public Integer getId() {
 		return id;
 	}
@@ -60,6 +61,13 @@ public class BlogVo {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
+	public Integer getClickHit() {
+		return clickHit;
+	}
+	public void setClickHit(Integer clickHit) {
+		this.clickHit = clickHit;
+	}
+	
 	
 	
 }

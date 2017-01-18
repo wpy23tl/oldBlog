@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>兔小白个人博客</title>
+<title>老王头个人博客</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="${pageContext.request.contextPath}/blogResources/css/base.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 	        <ul>
 	          <h3><a href="${pageContext.request.contextPath}/blog/article.do?id=${blog.id}">${blog.blogTitle}</a></h3>
 	          <p>${blog.summary }......</p>
-	          <p class="autor"><span class="lm f_l"><a href="/">${blog.blogTypeName}</a></span><span class="dtime f_l">${blog.createTime}</span><span class="viewnum f_r">浏览（<a href="/">459</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
+	          <p class="autor"><span class="lm f_l"><a href="/">${blog.blogTypeName}</a></span><span class="dtime f_l">${blog.createTime}</span><span class="viewnum f_r">浏览（<a href="/">${blog.clickHit }</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
 	        </ul>
 	      </div>
       </c:forEach>
@@ -146,22 +146,16 @@ window.onload = function ()
       <div class="ms-main" id="ms-main">
         <div style="display: block;" class="bd bd-news" >
           <ul>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
+          	<c:forEach var="clickRank" items="${clickHitRank }">
+          		<li><a href="/" target="_blank">${clickRank.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
         <div  class="bd bd-news">
           <ul>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
+          <c:forEach var="createRank" items="${createTimeRank}">
+          		<li><a href="/" target="_blank">${createRank.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
         <div class="bd bd-news">

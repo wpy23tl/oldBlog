@@ -62,5 +62,18 @@ public interface BlogDao  {
 	 * @return
 	 */
 	Blog getNextBlog(Integer id);
-	
+	/**
+	 * @author wpy
+	 * @desc 根据点击率排行
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	List<Blog> getRankByClickHit();
+	/**
+	 * @author wpy
+	 * @desc 根据创建时间拍行
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	List<Blog> getRankByCreateTime();
 }
