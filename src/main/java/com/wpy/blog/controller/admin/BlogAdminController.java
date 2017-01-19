@@ -95,7 +95,7 @@ public class BlogAdminController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
 		model.addAttribute("blogTypeList",blogTypeList);
-		return "admin/blogAdd";
+		return "admin/blogAdd2";
 	}
 	
 	@RequestMapping("/saveBlog")

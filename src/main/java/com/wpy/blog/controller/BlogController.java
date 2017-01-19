@@ -77,6 +77,9 @@ public class BlogController {
 		//最新文章
 		List<Blog> createTimeRank = blogService.getRankByCreateTime();
 		model.addAttribute("createTimeRank",createTimeRank);
+		//随机文章
+		List<Blog> randomBlogs = blogService.getRankByRandom();
+		model.addAttribute("randomBlogs",randomBlogs);
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
 		

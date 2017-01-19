@@ -71,4 +71,9 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.getRankByCreateTime();
 	}
 
+	@Override
+	public List<Blog> getRankByRandom() {
+		return blogDao.getRankByRandom();
+	}
+
 }

@@ -46,4 +46,11 @@ public interface BlogService {
 	 * @return
 	 */
 	List<Blog> getRankByCreateTime();
+	/**
+	 * @author wpy
+	 * @desc 获取随机文章
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	List<Blog> getRankByRandom();
 }

@@ -76,4 +76,11 @@ public interface BlogDao  {
 	 * @return
 	 */
 	List<Blog> getRankByCreateTime();
+	/**
+	 * @author wpy
+	 * @desc 随机获取博客文章
+	 * @date 2017年1月18日
+	 * @return
+	 */
+	List<Blog> getRankByRandom();
 }

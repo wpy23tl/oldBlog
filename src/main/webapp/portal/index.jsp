@@ -86,17 +86,6 @@
 	        </ul>
 	      </div>
       </c:forEach>
-      <div class="blogs">
-        <figure><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"></figure>
-        <ul>
-          <h3><a href="/">住在手机里的朋友</a></h3>
-          <p>通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，这种快餐式的友谊 ...</p>
-          <p class="autor"><span class="lm f_l"><a href="/">个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_r">浏览（<a href="/">459</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
-        </ul>
-      </div>
-     <c:if test="">
-     	
-     </c:if>
      
      ${pageCode }
     
@@ -140,7 +129,7 @@ window.onload = function ()
         <ul class="hd" id="tab">
           <li class="cur"><a href="/">点击排行</a></li>
           <li><a href="/">最新文章</a></li>
-          <li><a href="/">站长推荐</a></li>
+          <li><a href="/">随机文章</a></li>
         </ul>
       </div>
       <div class="ms-main" id="ms-main">
@@ -160,12 +149,9 @@ window.onload = function ()
         </div>
         <div class="bd bd-news">
           <ul>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+          <c:forEach var="random" items="${randomBlogs}">
+          		<li><a href="/" target="_blank">${random.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
       </div>
