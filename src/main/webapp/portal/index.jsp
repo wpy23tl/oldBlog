@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!doctype html>
 <html>
 <head>
@@ -170,21 +171,11 @@ window.onload = function ()
     <div class="tuwen">
       <h3>图文推荐</h3>
       <ul>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"><b>住在手机里的朋友</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+      <c:forEach var="recommend" items="${bloggerRecommends}">
+       	<li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"><b>${recommend.blogTitle }</b></a>
+          <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime"><fmt:formatDate value="${recommend.createTime}" pattern="yyyy-MM-dd" /></span></p>
         </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="${pageContext.request.contextPath}/blogResources/images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/06.jpg"><b>住在手机里的朋友</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
+       </c:forEach>
       </ul>
     </div>
     <div class="ad"> <img src="${pageContext.request.contextPath}/blogResources/images/03.jpg"> </div>
@@ -206,7 +197,7 @@ window.onload = function ()
 </article>
 
 <footer>
-  <p class="ft-copyright">兔小白博客 Design by DanceSmile 蜀ICP备11002373号-1</p>
+  <p class="ft-copyright">老王头博客 Design by 老王头 </p>
   <div id="tbox"> <a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
 </footer>
 </body>

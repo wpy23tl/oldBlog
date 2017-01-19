@@ -83,4 +83,11 @@ public interface BlogDao  {
 	 * @return
 	 */
 	List<Blog> getRankByRandom();
+	/**
+	 * @author wpy
+	 * @desc 查询博主推荐
+	 * @date 2017年1月19日
+	 * @return
+	 */
+	List<Blog> selectBloggerRecommend();
 }

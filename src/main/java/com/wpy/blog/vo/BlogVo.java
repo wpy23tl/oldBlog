@@ -13,6 +13,8 @@ public class BlogVo {
 	private String blogTypeName;
 	private String summary;
 	private Integer clickHit;
+	private Integer recommendFlag;//博主推荐标识
+	private Integer recommendNo;//推荐编号
 	public Integer getId() {
 		return id;
 	}
@@ -66,6 +68,18 @@ public class BlogVo {
 	}
 	public void setClickHit(Integer clickHit) {
 		this.clickHit = clickHit;
+	}
+	public Integer getRecommendFlag() {
+		return recommendFlag;
+	}
+	public void setRecommendFlag(Integer recommendFlag) {
+		this.recommendFlag = recommendFlag;
+	}
+	public Integer getRecommendNo() {
+		return recommendNo;
+	}
+	public void setRecommendNo(Integer recommendNo) {
+		this.recommendNo = recommendNo;
 	}
 	
 	

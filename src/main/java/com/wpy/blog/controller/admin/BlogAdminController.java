@@ -134,5 +134,70 @@ public class BlogAdminController {
 		model.addAttribute("blogTypeId",blog.getBlogTypeId());
 		return "admin/blogAdd";
 	}
+	/**
+	 * @author wpy
+	 * @desc 博主推荐
+	 * @date 2017年1月19日
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/bloggerRecommend")
+	public  String bloggerRecommend(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		return "admin/bloggerRecommend";
+	}
 	
+	@RequestMapping("/recommendList")
+	public  String recommendList(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+//		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
+//		Map<String,Object> map=new HashMap<String,Object>();
+//		map.put("start", pageBean.getStart());
+//		map.put("size", pageBean.getPageSize());
+		List<Blog> blogList=blogService.getBloggerRecommend();
+		Integer total=blogService.getTotalCount();
+		List<BlogVo> newBlogList = new ArrayList<>();
+		for(Blog blog:blogList){
+			Date createTime = blog.getCreateTime();
+			String createTimeString = DateTimeUtil.DateToString(createTime, "yyyy-MM-dd HH:mm:ss");
+			BlogVo blogVo = new BlogVo();
+			BeanUtils.copyProperties(blog, blogVo);
+			blogVo.setCreateTime(createTimeString);
+			newBlogList.add(blogVo);
+		}
+		Map<String,Object> result = new HashMap<>();
+		result.put("rows",newBlogList);
+		result.put("total", total);
+		String json = JSON.toJSONString(result);
+		ResponseUtil.write(response, json);
+	return null;
+	}
+	/**
+	 * 删除推荐
+	 * @param request
+	 * @param response
+	 * @param id
+	 */
+	@RequestMapping("/deleteRecommend")
+	public void deleteRecommend(HttpServletRequest request,HttpServletResponse response,String ids){
+		String[] idsArray = ids.split(",");
+		for(int i=0;i<idsArray.length;i++){
+			Blog blog = blogService.getBlogById(Integer.valueOf(idsArray[i]));
+			blog.setRecommendFlag(0);
+			blogService.updateBlog(blog);
+		}
+		
+	}
+	
+	@RequestMapping("/addRecommendBlog")
+	public void addRecommendBlog(HttpServletRequest request,HttpServletResponse response,String ids){
+		String[] idsArray = ids.split(",");
+		for(int i=0;i<idsArray.length;i++){
+			Blog blog = blogService.getBlogById(Integer.valueOf(idsArray[i]));
+			blog.setRecommendFlag(1);
+			blogService.updateBlog(blog);
+		}
+		
+	}
 }

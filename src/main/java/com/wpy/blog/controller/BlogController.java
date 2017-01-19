@@ -80,6 +80,9 @@ public class BlogController {
 		//随机文章
 		List<Blog> randomBlogs = blogService.getRankByRandom();
 		model.addAttribute("randomBlogs",randomBlogs);
+		//博主推荐
+		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
+		model.addAttribute("bloggerRecommends",bloggerRecommends);
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
 		

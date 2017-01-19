@@ -76,4 +76,10 @@ public class BlogServiceImpl implements BlogService {
 		return blogDao.getRankByRandom();
 	}
 
+	@Override
+	public List<Blog> getBloggerRecommend() {
+		
+		return blogDao.selectBloggerRecommend();
+	}
+
 }
