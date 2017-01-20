@@ -169,7 +169,7 @@ window.onload = function ()
       </ul>
     </div>
     <div class="tuwen">
-      <h3>图文推荐</h3>
+      <h3>博主推荐</h3>
       <ul>
       <c:forEach var="recommend" items="${bloggerRecommends}">
        	<li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"><b>${recommend.blogTitle }</b></a>

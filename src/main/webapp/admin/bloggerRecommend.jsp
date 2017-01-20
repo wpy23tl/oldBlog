@@ -116,6 +116,36 @@
 		 $("#id").val("");
 	 }
 	
+	function updateRecommendNo(){
+		$("#fm1").form("submit",{
+			url:"${pageContext.request.contextPath}/admin/blog/updateRecommendBlog.do",
+			onSubmit:function(){
+				return $(this).form("validate");
+			},
+			success:function(data){
+				var data=eval('('+data+')');
+				if(data.success){
+					$.messager.alert("系统提示","保存成功！");
+					resetValue();
+					$("#dlg1").dialog("close");
+					$("#dg").datagrid("reload");
+				}else{
+					$.messager.alert("系统提示","保存失败！");
+					resetValue();
+					$("#dlg1").dialog("close");
+					return;
+				}
+				
+			},
+			error:function(){
+				$.messager.alert("系统提示","操作失败！");
+				resetValue();
+				$("#dlg1").dialog("close");
+				return;
+			}
+		});
+	}
+	
 </script>
 </head>
 <body style="margin: 1px">
@@ -186,7 +216,7 @@
  </div>
  
  <div id="dlg-buttons1">
- 	<a href="javascript:saveRecommendBlog()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+ 	<a href="javascript:updateRecommendNo()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
  	<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  

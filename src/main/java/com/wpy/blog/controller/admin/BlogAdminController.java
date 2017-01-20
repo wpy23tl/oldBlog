@@ -200,4 +200,22 @@ public class BlogAdminController {
 		}
 		
 	}
+	
+	@RequestMapping("/updateRecommendBlog")
+	public void updateRecommendBlog(HttpServletRequest request,HttpServletResponse response,String id,String recommendNo) throws Exception{
+			Map<String, Object> map= new HashMap<>();
+			Blog blog = blogService.getBlogById(Integer.valueOf(id));
+			blog.setRecommendNo(Integer.valueOf(recommendNo));
+			try {
+				blog.setRecommendNo(Integer.valueOf(recommendNo));
+				blogService.updateBlog(blog);
+				map.put("success", true);
+			} catch (Exception e) {
+				map.put("success", false);
+				e.printStackTrace();
+			}
+			String result = JSON.toJSONString(map);
+			ResponseUtil.write(response,result);
+		
+	}
 }
