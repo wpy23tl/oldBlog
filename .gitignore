@@ -7,3 +7,5 @@ target
 .settings
 .metadata
 /bin/
+# ignore idea files
+.idea

@@ -218,4 +218,18 @@ public class BlogAdminController {
 			ResponseUtil.write(response,result);
 		
 	}
+	/**
+	 * @author wpy
+	 * @desc 
+	 * @date 2017年1月21日
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/blogBannerSet")
+	public  String blogBannerSet(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		return "admin/blogBannerSet";
+	}
 }
