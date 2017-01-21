@@ -79,7 +79,7 @@
       <h2><span><a href="/" target="_blank">栏目标题</a><a href="/" target="_blank">栏目标题</a><a href="/" target="_blank">栏目标题</a></span><b>文章</b>推荐</h2>
       <c:forEach var="blog" items="${blogList }" >
 	      <div class="blogs">
-	        <figure><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"></figure>
+	        <figure><c:forEach var="image" items="${blog.imagesList }">${image }</c:forEach></figure>
 	        <ul>
 	          <h3><a href="${pageContext.request.contextPath}/blog/article.do?id=${blog.id}">${blog.blogTitle}</a></h3>
 	          <p>${blog.summary }......</p>

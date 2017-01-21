@@ -10,6 +10,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +73,7 @@ public class BlogController {
 			blogVo.setCreateTime(createTimeString);
 			newBlogList.add(blogVo);
 		}
-		model.addAttribute("blogList",newBlogList);
+		//model.addAttribute("blogList",newBlogList);
 		
 		//点击排行
 		List<Blog> clickHitRank = blogService.getRankByClickHit();
@@ -85,6 +89,22 @@ public class BlogController {
 		model.addAttribute("bloggerRecommends",bloggerRecommends);
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
+		
+		for(BlogVo blog:newBlogList){
+			List<String> imagesList=blog.getImagesList();
+			String blogInfo=blog.getBlogContent();
+			Document doc=Jsoup.parse(blogInfo);
+			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
+			for(int i=0;i<jpgs.size();i++){
+				if(i==1){
+					break;
+				}
+				Element jpg=jpgs.get(i);
+				imagesList.add(jpg.toString());
+				
+			}
+		}
+		model.addAttribute("blogList",newBlogList);
 		
 		String pageCode = PageUtil.genPageCode(totalCount, Integer.valueOf(pageSize),Integer.valueOf(page), request);
 		model.addAttribute("pageCode",pageCode);
