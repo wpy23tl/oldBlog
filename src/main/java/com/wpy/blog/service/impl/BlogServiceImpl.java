@@ -81,9 +81,12 @@ public class BlogServiceImpl implements BlogService {
 		
 		return blogDao.selectBloggerRecommend();
 	}
+
 	@Override
-	public List<Blog> getBanner(){
+	public List<Blog> getBanner() {
+		
 		return blogDao.selectBanner();
 	}
+	
 
 }

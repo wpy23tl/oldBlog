@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName}  where id=#{id}
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName},bannerFlag=#{bannerFlag}  where id=#{id}
 	</update>
 	<select id="getRankByClickHit"  resultMap="BlogResult">
 		SELECT * FROM `tb_blog`  order by clickHit desc,id desc limit 6

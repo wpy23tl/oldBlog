@@ -20,7 +20,7 @@
 		return "<a target='_blank' href='${pageContext.request.contextPath}/blog/articles/"+row.id+".html'>"+val+"</a>"
 	}
 	
-	function openUpdateNoDialog(){
+	function openUpdateBannerDialog(){
 		
 		var selectedRows = $("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
@@ -216,7 +216,7 @@
  <div id="tb">
  	<div>
  		<a href="javascript:void(0)" onclick="openRecommendDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
- 		<a href="javascript:void(0)" onclick="openUpdateNoDialog()"  class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+ 		<a href="javascript:void(0)" onclick="openUpdateBannerDialog()"  class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
  		<a href="javascript:void(0)" onclick="deleteRecommend()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  	<div>
@@ -256,17 +256,29 @@
  	<a href="javascript:closeBlogTypeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  
- <div id="dlg1" class="easyui-dialog" style="width:500px;height:180px;padding: 10px 20px"
+ <div id="dlg1" class="easyui-dialog" style="width:820px;height:420px;padding: 10px 20px"
    closed="true" buttons="#dlg-buttons1">
    
-   <form id="fm1" method="post">
-   	<table cellspacing="8px">
-   		<tr>
-   			<td>推荐编号：</td>
-   			<td><input type="text" id="recommendNo" name="recommendNo" class="easyui-validatebox" required="true"/></td>
-   		</tr>
-   	</table>
-   	<input type="hidden" id="id" name="id" >
+   <form id="fm1" method="post" enctype="multipart/form-data">
+   	博客选择:
+   	<select id="cc1" class="easyui-combogrid" name="dept" style="width:250px;" pagination="true"   
+        data-options="    
+            panelWidth:650,
+            panelHeight:320,    
+            value:'',    
+            idField:'id',    
+            textField:'blogTitle',    
+            url:'${pageContext.request.contextPath}/admin/blog/list.do',    
+            columns:[[    
+                {field:'id',title:'编号',width:60},    
+                {field:'blogTitle',title:'标题',width:200},    
+                {field:'createTime',title:'发布日期',width:120},    
+                {field:'blogTypeName',title:'博客类别',width:100}    
+            ]]    
+        "></select><br/>
+   	
+   	图片       :<input type="file" name="pictureFile1" id="doc" style="width:150px;" onchange="javascript:setImagePreview();">
+	   <div id="localImag"><img id="preview1" src="${pageContext.request}"  width="150" height="180" style="display: block; width: 150px; height: 180px;"></div>
    </form>
  </div>
  

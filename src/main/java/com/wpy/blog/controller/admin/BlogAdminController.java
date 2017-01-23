@@ -251,6 +251,7 @@ public class BlogAdminController {
 		//将内存中的文件写入磁盘
 		pictureFile.transferTo(file);
 		blog.setBannerName(newFileName);
+		blog.setBannerFlag(1);
 		Map<String, Object> map= new HashMap<>();
 		try {
 			blogService.updateBlog(blog);
@@ -266,7 +267,18 @@ public class BlogAdminController {
 	@RequestMapping("/getBanner")
 	public  String getBanner(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		List<Blog>  bannerList = blogService.getBanner();
-		model.addAttribute("bannerList",bannerList);
+		Map<String,Object> result = new HashMap<>();
+		result.put("rows",bannerList);
+		result.put("total", 10);
+		String json = JSON.toJSONString(result);
+		ResponseUtil.write(response, json);
+		return null;
+	}
+	
+	@RequestMapping("/updateBanner")
+	public  String updateBanner(HttpServletRequest request,HttpServletResponse response,Model model,String id) throws Exception{
+		Blog blog = blogService.getBlogById(Integer.valueOf(id));
+		model.addAttribute("blog",blog);
 		return null;
 	}
 
