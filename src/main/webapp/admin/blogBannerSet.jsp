@@ -83,20 +83,16 @@
 		$("#dlg1").dialog("close");
 	}
 	
-	function saveRecommendBlog(){
-		var selectedRows = $("#dg1").datagrid("getSelections");
-		var strIds =[];
-		for(var i=0;i<selectedRows.length;i++){
-			strIds.push(selectedRows[i].id)
-		}
-		var ids=strIds.join(",");
-		$.messager.confirm("系统提示","您确定要添加这<font color=red>"+selectedRows.length+"</font>条数据吗？",
+	function saveBannner(){
+        var selectedRows = $("#cc").datagrid("getSelections");
+        var id= selectedRows[0].id;
+		$.messager.confirm("系统提示","您确定要保存这条数据吗？",
 				function(r){
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/addRecommendBlog.do",
-							data:{ids:ids},
+							url:"${pageContext.request.contextPath}/admin/blog/addBanner.do",
+							data:{id:id},
 							success:function(){
 								$.messager.alert("系统提示","数据已添加成功！");
 								$("#dlg").dialog("close");
@@ -245,7 +241,7 @@
  </div>
  
  <div id="dlg-buttons">
- 	<a href="javascript:saveRecommendBlog()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+ 	<a href="javascript:saveBannner()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
  	<a href="javascript:closeBlogTypeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  

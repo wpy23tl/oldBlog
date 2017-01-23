@@ -1,5 +1,6 @@
 package com.wpy.blog.controller.admin;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
 import com.wpy.blog.util.ResponseUtil;
 import com.wpy.blog.vo.BlogVo;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -231,5 +233,24 @@ public class BlogAdminController {
 	@RequestMapping("/blogBannerSet")
 	public  String blogBannerSet(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		return "admin/blogBannerSet";
+	}
+
+	@RequestMapping("/addblogBanner")
+	public  String blogBannerSet(HttpServletRequest request, HttpServletResponse response, Model model, String id, MultipartFile pictureFile) throws Exception{
+		Blog blog= blogService.getBlogById(Integer.valueOf(id));
+		String timeString =String.valueOf(new Date().getTime());
+		int a=(int)(Math.random()*10);
+		int b=(int)(Math.random()*10);
+		timeString = timeString+a+b;
+		String originalfileName =pictureFile.getOriginalFilename();
+		String newFileName = timeString+originalfileName.substring(originalfileName.lastIndexOf("."));
+		String filePath = request.getContextPath()+"/bannerImages";
+		//新文件
+		File file = new File(filePath+newFileName);
+		//将内存中的文件写入磁盘
+		pictureFile.transferTo(file);
+		blog.setBannerName("newFileName");
+		blogService.updateBlog(blog);
+		return null;
 	}
 }
