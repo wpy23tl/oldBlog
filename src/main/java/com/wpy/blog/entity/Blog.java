@@ -19,6 +19,7 @@ public class Blog {
 	private Integer recommendNo;//推荐编号
 	private List<String> imagesList=new LinkedList<String>(); // 博客里存在的图片 主要用于列表展示显示缩略图
 	private String bannerName;//轮播图名字
+	private Integer bannerFlag;//轮播标志0不轮播 1轮播
 	public Integer getId() {
 		return id;
 	}
@@ -98,5 +99,13 @@ public class Blog {
 
 	public void setBannerName(String bannerName) {
 		this.bannerName = bannerName;
+	}
+
+	public Integer getBannerFlag() {
+		return bannerFlag;
+	}
+
+	public void setBannerFlag(Integer bannerFlag) {
+		this.bannerFlag = bannerFlag;
 	}
 }

@@ -84,27 +84,38 @@
 	}
 	
 	function saveBannner(){
-        var selectedRows = $("#cc").datagrid("getSelections");
-        var id= selectedRows[0].id;
-		$.messager.confirm("系统提示","您确定要保存这条数据吗？",
-				function(r){
-					if(r){
-						$.ajax({
-							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/addBanner.do",
-							data:{id:id},
-							success:function(){
-								$.messager.alert("系统提示","数据已添加成功！");
-								$("#dlg").dialog("close");
-								$("#dg").datagrid("reload");
-							},
-							error:function(){
-								$.messager.alert("系统提示","数据添加失败！");
-							}
-							
-						});	
-					}
-				});
+        var g = $('#cc').combogrid('grid');
+        var rz = g.datagrid('getSelected');	// 获取选择的行
+        alert(rz.id);
+		var id =rz.id;
+        $("#fm").form("submit",{
+            url:"${pageContext.request.contextPath}/admin/blog/addBlogBanner.do?id="+id,
+            onSubmit:function(){
+                return $(this).form("validate");
+            },
+            success:function(data){
+                var data=eval('('+data+')');
+                if(data.success){
+                    $.messager.alert("系统提示","保存成功！");
+                    resetValue();
+                    $("#dlg").dialog("close");
+                    $("#dg").datagrid("reload");
+                }else{
+                    $.messager.alert("系统提示","保存失败！");
+                    resetValue();
+                    $("#dlg").dialog("close");
+                    return;
+                }
+
+            },
+            error:function(){
+                $.messager.alert("系统提示","操作失败！");
+                resetValue();
+                $("#dlg").dialog("close");
+                return;
+            }
+        });
+
 	}
 	
 	function resetValue(){
@@ -190,7 +201,7 @@
 <body style="margin: 1px">
 <table id="dg" title="推荐博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/recommendList.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/admin/blog/getBanner.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
@@ -217,7 +228,7 @@
  <div id="dlg" class="easyui-dialog" style="width:820px;height:420px;padding: 10px 20px"
    closed="true" buttons="#dlg-buttons">
    
-   <form id="fm" method="post">
+   <form id="fm" method="post" enctype="multipart/form-data">
    	博客选择:
    	<select id="cc" class="easyui-combogrid" name="dept" style="width:250px;" pagination="true"   
         data-options="    
@@ -235,7 +246,7 @@
             ]]    
         "></select><br/>
    	
-   	图片       :<input type="file" name="file" id="doc" style="width:150px;" onchange="javascript:setImagePreview();">
+   	图片       :<input type="file" name="pictureFile" id="doc" style="width:150px;" onchange="javascript:setImagePreview();">
 	   <div id="localImag"><img id="preview" src="http://blog.chuangling.net/Public/images/top.jpg" width="150" height="180" style="display: block; width: 150px; height: 180px;"></div>
    </form>
  </div>
@@ -260,7 +271,7 @@
  </div>
  
  <div id="dlg-buttons1">
- 	<a href="javascript:updateRecommendNo()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+ 	<a href="javascript:saveBannner()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
  	<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  

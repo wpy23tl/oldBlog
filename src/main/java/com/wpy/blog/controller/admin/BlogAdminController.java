@@ -235,8 +235,8 @@ public class BlogAdminController {
 		return "admin/blogBannerSet";
 	}
 
-	@RequestMapping("/addblogBanner")
-	public  String blogBannerSet(HttpServletRequest request, HttpServletResponse response, Model model, String id, MultipartFile pictureFile) throws Exception{
+	@RequestMapping("/addBlogBanner")
+	public  String addBlogBanner(HttpServletRequest request, HttpServletResponse response, Model model, String id, MultipartFile pictureFile) throws Exception{
 		Blog blog= blogService.getBlogById(Integer.valueOf(id));
 		String timeString =String.valueOf(new Date().getTime());
 		int a=(int)(Math.random()*10);
@@ -244,13 +244,30 @@ public class BlogAdminController {
 		timeString = timeString+a+b;
 		String originalfileName =pictureFile.getOriginalFilename();
 		String newFileName = timeString+originalfileName.substring(originalfileName.lastIndexOf("."));
-		String filePath = request.getContextPath()+"/bannerImages";
+		//String filePath = request.getContextPath()+"/bannerImages/";
+		String filePath =request.getSession().getServletContext().getRealPath("bannerImages/");
 		//新文件
 		File file = new File(filePath+newFileName);
 		//将内存中的文件写入磁盘
 		pictureFile.transferTo(file);
-		blog.setBannerName("newFileName");
-		blogService.updateBlog(blog);
+		blog.setBannerName(newFileName);
+		Map<String, Object> map= new HashMap<>();
+		try {
+			blogService.updateBlog(blog);
+			map.put("success", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("success", false );
+		}
+		String result = JSON.toJSONString(map);
+		ResponseUtil.write(response,result);
 		return null;
 	}
+	@RequestMapping("/getBanner")
+	public  String getBanner(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		List<Blog>  bannerList = blogService.getBanner();
+		model.addAttribute("bannerList",bannerList);
+		return null;
+	}
+
 }

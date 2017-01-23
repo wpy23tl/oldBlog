@@ -90,4 +90,10 @@ public interface BlogDao  {
 	 * @return
 	 */
 	List<Blog> selectBloggerRecommend();
+
+	/**
+	 * 查询具有banner的博客
+	 * @return
+	 */
+	List<Blog> selectBanner();
 }

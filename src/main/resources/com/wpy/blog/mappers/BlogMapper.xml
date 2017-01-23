@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="clickHit" column="clickHit"/>
 		<result property="recommendFlag" column="recommendFlag"/>
 		<result property="recommendNo" column="recommendNo"/>
+		<result property="bannerName" column="bannerName"/>
 	</resultMap>
 	
 	
@@ -47,11 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0)
+		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0,'',0)
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo}  where id=#{id}
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName}  where id=#{id}
 	</update>
 	<select id="getRankByClickHit"  resultMap="BlogResult">
 		SELECT * FROM `tb_blog`  order by clickHit desc,id desc limit 6
@@ -65,5 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBloggerRecommend" parameterType="Map" resultMap="BlogResult">
 		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id where obj.recommendFlag=1 order by obj.recommendNo asc
 		
+	</select>
+	<select id="selectBanner"  resultMap="BlogResult">
+		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id where obj.bannerFlag=1
+
 	</select>
 </mapper>

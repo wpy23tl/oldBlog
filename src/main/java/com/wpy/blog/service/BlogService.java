@@ -60,4 +60,10 @@ public interface BlogService {
 	 * @return
 	 */
 	List<Blog> getBloggerRecommend();
+
+	/**
+	 * 查询具有banner的博客
+	 * @return
+	 */
+	List<Blog> getBanner();
 }
