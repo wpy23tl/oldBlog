@@ -288,5 +288,17 @@ public class BlogAdminController {
 		model.addAttribute("blog",blog);
 		return null;
 	}
+	
+	@RequestMapping("/deleteBanner")
+	public void deleteBanner(HttpServletRequest request,HttpServletResponse response,String ids){
+		String[] idsArray = ids.split(",");
+		for(int i=0;i<idsArray.length;i++){
+			Blog blog =	blogService.getBlogById(Integer.valueOf(idsArray[i]));
+			blog.setBannerFlag(0);
+			blog.setBannerName("");
+			blogService.updateBlog(blog);
+		}
+		
+	}
 
 }
