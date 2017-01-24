@@ -281,5 +281,12 @@ public class BlogAdminController {
 		model.addAttribute("blog",blog);
 		return null;
 	}
+	
+	@RequestMapping("/saveUpdateBanner")
+	public  String saveUpdateBanner(HttpServletRequest request,HttpServletResponse response,Model model,String id) throws Exception{
+		Blog blog = blogService.getBlogById(Integer.valueOf(id));
+		model.addAttribute("blog",blog);
+		return null;
+	}
 
 }

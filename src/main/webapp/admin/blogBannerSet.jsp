@@ -123,37 +123,17 @@
 		 $("#id").val("");
 	 }
 	
-	function updateRecommendNo(){
-		$("#fm1").form("submit",{
-			url:"${pageContext.request.contextPath}/admin/blog/updateRecommendBlog.do",
-			onSubmit:function(){
-				return $(this).form("validate");
-			},
-			success:function(data){
-				var data=eval('('+data+')');
-				if(data.success){
-					$.messager.alert("系统提示","保存成功！");
-					resetValue();
-					$("#dlg1").dialog("close");
-					$("#dg").datagrid("reload");
-				}else{
-					$.messager.alert("系统提示","保存失败！");
-					resetValue();
-					$("#dlg1").dialog("close");
-					return;
-				}
-				
-			},
-			error:function(){
-				$.messager.alert("系统提示","操作失败！");
-				resetValue();
-				$("#dlg1").dialog("close");
-				return;
-			}
-		});
+	function openUpdateBannerDialog(){
+		$("#dlg1").dialog("open").dialog("setTitle","添加推荐博客");
+		//$("#blogTypeId").combobox("setValue",btid);
+		var selectedRows = $("#dg").datagrid("getSelections");
+		var row=selectedRows[0];
+        var bannerName =row.bannerName;
+		var srcbanner ="${pageContext.request.contextPath}/bannerImages/"+bannerName;
+		$("#preview1").attr("src",srcbanner);
 	}
 
-	//
+
     //下面用于图片上传预览功能
     function setImagePreview(avalue) {
         var docObj=document.getElementById("doc");
@@ -161,25 +141,25 @@
         var imgObjPreview=document.getElementById("preview");
         if(docObj.files &&docObj.files[0])
         {
-//火狐下，直接设img属性
+			//火狐下，直接设img属性
             imgObjPreview.style.display = 'block';
             imgObjPreview.style.width = '285px';
             imgObjPreview.style.height = '220px';
-//imgObjPreview.src = docObj.files[0].getAsDataURL();
+			//imgObjPreview.src = docObj.files[0].getAsDataURL();
 
-//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
             imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
         }
         else
         {
-//IE下，使用滤镜
+			//IE下，使用滤镜
             docObj.select();
             var imgSrc = document.selection.createRange().text;
             var localImagId = document.getElementById("localImag");
-//必须设置初始大小
+			//必须设置初始大小
             localImagId.style.width = "285px";
             localImagId.style.height = "220px";
-//图片异常的捕捉，防止用户修改后缀来伪造图片
+			//图片异常的捕捉，防止用户修改后缀来伪造图片
             try{
                 localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
                 localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
@@ -195,6 +175,46 @@
         return true;
     }
 
+    
+  //下面用于图片上传预览功能
+    function setImagePreview1(avalue) {
+        var docObj=document.getElementById("doc1");
+        var imgObjPreview=document.getElementById("preview1");
+        if(docObj.files &&docObj.files[0])
+        {
+			//火狐下，直接设img属性
+            imgObjPreview.style.display = 'block';
+            imgObjPreview.style.width = '285px';
+            imgObjPreview.style.height = '220px';
+			//imgObjPreview.src = docObj.files[0].getAsDataURL();
+
+			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+            imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);
+        }
+        else
+        {
+			//IE下，使用滤镜
+            docObj.select();
+            var imgSrc = document.selection.createRange().text;
+            var localImagId = document.getElementById("localImag");
+			//必须设置初始大小
+            localImagId.style.width = "285px";
+            localImagId.style.height = "220px";
+			//图片异常的捕捉，防止用户修改后缀来伪造图片
+            try{
+                localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+            }
+            catch(e)
+            {
+                alert("您上传的图片格式不正确，请重新选择!");
+                return false;
+            }
+            imgObjPreview.style.display = 'none';
+            document.selection.empty();
+        }
+        return true;
+    }
 
 </script>
 </head>
@@ -277,7 +297,7 @@
             ]]    
         "></select><br/>
    	
-   	图片       :<input type="file" name="pictureFile1" id="doc" style="width:150px;" onchange="javascript:setImagePreview();">
+   	图片       :<input type="file" name="pictureFile1" id="doc1" style="width:150px;" onchange="javascript:setImagePreview1();">
 	   <div id="localImag"><img id="preview1" src="${pageContext.request}"  width="150" height="180" style="display: block; width: 150px; height: 180px;"></div>
    </form>
  </div>
