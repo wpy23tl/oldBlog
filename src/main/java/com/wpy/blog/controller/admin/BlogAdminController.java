@@ -245,9 +245,9 @@ public class BlogAdminController {
 		String originalfileName =pictureFile.getOriginalFilename();
 		String newFileName = timeString+originalfileName.substring(originalfileName.lastIndexOf("."));
 		//String filePath = request.getContextPath()+"/bannerImages/";
-		String filePath =request.getSession().getServletContext().getRealPath("bannerImages/");
+		String filePath =request.getSession().getServletContext().getRealPath("/bannerImages");
 		//新文件
-		File file = new File(filePath+newFileName);
+		File file = new File(filePath,newFileName);
 		//将内存中的文件写入磁盘
 		pictureFile.transferTo(file);
 		blog.setBannerName(newFileName);
