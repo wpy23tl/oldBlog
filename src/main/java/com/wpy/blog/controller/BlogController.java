@@ -87,6 +87,9 @@ public class BlogController {
 		//博主推荐
 		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
 		model.addAttribute("bloggerRecommends",bloggerRecommends);
+		//获取所有banner
+		List<Blog> bannerBlogList = blogService.getBanner();
+		model.addAttribute("bannerBlogList",bannerBlogList);
 		//获取博客总数
 		Integer totalCount = blogService.getTotalCount();
 		

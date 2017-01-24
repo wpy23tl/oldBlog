@@ -32,11 +32,15 @@
     <script src="js/nav.js"></script> 
   </nav>
 </header>
+
 <article>
   <div class="l_box f_l">
     <div class="banner">
       <div id="slide-holder">
-        <div id="slide-runner"> <a href="/" target="_blank"><img id="slide-img-1" src="${pageContext.request.contextPath}/blogResources/images/a1.jpg"  alt="" /></a> <a href="/" target="_blank"><img id="slide-img-2" src="${pageContext.request.contextPath}/blogResources/images/a2.jpg"  alt="" /></a> <a href="/" target="_blank"><img id="slide-img-3" src="${pageContext.request.contextPath}/blogResources/images/a3.jpg"  alt="" /></a> <a href="/" target="_blank"><img id="slide-img-4" src="${pageContext.request.contextPath}/blogResources/images/a4.jpg"  alt="" /></a>
+        <div id="slide-runner"> 
+        <c:forEach var="bannerBlog" items="${bannerBlogList }">
+        	 <a href="/" target="_blank"><img id="${bannerBlog.id}" width="100%" src="${pageContext.request.contextPath}/bannerImages/${bannerBlog.bannerName}"  alt="" /></a>
+        </c:forEach>
           <div id="slide-controls">
             <p id="slide-client" class="text"><strong></strong><span></span></p>
             <p id="slide-desc" class="text"></p>
@@ -50,26 +54,26 @@
 	}
 
 	slider.data= [
-    {
-        "id":"slide-img-1", // 与slide-runner中的img标签id对应
-        "client":"标题1",
-        "desc":"这里修改描述 这里修改描述 这里修改描述" //这里修改描述
-    },
-    {
-        "id":"slide-img-2",
-        "client":"标题2",
-        "desc":"add your description here"
-    },
-    {
-        "id":"slide-img-3",
-        "client":"标题3",
-        "desc":"add your description here"
-    },
-    {
-        "id":"slide-img-4",
-        "client":"标题4",
-        "desc":"add your description here"
-    } 
+	   <c:forEach var="bannerBlog" varStatus="stat" items="${bannerBlogList }" >
+	   <c:choose>
+		<c:when test="${!st.last}">
+		{
+	        "id":"${bannerBlog.id}", // 与slide-runner中的img标签id对应
+	        "client":"",
+	        "desc":"${bannerBlog.blogTitle}" //这里修改描述
+	    },
+		</c:when>
+		<c:otherwise>
+		{
+	        "id":"${bannerBlog.id}", // 与slide-runner中的img标签id对应
+	        "client":"标题1",
+	        "desc":"这里修改描述 这里修改描述 这里修改描述" //这里修改描述
+	    }
+		</c:otherwise>
+	</c:choose>
+	  
+	   </c:forEach>
+    
 	];
 
 	  </script> 
