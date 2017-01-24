@@ -66,6 +66,8 @@
 			<a href="javascript:void(0)" onclick="openTab('写博客','/admin/blog/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
 			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','/admin/blog/blogManage.do','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
 			<a href="javascript:void(0)" onclick="openTab('博客类别信息管理','/admin/blogType/blogTypeManage.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
+			<a href="javascript:void(0)" onclick="openTab('博客推荐管理','/admin/blog/bloggerRecommend.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博主推荐</a>
+			<a href="javascript:void(0)" onclick="openTab('首页轮播图片设置','/admin/blog/blogBannerSet.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">首页轮播图片设置</a>
 		</div>
 		<div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
 			<a href="javascript:void(0)" onclick="openTab('写博客','/admin/blog/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
