@@ -282,10 +282,33 @@ public class BlogAdminController {
 		return null;
 	}
 	
-	@RequestMapping("/saveUpdateBanner")
-	public  String saveUpdateBanner(HttpServletRequest request,HttpServletResponse response,Model model,String id) throws Exception{
-		Blog blog = blogService.getBlogById(Integer.valueOf(id));
-		model.addAttribute("blog",blog);
+	@RequestMapping("/saveUpdateBlogBanner")
+	public  String saveUpdateBlogBanner(HttpServletRequest request, HttpServletResponse response, Model model, String id, MultipartFile pictureFile1) throws Exception{
+		Blog blog= blogService.getBlogById(Integer.valueOf(id));
+		String timeString =String.valueOf(new Date().getTime());
+		int a=(int)(Math.random()*10);
+		int b=(int)(Math.random()*10);
+		timeString = timeString+a+b;
+		String originalfileName =pictureFile1.getOriginalFilename();
+		String newFileName = timeString+originalfileName.substring(originalfileName.lastIndexOf("."));
+		//String filePath = request.getContextPath()+"/bannerImages/";
+		String filePath =request.getSession().getServletContext().getRealPath("/bannerImages");
+		//新文件
+		File file = new File(filePath,newFileName);
+		//将内存中的文件写入磁盘
+		pictureFile1.transferTo(file);
+		blog.setBannerName(newFileName);
+		blog.setBannerFlag(1);
+		Map<String, Object> map= new HashMap<>();
+		try {
+			blogService.updateBlog(blog);
+			map.put("success", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("success", false );
+		}
+		String result = JSON.toJSONString(map);
+		ResponseUtil.write(response,result);
 		return null;
 	}
 	

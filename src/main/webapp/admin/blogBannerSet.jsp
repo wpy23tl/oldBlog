@@ -20,23 +20,6 @@
 		return "<a target='_blank' href='${pageContext.request.contextPath}/blog/articles/"+row.id+".html'>"+val+"</a>"
 	}
 	
-	function openUpdateBannerDialog(){
-		
-		var selectedRows = $("#dg").datagrid("getSelections");
-		if(selectedRows.length==0){
-			$.messager.alert("系统提示","请选择要修改的数据！");
-			return;
-		}else if(selectedRows.length>1){
-			$.messager.alert("系统提示","最多选择一条数据！");
-			return;
-		}else{
-			$("#dlg1").dialog("open").dialog("setTitle","编辑推荐编号");
-			 var row=selectedRows[0];
-			 $("#fm1").form("load",row);
-		}
-		
-	
-	}
 	
 	
 	function deleteRecommend(){
@@ -118,6 +101,41 @@
 
 	}
 	
+	function saveBannner1(){
+        var g = $('#cc1').combogrid('grid');
+        var rz = g.datagrid('getSelected');	// 获取选择的行
+        alert(rz.id);
+		var id =rz.id;
+        $("#fm1").form("submit",{
+            url:"${pageContext.request.contextPath}/admin/blog/saveUpdateBlogBanner.do?id="+id,
+            onSubmit:function(){
+                return $(this).form("validate");
+            },
+            success:function(data){
+                var data=eval('('+data+')');
+                if(data.success){
+                    $.messager.alert("系统提示","保存成功！");
+                    resetValue();
+                    $("#dlg").dialog("close");
+                    $("#dg").datagrid("reload");
+                }else{
+                    $.messager.alert("系统提示","保存失败！");
+                    resetValue();
+                    $("#dlg").dialog("close");
+                    return;
+                }
+
+            },
+            error:function(){
+                $.messager.alert("系统提示","操作失败！");
+                resetValue();
+                $("#dlg").dialog("close");
+                return;
+            }
+        });
+
+	}
+	
 	function resetValue(){
 		 $("#blogTypeName").val("");
 		 $("#id").val("");
@@ -125,9 +143,11 @@
 	
 	function openUpdateBannerDialog(){
 		$("#dlg1").dialog("open").dialog("setTitle","添加推荐博客");
-		//$("#blogTypeId").combobox("setValue",btid);
+		
 		var selectedRows = $("#dg").datagrid("getSelections");
 		var row=selectedRows[0];
+		var sc=row.id
+		$("#cc1").combogrid("setValue",sc);
         var bannerName =row.bannerName;
 		var srcbanner ="${pageContext.request.contextPath}/bannerImages/"+bannerName;
 		$("#preview1").attr("src",srcbanner);
@@ -281,7 +301,7 @@
    
    <form id="fm1" method="post" enctype="multipart/form-data">
    	博客选择:
-   	<select id="cc1" class="easyui-combogrid" name="dept" style="width:250px;" pagination="true"   
+   	<select id="cc1" class="easyui-combogrid" name="dept" style="width:250px;" pagination="true"  readonly="true" 
         data-options="    
             panelWidth:650,
             panelHeight:320,    
@@ -303,7 +323,7 @@
  </div>
  
  <div id="dlg-buttons1">
- 	<a href="javascript:saveBannner()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+ 	<a href="javascript:saveBannner1()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
  	<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  
