@@ -2,8 +2,9 @@ package com.wpy.blog.entity;
 
 public class BlogType {
 
-	private Integer id;//Ö÷¼üid
-	private String blogTypeName;//²©¿ÍÀàĞÍÃû×Ö
+	private Integer id;//ï¿½ï¿½ï¿½ï¿½id
+	private String blogTypeName;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Integer blogTypeCount;//åšå®¢ç±»å‹æ•°é‡
 	public Integer getId() {
 		return id;
 	}
@@ -15,6 +16,12 @@ public class BlogType {
 	}
 	public void setBlogTypeName(String blogTypeName) {
 		this.blogTypeName = blogTypeName;
+	}
+	public Integer getBlogTypeCount() {
+		return blogTypeCount;
+	}
+	public void setBlogTypeCount(Integer blogTypeCount) {
+		this.blogTypeCount = blogTypeCount;
 	}
 	
 }

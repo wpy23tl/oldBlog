@@ -51,7 +51,7 @@ public class BlogController {
 	public String index(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String pageSize){
 		Map<String,Object> map = new HashMap<>();
 		//获取所有博客类型
-		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
+//		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
 		if("".equals(page) || page==null){
 			page="1";
 		}
@@ -61,6 +61,7 @@ public class BlogController {
 		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
+		List<BlogType> blogTypeList =blogTypeService.getCount();
 		model.addAttribute("blogTypeList",blogTypeList);
 		//获取所有博客
 		List<Blog> blogList =  blogService.getAllBlog(map);
@@ -86,6 +87,20 @@ public class BlogController {
 		model.addAttribute("randomBlogs",randomBlogs);
 		//博主推荐
 		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
+		for(Blog blog:bloggerRecommends){
+			List<String> imagesList=blog.getImagesList();
+			String blogInfo=blog.getBlogContent();
+			Document doc=Jsoup.parse(blogInfo);
+			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
+			for(int i=0;i<jpgs.size();i++){
+				if(i==1){
+					break;
+				}
+				Element jpg=jpgs.get(i);
+				imagesList.add(jpg.toString());
+				
+			}
+		}
 		model.addAttribute("bloggerRecommends",bloggerRecommends);
 		//获取所有banner
 		List<Blog> bannerBlogList = blogService.getBanner();

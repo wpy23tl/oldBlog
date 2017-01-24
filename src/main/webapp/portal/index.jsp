@@ -39,7 +39,7 @@
       <div id="slide-holder">
         <div id="slide-runner"> 
         <c:forEach var="bannerBlog" items="${bannerBlogList }">
-        	 <a href="/" target="_blank"><img id="${bannerBlog.id}" width="100%" src="${pageContext.request.contextPath}/bannerImages/${bannerBlog.bannerName}"  alt="" /></a>
+        	 <a href="${pageContext.request.contextPath}/blog/article.do?id=${bannerBlog.id}" target="_blank"><img id="${bannerBlog.id}" width="100%" src="${pageContext.request.contextPath}/bannerImages/${bannerBlog.bannerName}"  alt="" /></a>
         </c:forEach>
           <div id="slide-controls">
             <p id="slide-client" class="text"><strong></strong><span></span></p>
@@ -141,21 +141,21 @@ window.onload = function ()
         <div style="display: block;" class="bd bd-news" >
           <ul>
           	<c:forEach var="clickRank" items="${clickHitRank }">
-          		<li><a href="/" target="_blank">${clickRank.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${clickRank.id}" target="_blank">${clickRank.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
         <div  class="bd bd-news">
           <ul>
           <c:forEach var="createRank" items="${createTimeRank}">
-          		<li><a href="/" target="_blank">${createRank.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${createRank.id}" target="_blank">${createRank.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
         <div class="bd bd-news">
           <ul>
           <c:forEach var="random" items="${randomBlogs}">
-          		<li><a href="/" target="_blank">${random.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${random.id}" target="_blank">${random.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
@@ -167,8 +167,8 @@ window.onload = function ()
     <div class="cloud">
       <h3>标签云</h3>
       <ul>
-       <c:forEach var="blogType" items="${blogTypeList}">
-       	<li><a href="/">${blogType.blogTypeName}</a></li>
+       <c:forEach var="blogType" items="${blogTypeList}" varStatus="stat">
+       	<li><a href="/">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
        </c:forEach>
       </ul>
     </div>
@@ -176,7 +176,7 @@ window.onload = function ()
       <h3>博主推荐</h3>
       <ul>
       <c:forEach var="recommend" items="${bloggerRecommends}">
-       	<li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"><b>${recommend.blogTitle }</b></a>
+       	<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${recommend.id}"><c:forEach var="image" items="${recommend.imagesList }">${image }</c:forEach><b>${recommend.blogTitle }</b></a>
           <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime"><fmt:formatDate value="${recommend.createTime}" pattern="yyyy-MM-dd" /></span></p>
         </li>
        </c:forEach>

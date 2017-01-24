@@ -50,5 +50,11 @@ public interface BlogTypeDao  {
 	 * @return
 	 */
 	Integer getTotalCount();
-	
+	/**
+	 * @author wpy
+	 * @desc 查询博客类型数量
+	 * @date 2017年1月25日
+	 * @return
+	 */
+	List<BlogType> selectCount();
 }

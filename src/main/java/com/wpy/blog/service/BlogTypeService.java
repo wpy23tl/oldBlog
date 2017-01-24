@@ -17,4 +17,5 @@ public interface BlogTypeService {
 	public BlogType getBlogTypeById(Integer id);
 	public List<BlogType> getAllBlogType(Map<String,Object> map);
 	public Integer getTotalCount();
+	List<BlogType> getCount();
 }
