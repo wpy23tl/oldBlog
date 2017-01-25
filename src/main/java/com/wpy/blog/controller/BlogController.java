@@ -48,7 +48,8 @@ public class BlogController {
 	 * @return
 	 */
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,@RequestParam(value="rows",required=false)String pageSize){
+	public String index(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="page",required=false)String page,
+			@RequestParam(value="rows",required=false)String pageSize,String blogTypeId){
 		Map<String,Object> map = new HashMap<>();
 		//获取所有博客类型
 //		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
@@ -61,7 +62,11 @@ public class BlogController {
 		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
-		List<BlogType> blogTypeList =blogTypeService.getCount();
+		if(blogTypeId !=null || "".equals(blogTypeId)){
+			map.put("blogTypeId",Integer.valueOf(blogTypeId));
+		}
+		Map<String,Object> map0 = new HashMap<>();
+		List<BlogType> blogTypeList =blogTypeService.getCount(map0);
 		model.addAttribute("blogTypeList",blogTypeList);
 		//获取所有博客
 		List<Blog> blogList =  blogService.getAllBlog(map);
@@ -106,8 +111,16 @@ public class BlogController {
 		List<Blog> bannerBlogList = blogService.getBanner();
 		model.addAttribute("bannerBlogList",bannerBlogList);
 		//获取博客总数
-		Integer totalCount = blogService.getTotalCount();
-		
+		Integer totalCount = null; 
+		if(blogTypeId==null || "".equals(blogTypeId)){
+			totalCount = blogService.getTotalCount();
+		}else{
+			Map<String,Object> map1 = new HashMap<>();
+			map1.put("id",blogTypeId);
+			List<BlogType> blogTypeList1 = blogTypeService.getCount(map1);
+			BlogType blogType = blogTypeList1.get(0);
+			totalCount= blogType.getBlogTypeCount();
+		}
 		for(BlogVo blog:newBlogList){
 			List<String> imagesList=blog.getImagesList();
 			String blogInfo=blog.getBlogContent();

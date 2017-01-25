@@ -25,7 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAll" parameterType="Map" resultMap="BlogResult">
-		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id order by create_time desc
+		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id 
+		<where>
+			<if test="blogTypeId !=null and blogTypeId !='' ">
+				and blogtype_id = #{blogTypeId}
+			</if>
+		</where>
+		order by create_time desc
 		<if test="start!=null and size!=null">
 			limit #{start},#{size}
 		</if>

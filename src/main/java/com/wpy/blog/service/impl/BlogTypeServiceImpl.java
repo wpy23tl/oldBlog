@@ -56,9 +56,9 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	}
 
 	@Override
-	public List<BlogType> getCount() {
+	public List<BlogType> getCount(Map<String,Object> map) {
 		
-		return blogTypeDao.selectCount();
+		return blogTypeDao.selectCount(map);
 	}
 	
 	

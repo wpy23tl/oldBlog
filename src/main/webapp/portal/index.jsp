@@ -168,7 +168,7 @@ window.onload = function ()
       <h3>标签云</h3>
       <ul>
        <c:forEach var="blogType" items="${blogTypeList}" varStatus="stat">
-       	<li><a href="/">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
+       	<li><a href="${pageContext.request.contextPath}/blog/index.do?blogTypeId=${blogType.id}">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
        </c:forEach>
       </ul>
     </div>

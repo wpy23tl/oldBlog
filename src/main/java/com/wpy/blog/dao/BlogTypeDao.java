@@ -56,5 +56,5 @@ public interface BlogTypeDao  {
 	 * @date 2017年1月25日
 	 * @return
 	 */
-	List<BlogType> selectCount();
+	List<BlogType> selectCount(Map<String,Object> map);
 }
