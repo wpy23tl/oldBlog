@@ -52,7 +52,6 @@ public class BlogController {
 			@RequestParam(value="rows",required=false)String pageSize,String blogTypeId){
 		Map<String,Object> map = new HashMap<>();
 		//获取所有博客类型
-//		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
 		if("".equals(page) || page==null){
 			page="1";
 		}
@@ -62,7 +61,7 @@ public class BlogController {
 		PageBean pageBean = new PageBean(Integer.valueOf(page),Integer.valueOf(pageSize));
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
-		if(blogTypeId !=null || "".equals(blogTypeId)){
+		if(blogTypeId!=null && !"null".equals(blogTypeId) ){
 			map.put("blogTypeId",Integer.valueOf(blogTypeId));
 		}
 		Map<String,Object> map0 = new HashMap<>();
@@ -112,7 +111,7 @@ public class BlogController {
 		model.addAttribute("bannerBlogList",bannerBlogList);
 		//获取博客总数
 		Integer totalCount = null; 
-		if(blogTypeId==null || "".equals(blogTypeId)){
+		if(blogTypeId==null || "".equals(blogTypeId) || "null".equals(blogTypeId)){
 			totalCount = blogService.getTotalCount();
 		}else{
 			Map<String,Object> map1 = new HashMap<>();
@@ -137,7 +136,7 @@ public class BlogController {
 		}
 		model.addAttribute("blogList",newBlogList);
 		
-		String pageCode = PageUtil.genPageCode(totalCount, Integer.valueOf(pageSize),Integer.valueOf(page), request);
+		String pageCode = PageUtil.genPageCode(totalCount, Integer.valueOf(pageSize),Integer.valueOf(page), blogTypeId, request);
 		model.addAttribute("pageCode",pageCode);
 		return "portal/index";
 	}
