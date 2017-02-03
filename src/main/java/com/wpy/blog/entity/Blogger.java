@@ -1,21 +1,21 @@
 package com.wpy.blog.entity;
 
-public class User {
+public class Blogger {
 
-	private Integer id;//Ö÷¼üid
-	private String username;//ÓÃ»§Ãû
-	private String password;//ÃÜÂë
+	private Integer id;//ï¿½ï¿½ï¿½ï¿½id
+	private String userName;//ï¿½Ã»ï¿½ï¿½ï¿½
+	private String password;//ï¿½ï¿½ï¿½ï¿½
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
