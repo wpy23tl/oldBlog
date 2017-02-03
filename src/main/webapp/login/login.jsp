@@ -151,6 +151,7 @@ $(function(){
 <META name="GENERATOR" content="MSHTML 11.00.9600.17496"></HEAD> 
 <BODY>
 <DIV class="top_div"></DIV>
+<form action="${pageContext.request.contextPath}/blogger/login.do" method="post" >
 <DIV style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
 <DIV style="width: 165px; height: 96px; position: absolute;">
 <DIV class="tou"></DIV>
@@ -169,6 +170,7 @@ class="u_logo"></SPAN>         <INPUT class="ipt" type="text" placeholder="请�
 href="#">登录</A> 
            </SPAN>         </P></DIV></DIV>
 		   <div style="text-align:center;">
+</form>		   
 <div style="text-align:center;padding-top: 30px">
 老王头博客
 </div>
