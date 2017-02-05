@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>兔小白个人博客</title>
+<title>老王头个人博客</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 
@@ -110,42 +110,33 @@ window.onload = function ()
 	}
 }
 </script>
-      <div class="ms-top">
+     <div class="ms-top">
         <ul class="hd" id="tab">
           <li class="cur"><a href="/">点击排行</a></li>
           <li><a href="/">最新文章</a></li>
-          <li><a href="/">站长推荐</a></li>
+          <li><a href="/">随机文章</a></li>
         </ul>
       </div>
       <div class="ms-main" id="ms-main">
         <div style="display: block;" class="bd bd-news" >
           <ul>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
+          	<c:forEach var="clickRank" items="${clickHitRank }">
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${clickRank.id}" target="_blank">${clickRank.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
         <div  class="bd bd-news">
           <ul>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
+          <c:forEach var="createRank" items="${createTimeRank}">
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${createRank.id}" target="_blank">${createRank.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
         <div class="bd bd-news">
           <ul>
-            <li><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-            <li><a href="/" target="_blank">你面对的是生活而不是手机</a></li>
-            <li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            <li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
-            <li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            <li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+          <c:forEach var="random" items="${randomBlogs}">
+          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${random.id}" target="_blank">${random.blogTitle}</a></li>
+          	</c:forEach>
           </ul>
         </div>
       </div>
@@ -156,29 +147,19 @@ window.onload = function ()
     <div class="cloud">
       <h3>标签云</h3>
       <ul>
-       <c:forEach var="blogType" items="${blogTypeList}">
-       	<li><a href="/">${blogType.blogTypeName}</a></li>
+       <c:forEach var="blogType" items="${blogTypeList}" varStatus="stat">
+       	<li><a href="${pageContext.request.contextPath}/blog/index.do?blogTypeId=${blogType.id}">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
        </c:forEach>
       </ul>
     </div>
     <div class="tuwen">
-      <h3>图文推荐</h3>
+      <h3>博主推荐</h3>
       <ul>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/01.jpg"><b>住在手机里的朋友</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+      <c:forEach var="recommend" items="${bloggerRecommends}">
+       	<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${recommend.id}"><c:forEach var="image" items="${recommend.imagesList }">${image }</c:forEach><b>${recommend.blogTitle }</b></a>
+          <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime"><fmt:formatDate value="${recommend.createTime}" pattern="yyyy-MM-dd" /></span></p>
         </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="${pageContext.request.contextPath}/blogResources/images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/06.jpg"><b>住在手机里的朋友</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
-        <li><a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
-          <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
-        </li>
+       </c:forEach>
       </ul>
     </div>
     <div class="ad"> <img src="${pageContext.request.contextPath}/blogResources/images/03.jpg"> </div>
@@ -198,7 +179,7 @@ window.onload = function ()
   <!--r_box end --> 
 </article>
 <footer>
-  <p class="ft-copyright">兔小白博客 Design by DanceSmile 蜀ICP备11002373号-1</p>
+  <p class="ft-copyright">老王头博客 Design by 老王头 </p>
   <div id="tbox"> <a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
 </footer>
 </body>

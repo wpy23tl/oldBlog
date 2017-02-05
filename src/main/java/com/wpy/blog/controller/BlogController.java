@@ -151,11 +151,11 @@ public class BlogController {
 	 * @return
 	 */
 	@RequestMapping("/article")
-	public String article(HttpServletRequest request,HttpServletResponse response,Model model,String id){
+	public String article(HttpServletRequest request,HttpServletResponse response,Model model,String id,String blogTypeId){
 		Map<String,Object> map = new HashMap<>();
-		//获取所有博客类型
-		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
-		model.addAttribute("blogTypeList",blogTypeList);
+//		//获取所有博客类型
+//		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
+//		model.addAttribute("blogTypeList",blogTypeList);
 		//获取所有博客
 		List<Blog> blogList =  blogService.getAllBlog(map);
 		List<BlogVo> newBlogList = new ArrayList<>();
@@ -185,6 +185,41 @@ public class BlogController {
 		Blog nextBlog = blogService.getNextBlog(Integer.valueOf(id));
 		model.addAttribute("lastBlog",lastBlog);
 		model.addAttribute("nextBlog",nextBlog);
+		
+		//新增代码
+		//点击排行
+		List<Blog> clickHitRank = blogService.getRankByClickHit();
+		model.addAttribute("clickHitRank",clickHitRank);
+		//最新文章
+		List<Blog> createTimeRank = blogService.getRankByCreateTime();
+		model.addAttribute("createTimeRank",createTimeRank);
+		//随机文章
+		List<Blog> randomBlogs = blogService.getRankByRandom();
+		model.addAttribute("randomBlogs",randomBlogs);
+		//博主推荐
+		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
+		for(Blog blog1:bloggerRecommends){
+			List<String> imagesList=blog1.getImagesList();
+			String blogInfo=blog1.getBlogContent();
+			Document doc=Jsoup.parse(blogInfo);
+			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
+			for(int i=0;i<jpgs.size();i++){
+				if(i==1){
+					break;
+				}
+				Element jpg=jpgs.get(i);
+				imagesList.add(jpg.toString());
+				
+			}
+		}
+		model.addAttribute("bloggerRecommends",bloggerRecommends);
+		
+		if(blogTypeId!=null && !"null".equals(blogTypeId) ){
+			map.put("blogTypeId",Integer.valueOf(blogTypeId));
+		}
+		Map<String,Object> map0 = new HashMap<>();
+		List<BlogType> blogTypeList =blogTypeService.getCount(map0);
+		model.addAttribute("blogTypeList",blogTypeList);
 		return "portal/article";
 	}
 }
