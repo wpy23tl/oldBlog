@@ -1,5 +1,6 @@
 package com.wpy.blog.service;
 
+import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.Blogger;
 
 
@@ -24,4 +25,11 @@ public interface BloggerService {
 	 * @return
 	 */
 	public Integer update(Blogger blogger);
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
+	public Blogger getBlogById(Integer id);
 }

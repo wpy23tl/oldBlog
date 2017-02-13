@@ -5,6 +5,7 @@ public class Blogger {
 	private Integer id;//����id
 	private String userName;//�û���
 	private String password;//����
+	private String aboutMe;//关于我
 	public Integer getId() {
 		return id;
 	}
@@ -23,5 +24,12 @@ public class Blogger {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
+	}
 }

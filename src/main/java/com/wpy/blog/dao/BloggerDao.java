@@ -1,5 +1,6 @@
 package com.wpy.blog.dao;
 
+import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.Blogger;
 
 /**
@@ -28,4 +29,10 @@ public interface BloggerDao {
 	 * @return
 	 */
 	public Integer update(Blogger blogger);
+	/**
+	 * 根据主键id查询
+	 * @param id
+	 * @return
+	 */
+	Blogger selectByPrimaryKey(Integer id);
 }

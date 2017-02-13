@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wpy.blog.entity.Blogger;
+import com.wpy.blog.service.BloggerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +40,8 @@ public class BlogAdminController {
 	private BlogService blogService;
 	@Resource
 	private BlogTypeService blogTypeService;
+	@Resource
+	private BloggerService bloggerService;
  	/**
  	 * 查询所有博客
  	 * @param request
@@ -323,5 +327,36 @@ public class BlogAdminController {
 		}
 		
 	}
+
+	/**
+	 * 跳转到修改关于我界面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/goModifyAboutMe")
+	public String goModifyAboutMe(HttpServletRequest request,HttpServletResponse response){
+		request.getSession();
+		return "/admin/modifyAboutMe";
+
+	}
+
+	/**
+	 * 保存关于我
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param aboutMe
+	 * @return
+	 */
+	@RequestMapping("/saveAboutMe")
+	public String saveAboutMe(HttpServletRequest request,HttpServletResponse response,String aboutMe) {
+
+		Blogger blogger = bloggerService.find();
+		blogger.setAboutMe(aboutMe);
+		bloggerService.update(blogger);
+		return null;
+	}
+
 
 }

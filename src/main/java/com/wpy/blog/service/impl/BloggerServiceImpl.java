@@ -3,6 +3,7 @@ package com.wpy.blog.service.impl;
 
 import javax.annotation.Resource;
 
+import com.wpy.blog.entity.Blog;
 import org.springframework.stereotype.Service;
 
 import com.wpy.blog.dao.BloggerDao;
@@ -32,6 +33,15 @@ public class BloggerServiceImpl implements BloggerService{
 	public Integer update(Blogger blogger) {
 		return bloggerDao.update(blogger);
 	}
-	
-	
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Blogger getBlogById(Integer id) {
+		return bloggerDao.selectByPrimaryKey(id);
+	}
+
+
 }

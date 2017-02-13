@@ -8,8 +8,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.wpy.blog.entity.Blogger;
 import com.wpy.blog.service.BloggerService;
@@ -48,7 +48,18 @@ public class BloggerController {
 			return "login/login";
 		}
 	}
-	
-	
+
+	/**
+	 * 跳转到关于我页面
+	 * @param blogger
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/goAboutMe")
+	public String goAboutMe(Blogger blogger, HttpServletRequest request, Model model, String id){
+		Blogger blogger1 = bloggerService.getBlogById(Integer.valueOf(id));
+		model.addAttribute("aboutMe",blogger1.getAboutMe());
+		return "forceGround/aboutMe";
+	}
 	
 }
