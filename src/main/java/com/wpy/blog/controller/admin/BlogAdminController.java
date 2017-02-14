@@ -11,8 +11,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wpy.blog.entity.Blogger;
+import com.wpy.blog.entity.*;
 import com.wpy.blog.service.BloggerService;
+import com.wpy.blog.service.LinkService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.wpy.blog.entity.Blog;
-import com.wpy.blog.entity.BlogType;
-import com.wpy.blog.entity.PageBean;
 import com.wpy.blog.service.BlogService;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
@@ -42,6 +40,8 @@ public class BlogAdminController {
 	private BlogTypeService blogTypeService;
 	@Resource
 	private BloggerService bloggerService;
+	@Resource
+	private LinkService linkService;
  	/**
  	 * 查询所有博客
  	 * @param request
@@ -363,6 +363,47 @@ public class BlogAdminController {
         String result = JSON.toJSONString(map);
         ResponseUtil.write(response,result);
         return null;
+	}
+
+	/**
+	 * 跳转到连接管理
+	 *
+	 * @return
+	 */
+	@RequestMapping("/linkManage")
+	public String linkManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+	 	List<Link> list =linkService.getAllLink(map);
+		model.addAttribute("linkList",list);
+		return "/admin/linkManage";
+	}
+
+	/**
+	 * 跳转到连接管理
+	 *
+	 * @return
+	 */
+	@RequestMapping("/linkManage")
+	public String saveLinkManage(HttpServletRequest request,HttpServletResponse response,Model model,String id,Link link) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			if(id==null || "".equals(id)){
+                linkService.addLink(link);
+            }else{
+                Link link1 =	linkService.getLinkById(Integer.valueOf(id));
+                link1.setLinkName(link.getLinkName());
+                link1.setLinkUrl(link.getLinkUrl());
+                link1.setOrdNo(link.getOrdNo());
+                linkService.updateLink(link1);
+            }
+            map.put("success",true);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			map.put("success",false);
+		}
+		String result = JSON.toJSONString(map);
+		ResponseUtil.write(response,result);
+		return null;
 	}
 
 

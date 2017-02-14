@@ -9,23 +9,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="linkUrl" column="linkUrl"/>
 		<result property="ordNo" column="ordNo"/>
 	</resultMap>
-	<select id="selectByPrimaryKey" parameterType="Integer" resultMap="BlogResult">
-		select * from tb_blog where id=#{id}
+	<select id="selectByPrimaryKey" parameterType="Integer" resultMap="LinkResult">
+		select * from tb_link where id=#{id}
 	</select>
 	<select id="getTotalCount"  resultType="Integer">
-		select count(id) from tb_blog 
+		select count(id) from tb_link 
 	</select>
 	
 	<delete id="deleteByPrimarKey" parameterType="Integer">
-		delete from tb_blog where id=#{id}
+		delete from tb_link where id=#{id}
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0,'',0)
+		insert into tb_link values(null,#{linkName},#{linkUrl},#{ordno})
 	</insert>
 	
-	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName},bannerFlag=#{bannerFlag}  where id=#{id}
+	<update id="updateByPrimaryKey" parameterType="Link" >
+		update tb_link
+		<set>
+			<if test="linkName!=null and linkName!=''">
+				linkName=#{linName},
+			</if>
+			<if test="linkUrl!=null and linkUrl!=''">
+				linkUrl=#{linkUrl},
+			</if>
+			<if test="ordNo!=null and ordNo!=''">
+				ordNo=#{ordNo},
+			</if>
+		</set>
+		  where id=#{id}
 	</update>
 
 </mapper>
