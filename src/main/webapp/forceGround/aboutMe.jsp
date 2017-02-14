@@ -27,15 +27,7 @@
 <!-- 返回顶部调用 end-->
 </head>
 <body>
-<header>
-  <div class="logo f_l"> <a href="/"><img src="${pageContext.request.contextPath}/blogResources/images/logo.png"></a> </div>
-  <nav id="topnav" class="f_r">
-    <ul>
-      <a href="index.html" target="_blank">首页</a> <a href="news.html" target="_blank">关于我</a> <a href="p.html" target="_blank">文章</a> <a href="a.html" target="_blank">心情</a> <a href="c.html" target="_blank">相册</a> <a href="b.html" target="_blank">留言</a>
-    </ul>
-    <script src="js/nav.js"></script> 
-  </nav>
-</header>
+<jsp:include page="/common/head.jsp"/>
 <article>
   <div class="l_box f_l">
     <h2 class="c_titile">${blog.blogTitle}</h2>
@@ -174,9 +166,6 @@ window.onload = function ()
   </div>
   <!--r_box end --> 
 </article>
-<footer>
-  <p class="ft-copyright">老王头博客 Design by 老王头 </p>
-  <div id="tbox"> <a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
-</footer>
+<jsp:include page="/common/foot.jsp"/>
 </body>
 </html>
