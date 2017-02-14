@@ -28,6 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="password!=null and password!='' ">
 				password=#{password},
 			</if>
+			<if test="aboutMe!=null and aboutMe!='' ">
+				aboutMe=#{aboutMe},
+			</if>
 		</set>
 		where id=1
 	</update>

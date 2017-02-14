@@ -51,14 +51,14 @@ public class BloggerController {
 
 	/**
 	 * 跳转到关于我页面
-	 * @param blogger
+	 * @param
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/goAboutMe")
-	public String goAboutMe(Blogger blogger, HttpServletRequest request, Model model, String id){
-		Blogger blogger1 = bloggerService.getBlogById(Integer.valueOf(id));
-		model.addAttribute("aboutMe",blogger1.getAboutMe());
+	@RequestMapping("/aboutMe")
+	public String aboutMe( HttpServletRequest request, Model model){
+		Blogger blogger = bloggerService.find();
+		model.addAttribute("aboutMe",blogger.getAboutMe());
 		return "forceGround/aboutMe";
 	}
 	

@@ -335,18 +335,16 @@ public class BlogAdminController {
 	 * @return
 	 */
 	@RequestMapping("/goModifyAboutMe")
-	public String goModifyAboutMe(HttpServletRequest request,HttpServletResponse response){
-		request.getSession();
+	public String goModifyAboutMe(HttpServletRequest request,HttpServletResponse response,Model model){
+		Blogger blogger = bloggerService.find();
+		model.addAttribute("aboutMe",blogger.getAboutMe());
 		return "/admin/modifyAboutMe";
 
 	}
 
 	/**
 	 * 保存关于我
-	 * @param request
-	 * @param response
-	 * @param id
-	 * @param aboutMe
+	 *
 	 * @return
 	 */
 	@RequestMapping("/saveAboutMe")
