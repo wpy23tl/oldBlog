@@ -2,26 +2,40 @@ package com.wpy.blog.entity;
 
 public class Link {
 
-	private Integer id;//Ö÷¼üid
-	private String linkName;//ÓÑÇéÁ´½ÓÃû³Æ
-	private String linkPath;//ÓÑÇéÁ´½ÓÂ·¾¶
+	private Integer id;//ï¿½ï¿½ï¿½ï¿½id
+	private String linkName;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String linkUrl;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+	private Integer ordNo;//æ’åºç¼–å·
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getLinkName() {
 		return linkName;
 	}
+
 	public void setLinkName(String linkName) {
 		this.linkName = linkName;
 	}
-	public String getLinkPath() {
-		return linkPath;
+
+	public String getLinkUrl() {
+		return linkUrl;
 	}
-	public void setLinkPath(String linkPath) {
-		this.linkPath = linkPath;
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
 	}
-	
+
+	public Integer getOrdNo() {
+		return ordNo;
+	}
+
+	public void setOrdNo(Integer ordNo) {
+		this.ordNo = ordNo;
+	}
 }
