@@ -348,12 +348,21 @@ public class BlogAdminController {
 	 * @return
 	 */
 	@RequestMapping("/saveAboutMe")
-	public String saveAboutMe(HttpServletRequest request,HttpServletResponse response,String aboutMe) {
+	public String saveAboutMe(HttpServletRequest request,HttpServletResponse response,String aboutMe) throws Exception {
 
 		Blogger blogger = bloggerService.find();
 		blogger.setAboutMe(aboutMe);
-		bloggerService.update(blogger);
-		return null;
+		Map<String,Object> map = new HashMap<>();
+        try {
+            bloggerService.update(blogger);
+            map.put("success",true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        String result = JSON.toJSONString(map);
+        ResponseUtil.write(response,result);
+        return null;
 	}
 
 
