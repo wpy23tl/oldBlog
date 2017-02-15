@@ -383,7 +383,7 @@ public class BlogAdminController {
 	 *
 	 * @return
 	 */
-	@RequestMapping("/linkManage")
+	@RequestMapping("/saveManage")
 	public String saveLinkManage(HttpServletRequest request,HttpServletResponse response,Model model,String id,Link link) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
