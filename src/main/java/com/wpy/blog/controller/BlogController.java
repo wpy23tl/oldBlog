@@ -165,34 +165,8 @@ public class BlogController {
 		model.addAttribute("lastBlog",lastBlog);
 		model.addAttribute("nextBlog",nextBlog);
 		
-		//新增代码
-		//点击排行
-		List<Blog> clickHitRank = blogService.getRankByClickHit();
-		model.addAttribute("clickHitRank",clickHitRank);
-		//最新文章
-		List<Blog> createTimeRank = blogService.getRankByCreateTime();
-		model.addAttribute("createTimeRank",createTimeRank);
-		//随机文章
-		List<Blog> randomBlogs = blogService.getRankByRandom();
-		model.addAttribute("randomBlogs",randomBlogs);
-		//博主推荐
-		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
-		for(Blog blog1:bloggerRecommends){
-			List<String> imagesList=blog1.getImagesList();
-			String blogInfo=blog1.getBlogContent();
-			Document doc=Jsoup.parse(blogInfo);
-			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
-			for(int i=0;i<jpgs.size();i++){
-				if(i==1){
-					break;
-				}
-				Element jpg=jpgs.get(i);
-				imagesList.add(jpg.toString());
-				
-			}
-		}
-		model.addAttribute("bloggerRecommends",bloggerRecommends);
-		
+
+
 		if(blogTypeId!=null && !"null".equals(blogTypeId) ){
 			map.put("blogTypeId",Integer.valueOf(blogTypeId));
 		}
