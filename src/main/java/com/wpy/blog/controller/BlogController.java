@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wpy.blog.entity.Link;
+import com.wpy.blog.service.LinkService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,6 +40,8 @@ public class BlogController {
 	
 	@Resource
 	private BlogService blogService;
+	@Resource
+	private LinkService linkService;
 	/**
 	 * @author wpy
 	 * @description 进入博客前台页面
@@ -80,32 +84,7 @@ public class BlogController {
 		}
 		//model.addAttribute("blogList",newBlogList);
 		
-		//点击排行
-		List<Blog> clickHitRank = blogService.getRankByClickHit();
-		model.addAttribute("clickHitRank",clickHitRank);
-		//最新文章
-		List<Blog> createTimeRank = blogService.getRankByCreateTime();
-		model.addAttribute("createTimeRank",createTimeRank);
-		//随机文章
-		List<Blog> randomBlogs = blogService.getRankByRandom();
-		model.addAttribute("randomBlogs",randomBlogs);
-		//博主推荐
-		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
-		for(Blog blog:bloggerRecommends){
-			List<String> imagesList=blog.getImagesList();
-			String blogInfo=blog.getBlogContent();
-			Document doc=Jsoup.parse(blogInfo);
-			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
-			for(int i=0;i<jpgs.size();i++){
-				if(i==1){
-					break;
-				}
-				Element jpg=jpgs.get(i);
-				imagesList.add(jpg.toString());
-				
-			}
-		}
-		model.addAttribute("bloggerRecommends",bloggerRecommends);
+
 		//获取所有banner
 		List<Blog> bannerBlogList = blogService.getBanner();
 		model.addAttribute("bannerBlogList",bannerBlogList);

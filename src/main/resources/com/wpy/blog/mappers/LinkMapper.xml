@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_link values(null,#{linkName},#{linkUrl},#{ordno})
+		insert into tb_link values(null,#{linkName},#{linkUrl},#{ordNo})
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Link" >

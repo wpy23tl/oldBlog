@@ -372,9 +372,6 @@ public class BlogAdminController {
 	 */
 	@RequestMapping("/linkManage")
 	public String linkManage(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-	 	List<Link> list =linkService.getAllLink(map);
-		model.addAttribute("linkList",list);
 		return "/admin/linkManage";
 	}
 
@@ -383,14 +380,31 @@ public class BlogAdminController {
 	 *
 	 * @return
 	 */
-	@RequestMapping("/saveManage")
+	@RequestMapping("/linkList")
+	public String linkList(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		List<Link> list =linkService.getAllLink(map);
+		Map<String,Object> result = new HashMap<>();
+		result.put("rows",list);
+		result.put("total", 50);
+		String json = JSON.toJSONString(result);
+		ResponseUtil.write(response, json);
+		return null;
+	}
+
+	/**
+	 * 跳转到连接管理
+	 *
+	 * @return
+	 */
+	@RequestMapping("/saveLinkManage")
 	public String saveLinkManage(HttpServletRequest request,HttpServletResponse response,Model model,String id,Link link) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			if(id==null || "".equals(id)){
                 linkService.addLink(link);
             }else{
-                Link link1 =	linkService.getLinkById(Integer.valueOf(id));
+                Link link1 =linkService.getLinkById(Integer.valueOf(id));
                 link1.setLinkName(link.getLinkName());
                 link1.setLinkUrl(link.getLinkUrl());
                 link1.setOrdNo(link.getOrdNo());
@@ -406,5 +420,13 @@ public class BlogAdminController {
 		return null;
 	}
 
+	@RequestMapping("/deleteLink")
+	public String deleteLink(HttpServletRequest request,HttpServletResponse response,Model model,String ids) throws Exception {
+		String[] idsArray = ids.split(",");
+		for(int i=0;i<idsArray.length;i++){
+			linkService.deleteLink(Integer.valueOf(idsArray[i]));
+		}
+		return null;
+	}
 
 }

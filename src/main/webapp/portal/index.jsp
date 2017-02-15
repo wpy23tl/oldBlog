@@ -178,13 +178,9 @@ window.onload = function ()
     <div class="links">
       <h3><span>[<a href="/">申请友情链接</a>]</span>友情链接</h3>
       <ul>
-        <li><a href="/">杨青个人博客</a></li>
-        <li><a href="/">web开发</a></li>
-        <li><a href="/">前端设计</a></li>
-        <li><a href="/">Html</a></li>
-        <li><a href="/">CSS3</a></li>
-        <li><a href="/">Html5+css3</a></li>
-        <li><a href="/">百度</a></li>
+        <c:forEach var="link" items="${linkList}" >
+          <li><a href="${link.linkUrl}">${link.linkName}</a></li>
+        </c:forEach>
       </ul>
     </div>
   </div>

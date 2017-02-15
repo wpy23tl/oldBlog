@@ -29,7 +29,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/Link/deleteLink.do",
+							url:"${pageContext.request.contextPath}/admin/blog/deleteLink.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -66,7 +66,7 @@
 	
 	function saveLink(){
 		$("#fm").form("submit",{
-			url:"${pageContext.request.contextPath}/admin/Link/addLink.do",
+			url:"${pageContext.request.contextPath}/admin/blog/saveLinkManage.do",
 			onSubmit:function(){
 				return $(this).form("validate");
 			},
@@ -95,7 +95,8 @@
 	}
 	
 	function resetValue(){
-		 $("#LinkName").val("");
+		 $("#linkName").val("");
+         $("#linkUrl").val("");
 		 $("#id").val("");
 	 }
 	
@@ -108,13 +109,13 @@
 <body style="margin: 1px">
 <table id="dg" title="链接管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/Link/list.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/admin/blog/linkList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
    		<th field="id" width="20" align="center">编号</th>
-   		<th field="LinkName" width="200" align="center" >链接名称</th>
-		<th field="LinkUrl" width="200" align="center" >链接地址</th>
+   		<th field="linkName" width="200" align="center" >链接名称</th>
+		<th field="linkUrl" width="200" align="center" >链接地址</th>
 		<th field="ordNo" width="200" align="center" >序号</th>
    	</tr>
    </thead>
@@ -138,11 +139,11 @@
    	<table cellspacing="8px">
    		<tr>
    			<td>链接名称：</td>
-   			<td><input type="text" id="LinkName" name="LinkName" class="easyui-validatebox" required="true"/></td>
+   			<td><input type="text" id="linkName" name="linkName" class="easyui-validatebox" required="true"/></td>
    		</tr>
 		<tr>
 			<td>链接地址：</td>
-			<td><input type="text" id="LinkUrl" name="LinkUrl" class="easyui-validatebox" required="true"/></td>
+			<td><input type="text" id="linkUrl" name="linkUrl" class="easyui-validatebox" required="true"/></td>
 		</tr>
    	</table>
    	<input type="hidden" id="id" name="id" >
