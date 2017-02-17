@@ -1,6 +1,8 @@
 package com.wpy.blog.entity;
 
-public class Link {
+import java.io.Serializable;
+
+public class Link implements Serializable{
 
 	private Integer id;//����id
 	private String linkName;//������������

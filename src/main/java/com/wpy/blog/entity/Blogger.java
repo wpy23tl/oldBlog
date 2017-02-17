@@ -1,6 +1,8 @@
 package com.wpy.blog.entity;
 
-public class Blogger {
+import java.io.Serializable;
+
+public class Blogger implements Serializable {
 
 	private Integer id;//����id
 	private String userName;//�û���

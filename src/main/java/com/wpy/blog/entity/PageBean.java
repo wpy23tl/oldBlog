@@ -1,12 +1,14 @@
 package com.wpy.blog.entity;
 
 
+import java.io.Serializable;
+
 /**
  * ��ҳModel��
  * @author 
  *
  */
-public class PageBean {
+public class PageBean implements Serializable {
 
 	private int page; // �ڼ�ҳ
 	private int pageSize; // ÿҳ��¼��

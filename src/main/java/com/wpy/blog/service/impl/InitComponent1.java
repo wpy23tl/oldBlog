@@ -7,21 +7,22 @@ import com.wpy.blog.service.BlogService;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.service.BloggerService;
 import com.wpy.blog.service.LinkService;
+import com.wpy.blog.util.EhcacheUtil;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.BeansException;
-import org.springframework.cache.Cache;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,14 +35,13 @@ import java.util.Map;
 public class InitComponent1 implements ServletContextListener,ApplicationContextAware{
 
 	private static ApplicationContext applicationContext;
-	@Resource
-	EhCacheCacheManager  ehCacheCacheManager;
+	
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		// TODO Auto-generated method stub
 		this.applicationContext=applicationContext;
 	}
 
-	public void contextInitialized(ServletContextEvent servletContextEvent) {
+	public void contextInitialized(ServletContextEvent servletContextEvent)  {
 		ServletContext application=servletContextEvent.getServletContext();
 		//获取需要调用的服务
 		BlogService blogService=(BlogService) applicationContext.getBean("blogService");
@@ -51,24 +51,24 @@ public class InitComponent1 implements ServletContextListener,ApplicationContext
 		Map<String,Object> map = new HashMap<>();
 		// 点击排行
 		List<Blog> clickHitRank = blogService.getRankByClickHit();
-		//application.setAttribute("clickHitRank",clickHitRank);
-		net.sf.ehcache.Cache cache =ehCacheCacheManager.getCache("mmm");
-		net.sf.ehcache.Element element = new net.sf.ehcache.Element("key",clickHitRank);
-		cache.put(element);
-		net.sf.ehcache.Element  s1 = cache.get("key");
-		s1.getValue();
+		application.setAttribute("clickHitRank",clickHitRank);
+	 	EhcacheUtil ehcacheUtil =	EhcacheUtil.getInstance();
+	 	ehcacheUtil.put("userCache","clickHitRank",clickHitRank);
 		//最新文章
 		List<Blog> createTimeRank = blogService.getRankByCreateTime();
 		application.setAttribute("createTimeRank",createTimeRank);
+		ehcacheUtil.put("userCache","createTimeRank",createTimeRank);
 		//随机文章
 		List<Blog> randomBlogs = blogService.getRankByRandom();
 		application.setAttribute("randomBlogs",randomBlogs);
 		//友情链接
 		List<Link> linkList = linkService.getAllLink(map);
 		application.setAttribute("linkList",linkList);
+		ehcacheUtil.put("userCache","linkList",linkList);
 		//标签云（获取所有博客类型）
 		List<BlogType> blogTypeList =blogTypeService.getCount(map);
 		application.setAttribute("blogTypeList",blogTypeList);
+		ehcacheUtil.put("userCache","blogTypeList",blogTypeList);
 		//博主推荐
 		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
 		for(Blog blog:bloggerRecommends){

@@ -1,10 +1,11 @@
 package com.wpy.blog.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Blog {
+public class Blog implements Serializable{
 
 	private Integer id;//����id
 	private String blogTitle;//���ͱ���
