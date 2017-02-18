@@ -45,7 +45,7 @@
 	</listener>
 
 	<listener>
-		<listener-class>com.wpy.blog.service.impl.InitComponent1</listener-class>
+		<listener-class>com.wpy.blog.service.impl.InitComponent</listener-class>
 	</listener>
 
 	<!-- 添加对springmvc的支持 -->
