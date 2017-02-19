@@ -174,12 +174,14 @@ public class BlogController {
 			 totalCount = null;
 			if(blogTypeId==null || "".equals(blogTypeId) || "null".equals(blogTypeId)){
 				totalCount = blogService.getTotalCount();
+                ehcacheUtil.put("sampleCache1","totalCount",totalCount);
 			}else{
 				Map<String,Object> map1 = new HashMap<>();
 				map1.put("id",blogTypeId);
 				List<BlogType> blogTypeList1 = blogTypeService.getCount(map1);
 				BlogType blogType = blogTypeList1.get(0);
 				totalCount= blogType.getBlogTypeCount();
+                ehcacheUtil.put("sampleCache1","totalCount",totalCount);
 			}
 			for(BlogVo blog:newBlogList){
 				List<String> imagesList=blog.getImagesList();
@@ -198,7 +200,7 @@ public class BlogController {
 			ehcacheUtil.put("sampleCache1","blogList",newBlogList);
 			model.addAttribute("blogList",newBlogList);
 		}else{
-			totalCount = 29;
+            totalCount = (Integer)ehcacheUtil.get("sampleCache1","totalCount");
 			//获取banner
 			bannerBlogList=(List<Blog>)ehcacheUtil.get("sampleCache1","bannerBlogList");
 			model.addAttribute("bannerBlogList",bannerBlogList);
