@@ -1,10 +1,11 @@
 package com.wpy.blog.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BlogVo {
+public class BlogVo implements Serializable{
 
 	private Integer id;//����id
 	private String blogTitle;//���ͱ���
