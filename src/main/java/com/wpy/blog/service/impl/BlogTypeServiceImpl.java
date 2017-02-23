@@ -18,19 +18,19 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	private BlogTypeDao blogTypeDao;
 
 	@Override
-	public void addBlogType(BlogType blog) {
+	public void add(BlogType blog) {
 		
 		blogTypeDao.insert(blog);
 	}
 
 	@Override
-	public void updateBlogType(BlogType blog) {
+	public void update(BlogType blog) {
 		blogTypeDao.updateByPrimaryKey(blog);
 		
 	}
 
 	@Override
-	public void deleteBlogType(Integer id) {
+	public void delete(Integer id) {
 		
 		 blogTypeDao.deleteByPrimarKey(id);
 	}
@@ -50,7 +50,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	}
 
 	@Override
-	public List<BlogType> getAllBlogType(Map<String, Object> map) {
+	public List<BlogType> getAll(Map<String, Object> map) {
 		
 		return blogTypeDao.selectAll(map);
 	}

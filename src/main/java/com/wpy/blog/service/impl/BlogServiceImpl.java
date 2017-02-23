@@ -17,18 +17,18 @@ public class BlogServiceImpl implements BlogService {
 	@Resource
 	private BlogDao blogDao;
 	
-	public void addBlog(Blog blog) {
+	public void add(Blog blog) {
 		
 		 blogDao.insert(blog);
 		
 	}
 
-	public void updateBlog(Blog blog) {
+	public void update(Blog blog) {
 		
 		blogDao.updateByPrimaryKey(blog);
 	}
 
-	public void deleteBlog(Integer id) {
+	public void delete(Integer id) {
 		
 		blogDao.deleteByPrimarKey(id);
 	}
@@ -45,7 +45,7 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public List<Blog> getAllBlog(Map<String, Object> map) {
+	public List<Blog> getAll(Map<String, Object> map) {
 		return blogDao.selectAll(map);
 	}
 

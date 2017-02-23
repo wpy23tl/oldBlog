@@ -65,7 +65,7 @@ public class BlogServiceImplTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		BlogService blogService = (BlogService)ac.getBean("blogService");
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<Blog> blogs = blogService.getAllBlog(map);
+		List<Blog> blogs = blogService.getAll(map);
 		System.out.println(blogs.toString());
 	}
 

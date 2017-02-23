@@ -154,7 +154,7 @@ public class BlogController {
 			ehcacheUtil.put("sampleCache1","blogTypeList",blogTypeList);
 			model.addAttribute("blogTypeList",blogTypeList);
 			//获取所有博客
-			List<Blog> blogList =  blogService.getAllBlog(map);
+			List<Blog> blogList =  blogService.getAll(map);
 			List<BlogVo> newBlogList = new ArrayList<>();
 			for(Blog blog:blogList){
 				Date createTime = blog.getCreateTime();
@@ -234,7 +234,7 @@ public class BlogController {
 //		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
 //		model.addAttribute("blogTypeList",blogTypeList);
 		//获取所有博客
-		List<Blog> blogList =  blogService.getAllBlog(map);
+		List<Blog> blogList =  blogService.getAll(map);
 		List<BlogVo> newBlogList = new ArrayList<>();
 		for(Blog blog:blogList){
 			Date createTime = blog.getCreateTime();
@@ -249,7 +249,7 @@ public class BlogController {
 		Blog blog =blogService.getBlogById(Integer.valueOf(id));
 		//增加查看次数
 		blog.setClickHit(blog.getClickHit()+1);
-		blogService.updateBlog(blog);
+		blogService.update(blog);
 		Date createTime = blog.getCreateTime();
 		BlogVo blogVo = new BlogVo();
 		BeanUtils.copyProperties(blog, blogVo);

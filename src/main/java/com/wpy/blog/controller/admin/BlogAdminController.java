@@ -61,7 +61,7 @@ public class BlogAdminController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
-		List<Blog> blogList=blogService.getAllBlog(map);
+		List<Blog> blogList=blogService.getAll(map);
 		Integer total=blogService.getTotalCount();
 		
 		List<BlogVo> newBlogList = new ArrayList<>();
@@ -90,7 +90,7 @@ public class BlogAdminController {
 	public void deleteBlog(HttpServletRequest request,HttpServletResponse response,String ids){
 		String[] idsArray = ids.split(",");
 		for(int i=0;i<idsArray.length;i++){
-			blogService.deleteBlog(Integer.valueOf(idsArray[i]));
+			blogService.delete(Integer.valueOf(idsArray[i]));
 		}
 		
 		
@@ -99,7 +99,7 @@ public class BlogAdminController {
 	@RequestMapping("/addBlog")
 	public String writeBlog(HttpServletRequest request,HttpServletResponse response,Model model){
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BlogType> blogTypeList = blogTypeService.getAllBlogType(map);
+		List<BlogType> blogTypeList = blogTypeService.getAll(map);
 		model.addAttribute("blogTypeList",blogTypeList);
 		return "admin/blogAdd2";
 	}
@@ -109,14 +109,14 @@ public class BlogAdminController {
 		Map<String,Object>  map = new HashMap<>();
 		 try {
 			 if("".equals(blog.getId()) || null == blog.getId()){
-				 blogService.addBlog(blog);
+				 blogService.add(blog);
 			 }else{
 				 Blog blog1 = blogService.getBlogById(blog.getId());
 				 blog1.setBlogContent(blog.getBlogContent());
 				 blog1.setBlogTitle(blog.getBlogTitle());
 				 blog1.setBlogTypeId(blog.getBlogTypeId());
 				 blog1.setUpdateTime(new Date());
-				 blogService.updateBlog(blog1);
+				 blogService.update(blog1);
 			 }
 			 map.put("success",true);
 		} catch (Exception e) {
@@ -132,7 +132,7 @@ public class BlogAdminController {
 	public String updateBlog(HttpServletRequest request,HttpServletResponse response,Model model,Integer id) throws Exception{
 		Blog blog = blogService.getBlogById(id);
 		Map<String,Object> map=new HashMap<String,Object>();
-		List<BlogType> blogTypeList=blogTypeService.getAllBlogType(map);
+		List<BlogType> blogTypeList=blogTypeService.getAll(map);
 		model.addAttribute("blogTitle",blog.getBlogTitle());
 		model.addAttribute("blogContent",blog.getBlogContent());
 		model.addAttribute("blogTypeList",blogTypeList);
@@ -191,7 +191,7 @@ public class BlogAdminController {
 		for(int i=0;i<idsArray.length;i++){
 			Blog blog = blogService.getBlogById(Integer.valueOf(idsArray[i]));
 			blog.setRecommendFlag(0);
-			blogService.updateBlog(blog);
+			blogService.update(blog);
 		}
 		
 	}
@@ -202,7 +202,7 @@ public class BlogAdminController {
 		for(int i=0;i<idsArray.length;i++){
 			Blog blog = blogService.getBlogById(Integer.valueOf(idsArray[i]));
 			blog.setRecommendFlag(1);
-			blogService.updateBlog(blog);
+			blogService.update(blog);
 		}
 		
 	}
@@ -214,7 +214,7 @@ public class BlogAdminController {
 			blog.setRecommendNo(Integer.valueOf(recommendNo));
 			try {
 				blog.setRecommendNo(Integer.valueOf(recommendNo));
-				blogService.updateBlog(blog);
+				blogService.update(blog);
 				map.put("success", true);
 			} catch (Exception e) {
 				map.put("success", false);
@@ -258,7 +258,7 @@ public class BlogAdminController {
 		blog.setBannerFlag(1);
 		Map<String, Object> map= new HashMap<>();
 		try {
-			blogService.updateBlog(blog);
+			blogService.update(blog);
 			map.put("success", true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -305,7 +305,7 @@ public class BlogAdminController {
 		blog.setBannerFlag(1);
 		Map<String, Object> map= new HashMap<>();
 		try {
-			blogService.updateBlog(blog);
+			blogService.update(blog);
 			map.put("success", true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -323,7 +323,7 @@ public class BlogAdminController {
 			Blog blog =	blogService.getBlogById(Integer.valueOf(idsArray[i]));
 			blog.setBannerFlag(0);
 			blog.setBannerName("");
-			blogService.updateBlog(blog);
+			blogService.update(blog);
 		}
 		
 	}
@@ -383,7 +383,7 @@ public class BlogAdminController {
 	@RequestMapping("/linkList")
 	public String linkList(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
 		Map<String,Object> map = new HashMap<>();
-		List<Link> list =linkService.getAllLink(map);
+		List<Link> list =linkService.getAll(map);
 		Map<String,Object> result = new HashMap<>();
 		result.put("rows",list);
 		result.put("total", 50);
@@ -402,13 +402,13 @@ public class BlogAdminController {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			if(id==null || "".equals(id)){
-                linkService.addLink(link);
+                linkService.add(link);
             }else{
                 Link link1 =linkService.getLinkById(Integer.valueOf(id));
                 link1.setLinkName(link.getLinkName());
                 link1.setLinkUrl(link.getLinkUrl());
                 link1.setOrdNo(link.getOrdNo());
-                linkService.updateLink(link1);
+                linkService.update(link1);
             }
             map.put("success",true);
 		} catch (NumberFormatException e) {
@@ -424,7 +424,7 @@ public class BlogAdminController {
 	public String deleteLink(HttpServletRequest request,HttpServletResponse response,Model model,String ids) throws Exception {
 		String[] idsArray = ids.split(",");
 		for(int i=0;i<idsArray.length;i++){
-			linkService.deleteLink(Integer.valueOf(idsArray[i]));
+			linkService.delete(Integer.valueOf(idsArray[i]));
 		}
 		return null;
 	}

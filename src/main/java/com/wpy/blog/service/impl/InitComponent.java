@@ -56,7 +56,7 @@ public class InitComponent implements ServletContextListener,ApplicationContextA
 		List<Blog> randomBlogs = blogService.getRankByRandom();
 		application.setAttribute("randomBlogs",randomBlogs);
 		//友情链接
-		List<Link> linkList = linkService.getAllLink(map);
+		List<Link> linkList = linkService.getAll(map);
 		application.setAttribute("linkList",linkList);
 		//标签云（获取所有博客类型）
 		List<BlogType> blogTypeList =blogTypeService.getCount(map);

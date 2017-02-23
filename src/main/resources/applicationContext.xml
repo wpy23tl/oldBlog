@@ -93,7 +93,8 @@
     </bean>
 
 	<bean id="ehcacheUtil " class="com.wpy.blog.util.EhcacheUtil"/>
-
+	<!-- 配置切面类-->
+	<bean id="ehcacheUtil1" class="com.wpy.blog.util.EhcacheUtil1"/>
 
 	<!-- 配置事务通知属性 -->  
     <tx:advice id="txAdvice" transaction-manager="transactionManager">  
@@ -115,14 +116,22 @@
             <tx:method name="load*" propagation="REQUIRED" read-only="true" />  
             <tx:method name="*" propagation="REQUIRED" read-only="true" />  
         </tx:attributes>  
-    </tx:advice>  
-  
+    </tx:advice>
+
     <!-- 配置事务切面 -->  
     <aop:config>  
         <aop:pointcut id="serviceOperation"  
-            expression="execution(* com.wpy.blog.service.*.*(..))" />  
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />  
-    </aop:config>  
+            expression="execution(* com.wpy.blog.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+
+    </aop:config>
+	<aop:config>
+		<aop:pointcut id="xx" expression="execution(* com.wpy.blog.service.*.add(..)) ) " />
+		<aop:aspect id="yy" ref="ehcacheUtil1" >
+			<aop:after method="put(org.aspectj.lang.JoinPoint)" pointcut-ref="xx"  />
+		</aop:aspect>
+
+	</aop:config>
     
    <!-- 自动扫描 -->
 	<context:component-scan base-package="com.wpy.blog.service" />

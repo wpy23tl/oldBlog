@@ -18,17 +18,17 @@ public class LinkServiceImpl implements LinkService {
     @Resource
     private LinkDao linkDao;
     @Override
-    public void addLink(Link link) {
+    public void add(Link link) {
          linkDao.insert(link);
     }
 
     @Override
-    public void updateLink(Link link) {
+    public void update(Link link) {
         linkDao.updateByPrimaryKey(link);
     }
 
     @Override
-    public void deleteLink(Integer id) {
+    public void delete(Integer id) {
         linkDao.deleteByPrimarKey(id);
     }
 
@@ -38,7 +38,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public List<Link> getAllLink(Map<String, Object> map) {
+    public List<Link> getAll(Map<String, Object> map) {
         return linkDao.selectAll(map);
     }
 

@@ -9,12 +9,11 @@ import com.wpy.blog.entity.Blog;
 public interface BlogService {
 
 	
-	public void addBlog(Blog blog);
-	public void updateBlog(Blog blog);
-	public void deleteBlog(Integer id);
+	public void add(Blog blog);
+	public void update(Blog blog);
+	public void delete(Integer id);
 	public Blog getBlogById(Integer id);
-	
-	public List<Blog> getAllBlog(Map<String,Object> map);
+	public List<Blog> getAll(Map<String,Object> map);
 	public Integer getTotalCount();
 	/**
 	 * @author wpy

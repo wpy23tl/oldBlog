@@ -9,11 +9,11 @@ import java.util.Map;
 
 public interface LinkService {
 
-	public void addLink(Link link);
-	public void updateLink(Link link);
-	public void deleteLink(Integer id);
+	public void add(Link link);
+	public void update(Link link);
+	public void delete(Integer id);
 	public Link getLinkById(Integer id);
-	public List<Link> getAllLink(Map<String, Object> map);
+	public List<Link> getAll(Map<String, Object> map);
 	public Integer getTotalCount();
 	List<Link> getCount(Map<String, Object> map);
 }

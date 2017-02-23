@@ -41,7 +41,7 @@ public class BlogTypeAdminController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
-		List<BlogType> blogTypeList=blogTypeService.getAllBlogType(map);
+		List<BlogType> blogTypeList=blogTypeService.getAll(map);
 		Integer total=blogTypeService.getTotalCount();
 		Map<String,Object> result = new HashMap<>();
 		result.put("rows",blogTypeList);
@@ -55,7 +55,7 @@ public class BlogTypeAdminController {
 	public void deleteBlogType(HttpServletRequest request,HttpServletResponse response,String ids){
 		String[] idsArray = ids.split(",");
 		for(int i=0;i<idsArray.length;i++){
-			blogTypeService.deleteBlogType(Integer.valueOf(idsArray[i]));
+			blogTypeService.delete(Integer.valueOf(idsArray[i]));
 		}
 		
 	}
@@ -66,11 +66,11 @@ public class BlogTypeAdminController {
 		Map<String, Object> map= new HashMap<>();
 		try {
 			if("".equals(blogType.getId()) ||blogType.getId()== null){
-				blogTypeService.addBlogType(blogType);
+				blogTypeService.add(blogType);
 				map.put("success", true);
 			}
 			else{
-				blogTypeService.updateBlogType(blogType);
+				blogTypeService.update(blogType);
 				map.put("success", true);
 			}
 		} catch (Exception e) {
