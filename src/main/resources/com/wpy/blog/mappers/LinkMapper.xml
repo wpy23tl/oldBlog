@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update tb_link
 		<set>
 			<if test="linkName!=null and linkName!=''">
-				linkName=#{linName},
+				linkName=#{linkName},
 			</if>
 			<if test="linkUrl!=null and linkUrl!=''">
 				linkUrl=#{linkUrl},
