@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wpy.blog.entity.Picture;
+import com.wpy.blog.entity.*;
 import com.wpy.blog.service.LinkService;
 import com.wpy.blog.service.PictureService;
 import com.wpy.blog.util.EhcacheUtil;
@@ -22,12 +22,10 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wpy.blog.entity.Blog;
-import com.wpy.blog.entity.BlogType;
-import com.wpy.blog.entity.PageBean;
 import com.wpy.blog.service.BlogService;
 import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
@@ -55,6 +53,47 @@ public class BlogController {
 	public 	List<Blog> bannerBlogList;
 	public List<BlogVo> newBlogList;
 	public Integer totalCount = null;
+
+
+	@ModelAttribute
+	public void init(Model model){
+		Map<String,Object> map = new HashMap<>();
+		// 点击排行
+		List<Blog> clickHitRank = blogService.getRankByClickHit();
+		//application.setAttribute("clickHitRank",clickHitRank);
+		model.addAttribute("clickHitRank",clickHitRank);
+		//最新文章
+		List<Blog> createTimeRank = blogService.getRankByCreateTime();
+		//application.setAttribute("createTimeRank",createTimeRank);
+		model.addAttribute("createTimeRank",createTimeRank);
+		//随机文章
+		List<Blog> randomBlogs = blogService.getRankByRandom();
+		//application.setAttribute("randomBlogs",randomBlogs);
+		model.addAttribute("randomBlogs",randomBlogs);
+		//友情链接
+		List<Link> linkList = linkService.getAll(map);
+		model.addAttribute("linkList",linkList);
+		//application.setAttribute("linkList",linkList);
+		//标签云（获取所有博客类型）
+		List<BlogType> blogTypeList =blogTypeService.getCount(map);
+		model.addAttribute("blogTypeList",blogTypeList);
+		//application.setAttribute("blogTypeList",blogTypeList);
+		//博主推荐
+		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
+		List<BlogVo> newBloggerRecommends = new ArrayList<>();
+		for(Blog blog:bloggerRecommends){
+			Picture picture = pictureService.getBlogById(blog.getArticlePictureViewId());
+			BlogVo blogVo = new BlogVo();
+			BeanUtils.copyProperties(blog, blogVo);
+			if (picture!=null){
+				String picturePath = picture.getPath();
+				blogVo.setPath(picturePath);
+			}
+			newBloggerRecommends.add(blogVo);
+		}
+		model.addAttribute("bloggerRecommends",newBloggerRecommends);
+	}
+
 	/**
 	 * @author wpy
 	 * @description 进入博客前台页面
