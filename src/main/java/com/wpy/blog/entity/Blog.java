@@ -21,6 +21,7 @@ public class Blog implements Serializable{
 	private List<String> imagesList=new LinkedList<String>(); // 博客里存在的图片 主要用于列表展示显示缩略图
 	private String bannerName;//轮播图名字
 	private Integer bannerFlag;//轮播标志0不轮播 1轮播
+	private Integer articlePictureViewId;//文章首图id
 	public Integer getId() {
 		return id;
 	}
@@ -108,5 +109,13 @@ public class Blog implements Serializable{
 
 	public void setBannerFlag(Integer bannerFlag) {
 		this.bannerFlag = bannerFlag;
+	}
+
+	public Integer getArticlePictureViewId() {
+		return articlePictureViewId;
+	}
+
+	public void setArticlePictureViewId(Integer articlePictureViewId) {
+		this.articlePictureViewId = articlePictureViewId;
 	}
 }

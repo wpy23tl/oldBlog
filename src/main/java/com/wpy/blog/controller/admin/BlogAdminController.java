@@ -1,6 +1,8 @@
 package com.wpy.blog.controller.admin;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wpy.blog.entity.*;
-import com.wpy.blog.service.BloggerService;
-import com.wpy.blog.service.LinkService;
+import com.wpy.blog.service.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.wpy.blog.service.BlogService;
-import com.wpy.blog.service.BlogTypeService;
 import com.wpy.blog.util.DateTimeUtil;
 import com.wpy.blog.util.ResponseUtil;
 import com.wpy.blog.vo.BlogVo;
@@ -42,6 +45,8 @@ public class BlogAdminController {
 	private BloggerService bloggerService;
 	@Resource
 	private LinkService linkService;
+	@Resource
+	private PictureService pictureService;
  	/**
  	 * 查询所有博客
  	 * @param request
@@ -105,10 +110,37 @@ public class BlogAdminController {
 	}
 	
 	@RequestMapping("/saveBlog")
-	public String saveBlog(HttpServletRequest request,HttpServletResponse response,Model model,Blog blog) throws Exception{
-		Map<String,Object>  map = new HashMap<>();
+	public String saveBlog(HttpServletRequest request,HttpServletResponse response,Model model,Blog blog) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		//解析首张图片名称，保存到图片表
+		String blogInfo = blog.getBlogContent();
+		Document doc = Jsoup.parse(blogInfo);
+		Elements jpgs = doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
+		//String title = doc.select("img[src$=.jpg]").get(0).attr("title"); //　查找扩展名是jpg的图片
+		Integer pictureViewId = null;
+		for(int i=0;i<jpgs.size();i++){
+			if(i==1){
+				break;
+			}
+			Element jpg=jpgs.get(i);
+			//获得图片名
+			String jpgTitle = jpg.attr("title");
+			String oldPath = jpg.attr("src");
+			if(jpgTitle!=null && !("").equals(jpgTitle)){
+				//插入图片表
+				Picture picture = new Picture();
+				picture.setPath(jpgTitle);
+				pictureService.add(picture);
+				 pictureViewId = Integer.valueOf(picture.getId());
+			}
+			movePictureLocation(request,oldPath,jpgTitle);
+			//String jpgString =jpg.toString();
+		}
+
+
 		 try {
 			 if("".equals(blog.getId()) || null == blog.getId()){
+				 blog.setArticlePictureViewId(pictureViewId);
 				 blogService.add(blog);
 			 }else{
 				 Blog blog1 = blogService.getBlogById(blog.getId());
@@ -116,6 +148,7 @@ public class BlogAdminController {
 				 blog1.setBlogTitle(blog.getBlogTitle());
 				 blog1.setBlogTypeId(blog.getBlogTypeId());
 				 blog1.setUpdateTime(new Date());
+				 blog1.setArticlePictureViewId(pictureViewId);
 				 blogService.update(blog1);
 			 }
 			 map.put("success",true);
@@ -427,6 +460,80 @@ public class BlogAdminController {
 			linkService.delete(Integer.valueOf(idsArray[i]));
 		}
 		return null;
+	}
+
+	/**
+	 * 跳转到文章图片预览设置界面
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/articlePictureViewSet")
+	public  String articlePictureViewSet(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		return "admin/articlePictureViewSet";
+	}
+
+	@RequestMapping("/saveArticlePictureViewSet")
+	public  String saveArticlePictureViewSet(HttpServletRequest request, HttpServletResponse response, Model model, String id, MultipartFile pictureFile1) throws Exception{
+		Blog blog= blogService.getBlogById(Integer.valueOf(id));
+		String timeString =String.valueOf(new Date().getTime());
+		int a=(int)(Math.random()*10);
+		int b=(int)(Math.random()*10);
+		timeString = timeString+a+b;
+		String originalfileName =pictureFile1.getOriginalFilename();
+		String newFileName = timeString+originalfileName.substring(originalfileName.lastIndexOf("."));
+		String filePath =request.getSession().getServletContext().getRealPath("/articlePictureView");
+		//新文件
+		File file = new File(filePath,newFileName);
+		//将内存中的文件写入磁盘
+		pictureFile1.transferTo(file);
+		//将路径存入图片表
+		Picture picture = new Picture();
+		picture.setPath(newFileName);
+		pictureService.add(picture);
+		int pictureId = picture.getId();
+		blog.setArticlePictureViewId(pictureId);
+		Map<String, Object> map= new HashMap<>();
+		try {
+			blogService.update(blog);
+			map.put("success", true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("success", false );
+		}
+		String result = JSON.toJSONString(map);
+		ResponseUtil.write(response,result);
+		return null;
+	}
+
+	/**
+	 * 移动图片初始位置到指定位置
+	 * @param originalLocation 图片初始位置
+	 * @return
+	 */
+	public  void movePictureLocation  (HttpServletRequest request,String oldPath,String newPath) throws Exception {
+
+		String oldPath1 = oldPath.substring(5);
+		String filePath =request.getSession().getServletContext().getRealPath(oldPath1);
+		// 封装数据源
+		FileInputStream fis = new FileInputStream(filePath);
+
+		String filePath1 =request.getSession().getServletContext().getRealPath("/articlePictureView")+"/"+newPath;
+
+		// 封装目的地
+		FileOutputStream fos = new FileOutputStream(filePath1);
+
+		//复制数据
+		int by = 0;
+		while ((by = fis.read()) != -1){
+			fos.write(by);
+		}
+
+		//释放资源
+		fos.close();
+		fis.close();
 	}
 
 }

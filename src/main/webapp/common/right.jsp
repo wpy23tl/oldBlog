@@ -82,7 +82,10 @@ window.onload = function ()
       <h3>博主推荐</h3>
       <ul>
       <c:forEach var="recommend" items="${bloggerRecommends}">
-       	<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${recommend.id}"><c:forEach var="image" items="${recommend.imagesList }">${image }</c:forEach><b>${recommend.blogTitle }</b></a>
+       	<li>
+            <a href="${pageContext.request.contextPath}/blog/article.do?id=${recommend.id}">
+                <c:forEach var="path" items="${recommend.path }"><img src="${pageContext.request.contextPath}/articlePictureView/${path}" title="${path}" alt="${path}"></c:forEach><b>${recommend.blogTitle }</b>
+            </a>
           <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime"><fmt:formatDate value="${recommend.createTime}" pattern="yyyy-MM-dd" /></span></p>
         </li>
        </c:forEach>

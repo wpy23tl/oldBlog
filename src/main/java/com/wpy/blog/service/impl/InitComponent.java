@@ -1,5 +1,6 @@
 package com.wpy.blog.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,14 @@ import javax.servlet.ServletContextListener;
 import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.BlogType;
 import com.wpy.blog.entity.Link;
-import com.wpy.blog.service.BlogService;
-import com.wpy.blog.service.BlogTypeService;
-import com.wpy.blog.service.BloggerService;
-import com.wpy.blog.service.LinkService;
+import com.wpy.blog.entity.Picture;
+import com.wpy.blog.service.*;
+import com.wpy.blog.vo.BlogVo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -45,6 +46,7 @@ public class InitComponent implements ServletContextListener,ApplicationContextA
 		BloggerService bloggerService=(BloggerService) applicationContext.getBean("bloggerService");
 		BlogTypeService blogTypeService=(BlogTypeService) applicationContext.getBean("blogTypeService");
 		LinkService linkService=(LinkService) applicationContext.getBean("linkService");
+		PictureService pictureService =(PictureService) applicationContext.getBean("pictureService");
 		Map<String,Object> map = new HashMap<>();
 		// 点击排行
 		List<Blog> clickHitRank = blogService.getRankByClickHit();
@@ -63,21 +65,18 @@ public class InitComponent implements ServletContextListener,ApplicationContextA
 		application.setAttribute("blogTypeList",blogTypeList);
 		//博主推荐
 		List<Blog> bloggerRecommends = blogService.getBloggerRecommend();
+		List<BlogVo> newBloggerRecommends = new ArrayList<>();
 		for(Blog blog:bloggerRecommends){
-			List<String> imagesList=blog.getImagesList();
-			String blogInfo=blog.getBlogContent();
-			Document doc= Jsoup.parse(blogInfo);
-			Elements jpgs=doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
-			for(int i=0;i<jpgs.size();i++){
-				if(i==1){
-					break;
-				}
-				Element jpg=jpgs.get(i);
-				imagesList.add(jpg.toString());
-
+		    Picture picture = pictureService.getBlogById(blog.getArticlePictureViewId());
+			BlogVo blogVo = new BlogVo();
+			BeanUtils.copyProperties(blog, blogVo);
+			if (picture!=null){
+				String picturePath = picture.getPath();
+				blogVo.setPath(picturePath);
 			}
+			newBloggerRecommends.add(blogVo);
 		}
-		application.setAttribute("bloggerRecommends",bloggerRecommends);
+		application.setAttribute("bloggerRecommends",newBloggerRecommends);
 		
 
 	}

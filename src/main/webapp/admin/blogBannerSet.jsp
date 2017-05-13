@@ -287,7 +287,7 @@
         "></select><br/>
    	
    	图片       :<input type="file" name="pictureFile" id="doc" style="width:150px;" onchange="javascript:setImagePreview();">
-	   <div id="localImag"><img id="preview" src="http://blog.chuangling.net/Public/images/top.jpg" width="150" height="180" style="display: block; width: 150px; height: 180px;"></div>
+	   <div id="localImag"><img id="preview" src="" width="150" height="180" style="display: block; width: 150px; height: 180px;"></div>
    </form>
  </div>
  

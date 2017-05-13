@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="recommendFlag" column="recommendFlag"/>
 		<result property="recommendNo" column="recommendNo"/>
 		<result property="bannerName" column="bannerName"/>
+		<result property="articlePictureViewId" column="articlePictureViewId"/>
 	</resultMap>
 	
 	
@@ -25,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAll" parameterType="Map" resultMap="BlogResult">
-		SELECT obj.*,bt.blogTypeName FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id 
+		SELECT obj.*,bt.blogTypeName,pic.path FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blogtype_id = bt.id  LEFT JOIN tb_picture pic ON obj.articlePictureViewId = pic.id
 		<where>
 			<if test="blogTypeId !=null and blogTypeId !='' ">
 				and blogtype_id = #{blogTypeId}
@@ -54,11 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0,'',0)
+		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0,'',0,#{articlePictureViewId})
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName},bannerFlag=#{bannerFlag}  where id=#{id}
+		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blogtype_id=#{blogTypeId},summary=#{summary},clickHit=#{clickHit},recommendFlag=#{recommendFlag},recommendNo=#{recommendNo},bannerName=#{bannerName},bannerFlag=#{bannerFlag},articlePictureViewId=#{articlePictureViewId}  where id=#{id}
 	</update>
 	<select id="getRankByClickHit"  resultMap="BlogResult">
 		SELECT * FROM `tb_blog`  order by clickHit desc,id desc limit 6
