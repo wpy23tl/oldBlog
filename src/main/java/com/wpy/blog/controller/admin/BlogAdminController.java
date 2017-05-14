@@ -171,7 +171,7 @@ public class BlogAdminController {
 		model.addAttribute("blogTypeList",blogTypeList);
 		model.addAttribute("id",id);
 		model.addAttribute("blogTypeId",blog.getBlogTypeId());
-		return "admin/blogAdd";
+		return "admin/blogAdd2";
 	}
 	/**
 	 * @author wpy
