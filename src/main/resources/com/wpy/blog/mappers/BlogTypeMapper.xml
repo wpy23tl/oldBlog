@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.wpy.blog.dao.BlogTypeDao">
 	<resultMap type="BlogType" id="BlogTypeResult">
 		<result property="id" column="id"/>
-		<result property="blogTypeName" column="blogTypeName"/>
+		<result property="blogTypeName" column="blog_type_name"/>
 		<result property="blogTypeCount" column="blogTypeCount"/>
 	</resultMap>
 	
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	<select id="selectCount" parameterType="Map" resultMap="BlogTypeResult">
-		select COUNT(bg.blogtype_id) blogTypeCount,obj.id,obj.blogTypeName from tb_blogtype obj   LEFT JOIN tb_blog bg on bg.blogtype_id = obj.id 
+		select COUNT(bg.blog_type_id) blogTypeCount,obj.id,obj.blog_type_name from tb_blogtype obj   LEFT JOIN tb_blog bg on bg.blog_type_id = obj.id
 		<where>
 			<if test="id !=null and id!='' ">
 				obj.id=#{id}
@@ -36,6 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="BlogType" >
-		update tb_blogtype set blogTypeName=#{blogTypeName}  where id=#{id}
+		update tb_blogtype set blog_type_name=#{blogTypeName}  where id=#{id}
 	</update>
 </mapper>
