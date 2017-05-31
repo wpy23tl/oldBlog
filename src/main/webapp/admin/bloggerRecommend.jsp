@@ -55,7 +55,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/deleteRecommend.do",
+							url:"${pageContext.request.contextPath}/bloggerRecommendAdminController/delete.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -95,7 +95,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/addRecommendBlog.do",
+							url:"${pageContext.request.contextPath}/bloggerRecommendAdminController/add.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已添加成功！");
@@ -118,7 +118,7 @@
 	
 	function updateRecommendNo(){
 		$("#fm1").form("submit",{
-			url:"${pageContext.request.contextPath}/admin/blog/updateRecommendBlog.do",
+			url:"${pageContext.request.contextPath}/bloggerRecommendAdminController/update.do",
 			onSubmit:function(){
 				return $(this).form("validate");
 			},
@@ -151,7 +151,7 @@
 <body style="margin: 1px">
 <table id="dg" title="推荐博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/recommendList.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/bloggerRecommendAdminController/getAllList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
@@ -181,7 +181,7 @@
    <form id="fm" method="post">
    	<table id="dg1" title="博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/list.do" fit="false" >
+   url="${pageContext.request.contextPath}/blogAdminController/getAllList.do" fit="false" >
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>

@@ -60,13 +60,13 @@ public class BlogServiceImplTest {
 //		System.out.println(blog.toString());
 //	}
 
-	@Test
-	public void testGetAllBlog() {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		BlogService blogService = (BlogService)ac.getBean("blogService");
-		Map<String,Object> map=new HashMap<String,Object>();
-		List<Blog> blogs = blogService.getAll(map);
-		System.out.println(blogs.toString());
-	}
+//	@Test
+//	public void testGetAllBlog() {
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		BlogService blogService = (BlogService)ac.getBean("blogService");
+//		Map<String,Object> map=new HashMap<String,Object>();
+//		List<Blog> blogs = blogService.getAll(map);
+//		System.out.println(blogs.toString());
+//	}
 
 }

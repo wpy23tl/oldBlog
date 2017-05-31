@@ -1,18 +1,20 @@
 package com.wpy.blog.service;
 
 
+import com.wpy.blog.entity.BlogType;
 import com.wpy.blog.entity.Picture;
+import com.wpy.blog.framework.model.DataGrid;
+import com.wpy.blog.framework.model.Response;
 
 import java.util.List;
 import java.util.Map;
 
 public interface PictureService {
 
-	
-	public int add(Picture blog);
-	public void update(Picture blog);
-	public void delete(Integer id);
-	public Picture getBlogById(Integer id);
-	public List<Picture> getAll(Map<String, Object> map);
+	public Response add(Picture picture);
+	public Response update(Picture picture);
+	public Response delete(Integer id);
+	public Response getObjectById(Integer id);
+	public DataGrid getAll(Map<String, Object> map);
 	public Integer getTotalCount();
 }

@@ -1,6 +1,5 @@
 package com.wpy.blog.dao;
 
-import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.Blogger;
 
 /**

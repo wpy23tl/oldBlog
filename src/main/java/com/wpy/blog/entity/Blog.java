@@ -1,23 +1,27 @@
 package com.wpy.blog.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
+@Table(name = "tb_blog")
 public class Blog implements Serializable{
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;//����id
 	private String blogTitle;//���ͱ���
 	private String blogContent;//��������
 	private Date createTime;//����ʱ��
 	private Date updateTime;//�޸�ʱ��
 	private Integer blogTypeId;//��������id
-	private String blogTypeName;  
+	@Transient
+	private String blogTypeName;
 	private String summary;
 	private Integer clickHit;//查看次数
 	private Integer recommendFlag;//博主推荐标识
 	private Integer recommendNo;//推荐编号
+	@Transient
 	private List<String> imagesList=new LinkedList<String>(); // 博客里存在的图片 主要用于列表展示显示缩略图
 	private String bannerName;//轮播图名字
 	private Integer bannerFlag;//轮播标志0不轮播 1轮播

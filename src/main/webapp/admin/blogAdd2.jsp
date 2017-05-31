@@ -42,7 +42,7 @@
 				
 				type:"POST",
 				data:{"blogTitle":title,"blogTypeId":blogTypeId,"blogContent":content,"id":id,"summary":UE.getEditor('editor').getContentTxt().substr(0,155)},
-				url:"${pageContext.request.contextPath}/admin/blog/saveBlog.do",
+				url:"${pageContext.request.contextPath}/blogAdminController/save.do",
 				dataType:"JSON",
 				success:function(data){
 					if(data.success){

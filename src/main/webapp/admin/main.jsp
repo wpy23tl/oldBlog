@@ -63,29 +63,29 @@
 <div region="west" style="width: 200px" title="导航菜单" split="true">
 	<div class="easyui-accordion" data-options="fit:true,border:false">
 		<div title="常用操作" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
-			<a href="javascript:void(0)" onclick="openTab('写博客','/admin/blog/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
-			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','/admin/blog/blogManage.do','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
-			<a href="javascript:void(0)" onclick="openTab('博客类别信息管理','/admin/blogType/blogTypeManage.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
-			<a href="javascript:void(0)" onclick="openTab('博客推荐管理','/admin/blog/bloggerRecommend.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博主推荐</a>
-			<a href="javascript:void(0)" onclick="openTab('首页轮播图片设置','/admin/blog/blogBannerSet.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">首页轮播图片设置</a>
-			<a href="javascript:void(0)" onclick="openTab('文章预览图片设置','/admin/blog/articlePictureViewSet.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">文章预览图片设置</a>
+			<a href="javascript:void(0)" onclick="openTab('写博客','/blogAdminController/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
+			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','/blogAdminController/manager.do','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
+			<a href="javascript:void(0)" onclick="openTab('博客类别信息管理','/blogAdminControllerType/blogTypeManage.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
+			<a href="javascript:void(0)" onclick="openTab('博客推荐管理','/bloggerRecommendAdminController/manager.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博主推荐</a>
+			<a href="javascript:void(0)" onclick="openTab('首页轮播图片设置','/blogAdminController/blogBannerSet.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">首页轮播图片设置</a>
+			<a href="javascript:void(0)" onclick="openTab('文章预览图片设置','/blogAdminController/articlePictureViewSet.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">文章预览图片设置</a>
 		</div>
 		<div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
-			<a href="javascript:void(0)" onclick="openTab('写博客','/admin/blog/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
-			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','/admin/blog/blogManage.do','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
+			<a href="javascript:void(0)" onclick="openTab('写博客','/blogAdminController/addBlog.do','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
+			<a href="javascript:void(0)"  onclick="openTab('博客信息管理','/blogAdminController/blogManage.do','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
 		</div>
 		<div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
-			<a href="javascript:void(0)" onclick="openTab('博客类别信息管理','/admin/blogType/blogTypeManage.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
+			<a href="javascript:void(0)" onclick="openTab('博客类别信息管理','/blogAdminControllerType/blogTypeManage.do','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
 		</div>
 		<div title="评论管理"  data-options="iconCls:'icon-plgl'" style="padding:10px">
 			<a href="javascript:openTab('评论审核','commentReview.jsp','icon-review')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-review'" style="width: 150px">评论审核</a>
 			<a href="javascript:openTab('评论信息管理','commentManage.jsp','icon-plgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-plgl'" style="width: 150px;">评论信息管理</a>
 		</div>
 		<div title="个人信息管理"  data-options="iconCls:'icon-grxx'" style="padding:10px">
-			<a href="javascript:void(0)" onclick="openTab('修改个人信息','/admin/blog/goModifyAboutMe.do','icon-grxxxg')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-grxxxg'" style="width: 150px;">修改个人信息</a>
+			<a href="javascript:void(0)" onclick="openTab('修改个人信息','/blogAdminController/goModifyAboutMe.do','icon-grxxxg')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-grxxxg'" style="width: 150px;">修改个人信息</a>
 		</div>
 		<div title="系统管理"  data-options="iconCls:'icon-system'" style="padding:10px">
-		    <a href="javascript:void(0)" onclick="openTab('友情链接管理','/admin/blog/linkManage.do','icon-link')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
+		    <a href="javascript:void(0)" onclick="openTab('友情链接管理','/blogAdminController/linkManage.do','icon-link')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
 			<a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
 			<a href="javascript:refreshSystem()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-refresh'" style="width: 150px;">刷新系统缓存</a>
 			<a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>

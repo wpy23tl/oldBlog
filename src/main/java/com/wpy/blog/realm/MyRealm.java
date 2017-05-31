@@ -23,7 +23,7 @@ public class MyRealm extends AuthorizingRealm{
 
 	@Resource
 	private BloggerService bloggerService;
-	
+
 	/**
 	 * Ϊ����ǰ��¼���û������ɫ��Ȩ
 	 */
@@ -44,7 +44,7 @@ public class MyRealm extends AuthorizingRealm{
 			AuthenticationInfo authcInfo=new SimpleAuthenticationInfo(blogger.getUserName(),blogger.getPassword(),"java1234");
 			return authcInfo;
 		}else{
-			return null;				
+			return null;
 		}
 	}
 

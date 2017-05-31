@@ -38,7 +38,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/deleteBanner.do",
+							url:"${pageContext.request.contextPath}/firstPageBannerSettingAdminController/delete.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -69,10 +69,9 @@
 	function saveBannner(){
         var g = $('#cc').combogrid('grid');
         var rz = g.datagrid('getSelected');	// 获取选择的行
-        alert(rz.id);
 		var id =rz.id;
         $("#fm").form("submit",{
-            url:"${pageContext.request.contextPath}/admin/blog/addBlogBanner.do?id="+id,
+            url:"${pageContext.request.contextPath}/firstPageBannerSettingAdminController/add.do?id="+id,
             onSubmit:function(){
                 return $(this).form("validate");
             },
@@ -104,10 +103,9 @@
 	function saveBannner1(){
         var g = $('#cc1').combogrid('grid');
         var rz = g.datagrid('getSelected');	// 获取选择的行
-        alert(rz.id);
 		var id =rz.id;
         $("#fm1").form("submit",{
-            url:"${pageContext.request.contextPath}/admin/blog/saveUpdateBlogBanner.do?id="+id,
+            url:"${pageContext.request.contextPath}/firstPageBannerSettingAdminController/update.do?id="+id,
             onSubmit:function(){
                 return $(this).form("validate");
             },
@@ -241,7 +239,7 @@
 <body style="margin: 1px">
 <table id="dg" title="推荐博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/getBanner.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/firstPageBannerSettingAdminController/getAllList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
@@ -277,7 +275,7 @@
             value:'',    
             idField:'id',    
             textField:'blogTitle',    
-            url:'${pageContext.request.contextPath}/admin/blog/list.do',    
+            url:'${pageContext.request.contextPath}/blogAdminController/getAllList.do',
             columns:[[    
                 {field:'id',title:'编号',width:60},    
                 {field:'blogTitle',title:'标题',width:200},    
@@ -308,7 +306,7 @@
             value:'',    
             idField:'id',    
             textField:'blogTitle',    
-            url:'${pageContext.request.contextPath}/admin/blog/list.do',    
+            url:'${pageContext.request.contextPath}/blogAdminController/getAllList.do',
             columns:[[    
                 {field:'id',title:'编号',width:60},    
                 {field:'blogTitle',title:'标题',width:200},    

@@ -29,7 +29,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blogType/deleteBlogType.do",
+							url:"${pageContext.request.contextPath}/blogTypeAdminController/delete.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -66,7 +66,7 @@
 	
 	function saveBlogType(){
 		$("#fm").form("submit",{
-			url:"${pageContext.request.contextPath}/admin/blogType/addBlogType.do",
+			url:"${pageContext.request.contextPath}/blogTypeAdminController/save.do",
 			onSubmit:function(){
 				return $(this).form("validate");
 			},
@@ -93,7 +93,9 @@
 			}
 		});
 	}
-	
+
+
+
 	function resetValue(){
 		 $("#blogTypeName").val("");
 		 $("#id").val("");
@@ -108,7 +110,7 @@
 <body style="margin: 1px">
 <table id="dg" title="博客类别管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blogType/list.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/blogTypeAdminController/getAllList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>

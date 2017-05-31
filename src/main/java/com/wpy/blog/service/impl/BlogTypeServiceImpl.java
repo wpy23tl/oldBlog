@@ -1,69 +1,86 @@
 package com.wpy.blog.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.github.pagehelper.PageHelper;
+import com.wpy.blog.dao.BlogTypeMapper;
+import com.wpy.blog.entity.Blog;
+import com.wpy.blog.entity.BlogType;
+import com.wpy.blog.framework.model.DataGrid;
+import com.wpy.blog.framework.model.Response;
+import com.wpy.blog.service.BlogService;
+import com.wpy.blog.service.BlogTypeService;
+import com.wpy.blog.util.DateTimeUtil;
+import com.wpy.blog.vo.BlogVo;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wpy.blog.dao.BlogTypeDao;
-import com.wpy.blog.entity.BlogType;
-import com.wpy.blog.service.BlogTypeService;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 @Service("blogTypeService")
 public class BlogTypeServiceImpl implements BlogTypeService {
+	@Autowired
+	private BlogTypeMapper blogTypeMapper;
 
-	@Resource
-	private BlogTypeDao blogTypeDao;
 
 	@Override
-	public void add(BlogType blog) {
-		
-		blogTypeDao.insert(blog);
+	public Response add(BlogType blogType) {
+		Response response = new Response();
+		try {
+			blogTypeMapper.insert(blogType);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	@Override
-	public void update(BlogType blog) {
-		blogTypeDao.updateByPrimaryKey(blog);
-		
+	public Response update(BlogType blogType) {
+		Response response = new Response();
+		try {
+			blogTypeMapper.updateByPrimaryKey(blogType);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	@Override
-	public void delete(Integer id) {
-		
-		 blogTypeDao.deleteByPrimarKey(id);
+	public Response delete(String ids) {
+		String[] idsArray = ids.split(",");
+		Response response = new Response();
+		for(int i=0;i<idsArray.length;i++){
+			try {
+				blogTypeMapper.deleteByPrimaryKey(Integer.valueOf(idsArray[i]));
+				response.setSuccess(true);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				response.setSuccess(false);
+			}
+		}
+		return response;
 	}
+
+
 
 	@Override
-	public BlogType getBlogTypeById(Integer id) {
-		
-		return null;
+	public DataGrid getAllList(String page, String pageSize) {
+
+		PageHelper.startPage(Integer.valueOf(page),Integer.valueOf(pageSize));
+		List<BlogType> blogTypeList = blogTypeMapper.select(null);
+		int total = blogTypeMapper.selectCount(new BlogType());
+		DataGrid dataGrid = new DataGrid();
+		dataGrid.setRows(blogTypeList);
+		dataGrid.setTotal(total);
+		return dataGrid;
+
 	}
-
-	
-
-	@Override
-	public Integer getTotalCount() {
-		
-		return blogTypeDao.getTotalCount();
-	}
-
-	@Override
-	public List<BlogType> getAll(Map<String, Object> map) {
-		
-		return blogTypeDao.selectAll(map);
-	}
-
-	@Override
-	public List<BlogType> getCount(Map<String,Object> map) {
-
-		return blogTypeDao.selectCount(map);
-	}
-	
-	
-	
-
-	
 
 }
+

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wpy.blog.dao.BlogDao">
+<mapper namespace="com.wpy.blog.dao.BlogMapper">
 	<resultMap type="Blog" id="BlogResult">
 		<result property="id" column="id"/>
 		<result property="blogTitle" column="blog_title"/>
@@ -20,10 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-	
-	<select id="selectByPrimaryKey" parameterType="Integer" resultMap="BlogResult">
-		select * from tb_blog where id=#{id}
-	</select>
+
 	
 	<select id="selectAll" parameterType="Map" resultMap="BlogResult">
 		SELECT obj.*,bt.blog_type_name,pic.path FROM `tb_blog` obj LEFT JOIN tb_blogtype  bt ON obj.blog_type_id = bt.id  LEFT JOIN tb_picture pic ON obj.article_picture_view_id = pic.id
@@ -33,9 +30,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 		order by create_time desc
-		<if test="start!=null and size!=null">
-			limit #{start},#{size}
-		</if>
 	</select>
 	<!-- 获取上一篇博客 -->
 	<select id="getLastBlog" parameterType="Integer" resultMap="BlogResult">
@@ -50,17 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(id) from tb_blog 
 	</select>
 	
-	<delete id="deleteByPrimarKey" parameterType="Integer">
-		delete from tb_blog where id=#{id}
-	</delete>
-	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
-		insert into tb_blog values(null,#{blogTitle},#{blogContent},now(),null,#{blogTypeId},#{summary},0,0,0,'',0,#{articlePictureViewId})
-	</insert>
-	
-	<update id="updateByPrimaryKey" parameterType="Blog" >
-		update tb_blog set blog_title=#{blogTitle},blog_content=#{blogContent},create_time=#{createTime},update_time=#{updateTime},blog_type_id=#{blogTypeId},summary=#{summary},click_hit=#{clickHit},recommend_flag=#{recommendFlag},recommend_no=#{recommendNo},banner_name=#{bannerName},banner_flag=#{bannerFlag},article_picture_view_id=#{articlePictureViewId}  where id=#{id}
-	</update>
 	<select id="getRankByClickHit"  resultMap="BlogResult">
 		SELECT * FROM `tb_blog`  order by click_hit desc,id desc limit 6
 	</select>

@@ -5,23 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpy.blog.entity.Blog;
+import com.wpy.blog.framework.model.DataGrid;
+import com.wpy.blog.framework.model.Response;
 
 public interface BlogService {
 
-	
-	public void add(Blog blog);
-	public void update(Blog blog);
-	public void delete(Integer id);
-	public Blog getBlogById(Integer id);
-	public List<Blog> getAll(Map<String,Object> map);
-	public Integer getTotalCount();
+
+	public Response add(Blog blog);
+	public Response update(Blog blog);
+	public Response delete(String ids);
+	public Blog     getObjectById(Integer id);
+	public DataGrid getAllList(String page, String pageSize);
+	public Response<Integer> getTotalCount();
 	/**
 	 * @author wpy
 	 * @desc 根据点击数排行
 	 * @date 2017年1月18日
 	 * @return
 	 */
-	public List<Blog> getRankByClickHit();
+	public Response<List<Blog>> getRankByClickHit();
 	/**
 	 * @author wpy
 	 * @desc 获取上一个博客信息
@@ -29,7 +31,7 @@ public interface BlogService {
 	 * @param id
 	 * @return
 	 */
-	public Blog getLastBlog(Integer id);
+	public Response<Blog> getLastBlog(Integer id);
 	/**
 	 * @author wpy
 	 * @desc 获取下一个博客新
@@ -37,32 +39,32 @@ public interface BlogService {
 	 * @param id
 	 * @return
 	 */
-	public Blog getNextBlog(Integer id);
+	public Response<Blog> getNextBlog(Integer id);
 	/**
 	 * @author wpy
 	 * @desc 根据创建时间排序
 	 * @date 2017年1月18日
 	 * @return
 	 */
-	List<Blog> getRankByCreateTime();
+	Response<Blog> getRankByCreateTime();
 	/**
 	 * @author wpy
 	 * @desc 获取随机文章
 	 * @date 2017年1月18日
 	 * @return
 	 */
-	List<Blog> getRankByRandom();
+	Response<Blog> getRankByRandom();
 	/**
 	 * @author wpy
 	 * @desc 查询博主推荐
 	 * @date 2017年1月19日
 	 * @return
 	 */
-	List<Blog> getBloggerRecommend();
+	Response<Blog> getBloggerRecommend();
 
 	/**
 	 * 查询具有banner的博客
 	 * @return
 	 */
-	List<Blog> getBanner();
+	Response<Blog> getBanner();
 }

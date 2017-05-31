@@ -1,43 +1,47 @@
 package com.wpy.blog.service.impl;
 
-import com.wpy.blog.dao.PictureDao;
+
+import com.wpy.blog.dao.BloggerDao;
+import com.wpy.blog.entity.Blogger;
 import com.wpy.blog.entity.Picture;
+import com.wpy.blog.framework.model.DataGrid;
+import com.wpy.blog.framework.model.Response;
+import com.wpy.blog.service.BloggerService;
 import com.wpy.blog.service.PictureService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 文章首页图片
+ */
 @Service("pictureService")
-public class PictureServiceImpl implements PictureService {
-	@Resource
-	private PictureDao pictureDao;
+public class PictureServiceImpl implements PictureService{
 
 
 	@Override
-	public int add(Picture blog) {
-		return pictureDao.insert(blog);
+	public Response add(Picture picture) {
+		return null;
 	}
 
 	@Override
-	public void update(Picture blog) {
-		pictureDao.updateByPrimaryKey(blog);
+	public Response update(Picture picture) {
+		return null;
 	}
 
 	@Override
-	public void delete(Integer id) {
-		pictureDao.deleteByPrimarKey(id);
+	public Response delete(Integer id) {
+		return null;
 	}
 
 	@Override
-	public Picture getBlogById(Integer id) {
-		return pictureDao.selectByPrimaryKey(id);
+	public Response getObjectById(Integer id) {
+		return null;
 	}
 
 	@Override
-	public List<Picture> getAll(Map<String, Object> map) {
+	public DataGrid getAll(Map<String, Object> map) {
 		return null;
 	}
 

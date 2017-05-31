@@ -1,21 +1,41 @@
 package com.wpy.blog.service;
 
 
-
-import java.util.List;
-import java.util.Map;
-
 import com.wpy.blog.entity.Blog;
 import com.wpy.blog.entity.BlogType;
+import com.wpy.blog.framework.model.DataGrid;
+import com.wpy.blog.framework.model.Response;
+
+import java.util.List;
 
 public interface BlogTypeService {
 
-	
-	public void add(BlogType blog);
-	public void update(BlogType blog);
-	public void delete(Integer id);
-	public BlogType getBlogTypeById(Integer id);
-	public List<BlogType> getAll(Map<String,Object> map);
-	public Integer getTotalCount();
-	List<BlogType> getCount(Map<String,Object> map);
+	/**
+     * 增加
+	 * @param blog
+     * @return
+     */
+	public Response add(BlogType blogType);
+
+    /**
+     * 修改
+	 * @param blog
+     * @return
+     */
+	public Response update(BlogType blogType);
+
+    /**
+     * 删除
+	 * @param ids
+     * @return
+     */
+	public Response delete(String ids);
+
+    /**
+     * 填充数据表格
+	 * @param page
+     * @param pageSize
+     * @return
+     */
+	public DataGrid getAllList(String page, String pageSize);
 }

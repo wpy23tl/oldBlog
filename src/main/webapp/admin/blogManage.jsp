@@ -28,7 +28,7 @@
 			 return;
 		 }
 		 var row=selectedRows[0];
-		 window.parent.openTab('修改博客','/admin/blog/updateBlog.do?id='+row.id,'icon-writeblog');	
+		 window.parent.openTab('修改博客','/blogAdminController/updatePage.do?id='+row.id,'icon-writeblog');
 		
 	
 	}
@@ -50,7 +50,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/deleteBlog.do",
+							url:"${pageContext.request.contextPath}/blogAdminController/deleteBlog.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -71,7 +71,7 @@
 <body style="margin: 1px">
 <table id="dg" title="博客管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/list.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/blogAdminController/getAllList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
