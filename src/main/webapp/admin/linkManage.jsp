@@ -29,7 +29,7 @@
 					if(r){
 						$.ajax({
 							type:"POST",
-							url:"${pageContext.request.contextPath}/admin/blog/deleteLink.do",
+							url:"${pageContext.request.contextPath}/linkAdminController/delete.do",
 							data:{ids:ids},
 							success:function(){
 								$.messager.alert("系统提示","数据已成功删除！");
@@ -66,7 +66,7 @@
 	
 	function saveLink(){
 		$("#fm").form("submit",{
-			url:"${pageContext.request.contextPath}/admin/blog/saveLinkManage.do",
+			url:"${pageContext.request.contextPath}/linkAdminController/save.do",
 			onSubmit:function(){
 				return $(this).form("validate");
 			},
@@ -109,7 +109,7 @@
 <body style="margin: 1px">
 <table id="dg" title="链接管理" class="easyui-datagrid"
    fitColumns="true" pagination="true" rownumbers="true"
-   url="${pageContext.request.contextPath}/admin/blog/linkList.do" fit="true" toolbar="#tb">
+   url="${pageContext.request.contextPath}/linkAdminController/getAllList.do" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
