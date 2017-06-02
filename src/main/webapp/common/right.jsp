@@ -47,21 +47,21 @@ window.onload = function ()
         <div style="display: block;" class="bd bd-news" >
           <ul>
           	<c:forEach var="clickRank" items="${clickHitRank }">
-          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${clickRank.id}" target="_blank">${clickRank.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blogController/article.do?id=${clickRank.id}" target="_blank">${clickRank.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
         <div  class="bd bd-news">
           <ul>
           <c:forEach var="createRank" items="${createTimeRank}">
-          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${createRank.id}" target="_blank">${createRank.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blogController/article.do?id=${createRank.id}" target="_blank">${createRank.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
         <div class="bd bd-news">
           <ul>
           <c:forEach var="random" items="${randomBlogs}">
-          		<li><a href="${pageContext.request.contextPath}/blog/article.do?id=${random.id}" target="_blank">${random.blogTitle}</a></li>
+          		<li><a href="${pageContext.request.contextPath}/blogController/article.do?id=${random.id}" target="_blank">${random.blogTitle}</a></li>
           	</c:forEach>
           </ul>
         </div>
@@ -74,7 +74,7 @@ window.onload = function ()
       <h3>标签云</h3>
       <ul>
        <c:forEach var="blogType" items="${blogTypeList}" varStatus="stat">
-       	<li><a href="${pageContext.request.contextPath}/blog/index.do?blogTypeId=${blogType.id}">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
+       	<li><a href="${pageContext.request.contextPath}/blogController/index.do?blogTypeId=${blogType.id}">${blogType.blogTypeName}(${blogType.blogTypeCount })</a></li>
        </c:forEach>
       </ul>
     </div>
@@ -83,10 +83,10 @@ window.onload = function ()
       <ul>
       <c:forEach var="recommend" items="${bloggerRecommends}">
        	<li>
-            <a href="${pageContext.request.contextPath}/blog/article.do?id=${recommend.id}">
+            <a href="${pageContext.request.contextPath}/blogController/article.do?id=${recommend.id}">
                 <c:forEach var="path" items="${recommend.path }"><img src="${pageContext.request.contextPath}/articlePictureView/${path}" title="${path}" alt="${path}"></c:forEach><b>${recommend.blogTitle }</b>
             </a>
-          <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime"><fmt:formatDate value="${recommend.createTime}" pattern="yyyy-MM-dd" /></span></p>
+          <p><span class="tulanmu"><a href="/">${recommend.blogTypeName}</a></span><span class="tutime">${recommend.createTime}</span></p>
         </li>
        </c:forEach>
       </ul>

@@ -16,7 +16,7 @@ public interface BlogService {
 	public Response delete(String ids);
 	public Blog     getObjectById(Integer id);
 	public DataGrid getAllList(String page, String pageSize);
-	public Response<Integer> getTotalCount();
+	public Integer getTotalCount();
 	/**
 	 * @author wpy
 	 * @desc 根据点击数排行
@@ -54,17 +54,5 @@ public interface BlogService {
 	 * @return
 	 */
 	Response<Blog> getRankByRandom();
-	/**
-	 * @author wpy
-	 * @desc 查询博主推荐
-	 * @date 2017年1月19日
-	 * @return
-	 */
-	Response<Blog> getBloggerRecommend();
 
-	/**
-	 * 查询具有banner的博客
-	 * @return
-	 */
-	Response<Blog> getBanner();
 }

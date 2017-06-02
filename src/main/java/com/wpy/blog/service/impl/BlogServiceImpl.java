@@ -34,6 +34,8 @@ public class BlogServiceImpl implements BlogService {
 		Response response = new Response();
 		try {
 			//blog.setCreateTime(new Date());
+			//写博客初始浏览数为0
+			blog.setClickHit(0);
 			blogMapper.insert(blog);
 			response.setSuccess(true);
 		} catch (Exception e) {
@@ -104,8 +106,8 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Response<Integer> getTotalCount() {
-		return null;
+	public Integer getTotalCount() {
+		return blogMapper.getTotalCount();
 	}
 
 	/**
@@ -116,7 +118,16 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public Response<List<Blog>> getRankByClickHit() {
-		return null;
+		Response response = new Response();
+		try {
+			List<Blog> blogList = blogMapper.getRankByClickHit();
+			response.setData(blogList);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	/**
@@ -128,7 +139,16 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public Response<Blog> getLastBlog(Integer id) {
-		return null;
+		Response response = new Response();
+		try {
+			Blog blog = blogMapper.getLastBlog(id);
+			response.setData(blog);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	/**
@@ -140,7 +160,16 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public Response<Blog> getNextBlog(Integer id) {
-		return null;
+		Response response = new Response();
+		try {
+			Blog blog = blogMapper.getNextBlog(id);
+			response.setData(blog);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	/**
@@ -151,7 +180,16 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public Response<Blog> getRankByCreateTime() {
-		return null;
+		Response response = new Response();
+		try {
+			List<Blog> blogList = blogMapper.getRankByCreateTime();
+			response.setData(blogList);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 	/**
@@ -162,28 +200,17 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public Response<Blog> getRankByRandom() {
-		return null;
+		Response response = new Response();
+		try {
+			List<Blog> blogList = blogMapper.getRankByRandom();
+			response.setData(blogList);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
-	/**
-	 * @return
-	 * @author wpy
-	 * @desc 查询博主推荐
-	 * @date 2017年1月19日
-	 */
-	@Override
-	public Response<Blog> getBloggerRecommend() {
-		return null;
-	}
-
-	/**
-	 * 查询具有banner的博客
-	 *
-	 * @return
-	 */
-	@Override
-	public Response<Blog> getBanner() {
-		return null;
-	}
 }
 

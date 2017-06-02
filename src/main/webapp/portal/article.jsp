@@ -46,8 +46,8 @@ var cpro_id = "u1335521";
 
 </div>
     <div class="nextinfo">
-<p>上一篇：<c:choose><c:when test="${not empty lastBlog.id}"><a href="${pageContext.request.contextPath}/blog/article.do?id=${lastBlog.id}">${lastBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
-<p>下一篇：<c:choose><c:when test="${not empty nextBlog.id}"><a href="${pageContext.request.contextPath}/blog/article.do?id=${nextBlog.id}">${nextBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
+<p>上一篇：<c:choose><c:when test="${not empty lastBlog.id}"><a href="${pageContext.request.contextPath}/blogController/article.do?id=${lastBlog.id}">${lastBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
+<p>下一篇：<c:choose><c:when test="${not empty nextBlog.id}"><a href="${pageContext.request.contextPath}/blogController/article.do?id=${nextBlog.id}">${nextBlog.blogTitle }</a></c:when><c:otherwise>没有了</c:otherwise>  </c:choose></p>
     </div>
     <div class="otherlink">
       <h2>相关文章</h2>

@@ -31,7 +31,7 @@
       <div id="slide-holder">
         <div id="slide-runner"> 
         <c:forEach var="bannerBlog" items="${bannerBlogList }">
-        	 <a href="${pageContext.request.contextPath}/blog/article.do?id=${bannerBlog.id}" target="_blank"><img id="${bannerBlog.id}" width="100%" src="${pageContext.request.contextPath}/bannerImages/${bannerBlog.bannerName}"  alt="" /></a>
+        	 <a href="${pageContext.request.contextPath}/blogController/article.do?id=${bannerBlog.id}" target="_blank"><img id="${bannerBlog.id}" width="100%" src="${pageContext.request.contextPath}/bannerImages/${bannerBlog.bannerName}"  alt="" /></a>
         </c:forEach>
           <div id="slide-controls">
             <p id="slide-client" class="text"><strong></strong><span></span></p>
@@ -81,7 +81,7 @@
                 </c:forEach>
             </figure>
 	        <ul>
-	          <h3><a href="${pageContext.request.contextPath}/blog/article.do?id=${blog.id}">${blog.blogTitle}</a></h3>
+	          <h3><a href="${pageContext.request.contextPath}/blogController/article.do?id=${blog.id}">${blog.blogTitle}</a></h3>
 	          <p>${blog.summary }......</p>
 	          <p class="autor"><span class="lm f_l"><a href="/">${blog.blogTypeName}</a></span><span class="dtime f_l">${blog.createTime}</span><span class="viewnum f_r">浏览（<a href="/">${blog.clickHit }</a>）</span><span class="pingl f_r">评论（<a href="/">30</a>）</span></p>
 	        </ul>

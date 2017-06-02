@@ -43,6 +43,8 @@ public class BlogAdminController {
     private BlogService blogService;
     @Resource
     private BlogTypeService blogTypeService;
+    @Resource
+    private PictureService pictureService;
 
     /**
      * 跳转到博客管理界面
@@ -162,30 +164,30 @@ public class BlogAdminController {
     @ResponseBody
     public Response save(HttpServletRequest request, HttpServletResponse response, Model model, Blog blog) throws Exception {
 
-//        //解析首张图片名称，保存到图片表
-//        String blogInfo = blog.getBlogContent();
-//        Document doc = Jsoup.parse(blogInfo);
-//        Elements jpgs = doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
-//        //String title = doc.select("img[src$=.jpg]").get(0).attr("title"); //　查找扩展名是jpg的图片
-//        Integer pictureViewId = null;
-//        for(int i=0;i<jpgs.size();i++){
-//            if(i==1){
-//                break;
-//            }
-//            Element jpg=jpgs.get(i);
-//            //获得图片名
-//            String jpgTitle = jpg.attr("title");
-//            String oldPath = jpg.attr("src");
-//            if(jpgTitle!=null && !("").equals(jpgTitle)){
-//                //插入图片表
-//                Picture picture = new Picture();
-//                picture.setPath(jpgTitle);
-//                pictureService.add(picture);
-//                pictureViewId = Integer.valueOf(picture.getId());
-//            }
-//            movePictureLocation(request,oldPath,jpgTitle);
-//            //String jpgString =jpg.toString();
-//        }
+        //解析首张图片名称，保存到图片表
+        String blogInfo = blog.getBlogContent();
+        Document doc = Jsoup.parse(blogInfo);
+        Elements jpgs = doc.select("img[src$=.jpg]"); //　查找扩展名是jpg的图片
+        //String title = doc.select("img[src$=.jpg]").get(0).attr("title"); //　查找扩展名是jpg的图片
+        Integer pictureViewId = null;
+        for(int i=0;i<jpgs.size();i++){
+            if(i==1){
+                break;
+            }
+            Element jpg=jpgs.get(i);
+            //获得图片名
+            String jpgTitle = jpg.attr("title");
+            String oldPath = jpg.attr("src");
+            if(jpgTitle!=null && !("").equals(jpgTitle)){
+                //插入图片表
+                Picture picture = new Picture();
+                picture.setPath(jpgTitle);
+                pictureService.add(picture);
+                pictureViewId = Integer.valueOf(picture.getId());
+            }
+            movePictureLocation(request,oldPath,jpgTitle);
+            //String jpgString =jpg.toString();
+        }
 
 
         if (!"".equals(blog.getId())&&blog.getId()!=null){
@@ -193,6 +195,7 @@ public class BlogAdminController {
             return blogService.update(blog);
         }else{
             blog.setCreateTime(new Date());
+            blog.setArticlePictureViewId(pictureViewId);
             return blogService.add(blog);
 
         }
@@ -214,6 +217,34 @@ public class BlogAdminController {
 
         return blogService.delete(ids);
 
+    }
+
+    /**
+     * 移动图片初始位置到指定位置
+     * @param originalLocation 图片初始位置
+     * @return
+     */
+    public  void movePictureLocation  (HttpServletRequest request,String oldPath,String newPath) throws Exception {
+
+        String oldPath1 = oldPath.substring(5);
+        String filePath =request.getSession().getServletContext().getRealPath(oldPath1);
+        // 封装数据源
+        FileInputStream fis = new FileInputStream(filePath);
+
+        String filePath1 =request.getSession().getServletContext().getRealPath("/articlePictureView")+"/"+newPath;
+
+        // 封装目的地
+        FileOutputStream fos = new FileOutputStream(filePath1);
+
+        //复制数据
+        int by = 0;
+        while ((by = fis.read()) != -1){
+            fos.write(by);
+        }
+
+        //释放资源
+        fos.close();
+        fis.close();
     }
 
 

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("blogTypeService")
@@ -80,6 +81,24 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 		dataGrid.setTotal(total);
 		return dataGrid;
 
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	@Override
+	public Response<List<BlogType>> selectTypeCount(Map<String, Object> map) {
+		Response response = new Response();
+		try {
+			List<BlogType> blogTypeList = blogTypeMapper.selectTypeCount(map);
+			response.setData(blogTypeList);
+			response.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setSuccess(false);
+		}
+		return response;
 	}
 
 }

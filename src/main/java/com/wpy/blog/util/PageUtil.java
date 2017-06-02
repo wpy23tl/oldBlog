@@ -37,7 +37,7 @@ Integer pageCount=null;
 		if(totalCount>10){
 			sb.append("<div class='page'><a title='总页数'><b>"+pageCount+"</b> </a>");
 			if(currentPage!=1){
-				sb.append("<a href='"+projectName+"/blog/index.do?blogTypeId="+typeId+"'>&lt;&lt;</a><a href='"+projectName+"/blog/index.do?page="+(currentPage-1)+"&blogTypeId="+typeId+"'>&lt;</a>");
+				sb.append("<a href='"+projectName+"/blogController/index.do?blogTypeId="+typeId+"'>&lt;&lt;</a><a href='"+projectName+"/blogController/index.do?page="+(currentPage-1)+"&blogTypeId="+typeId+"'>&lt;</a>");
 			}
 			for(int i=currentPage-2;i<=currentPage+2;i++){
 				if(i<1||i>pageCount){
@@ -46,11 +46,11 @@ Integer pageCount=null;
 				if(i==currentPage){
 					sb.append("<b>"+currentPage+"</b>");	
 				}else{
-					sb.append("<a href='"+projectName+"/blog/index.do?page="+i+"&blogTypeId="+typeId+"'>"+i+"</a>");	
+					sb.append("<a href='"+projectName+"/blogController/index.do?page="+i+"&blogTypeId="+typeId+"'>"+i+"</a>");
 				}
 			}
 			if(currentPage!=pageCount){
-				sb.append("<a href='"+projectName+"/blog/index.do?page="+(currentPage+1)+"&blogTypeId="+typeId+"'>&gt;</a><a href='"+projectName+"/blog/index.do?page="+pageCount+"&blogTypeId="+typeId+"'>&gt;&gt;</a>");
+				sb.append("<a href='"+projectName+"/blogController/index.do?page="+(currentPage+1)+"&blogTypeId="+typeId+"'>&gt;</a><a href='"+projectName+"/blogController/index.do?page="+pageCount+"&blogTypeId="+typeId+"'>&gt;&gt;</a>");
 			}
 			sb.append("</div>");
 		}

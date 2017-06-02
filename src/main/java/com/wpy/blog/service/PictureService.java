@@ -14,7 +14,8 @@ public interface PictureService {
 	public Response add(Picture picture);
 	public Response update(Picture picture);
 	public Response delete(Integer id);
-	public Response getObjectById(Integer id);
+	public Picture getObjectById(Integer id);
 	public DataGrid getAll(Map<String, Object> map);
 	public Integer getTotalCount();
+
 }

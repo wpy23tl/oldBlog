@@ -7,6 +7,7 @@ import com.wpy.blog.framework.model.DataGrid;
 import com.wpy.blog.framework.model.Response;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogTypeService {
 
@@ -38,4 +39,11 @@ public interface BlogTypeService {
      * @return
      */
 	public DataGrid getAllList(String page, String pageSize);
+
+	/**
+	 *
+	 * @param map
+	 * @return
+	 */
+	public Response<List<BlogType>> selectTypeCount(Map<String,Object> map);
 }
